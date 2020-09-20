@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :user do
-    name { "MyString" }
-    mail_address { "MyString" }
-    image { "MyString" }
+    name { "Name Sample" }
+    mail_address { "mail-sample@rails.com" }
+    image { "image.jpeg" }
   end
 end
