@@ -40,6 +40,15 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe "#password" do
+    context "空の場合" do
+      example "保存に失敗する" do
+        user = build(:user, password: nil)
+        expect(user).not_to be_valid
+      end
+    end
+  end
+
   describe "#image" do
     context "空の場合" do
       example "保存に失敗する" do
