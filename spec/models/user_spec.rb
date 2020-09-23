@@ -31,10 +31,7 @@ RSpec.describe User, type: :model do
     context "同じメールアドレスが入力された場合" do
       example "保存に失敗する" do
         create(:user)
-        # user = build(:user, name: "Name Sample_2", image: "image_2.jpeg")
         user = build(:user_2, email: "mail-sample@rails.com")
-        puts "-----"
-        puts user.inspect
         expect(user).not_to be_valid
       end
     end
