@@ -1,12 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe "Users", type: :request do
-
-  describe "GET /show" do
-    it "returns http success" do
-      get "/users/show"
-      expect(response).to have_http_status(:success)
+  describe "#show" do
+    context "正常なHTTPリクエストを送った時" do
+      example "リクエストが成功する" do
+        get "/user"
+        expect(response).to have_http_status(:success)
+      end
     end
   end
-
 end
