@@ -24,7 +24,7 @@ RSpec.describe User, type: :model do
   describe "#mail_address" do
     context "空の場合" do
       example "保存に失敗する" do
-        user = build(:user, mail_address: nil)
+        user = build(:user, email: nil)
         expect(user).not_to be_valid
       end
     end
