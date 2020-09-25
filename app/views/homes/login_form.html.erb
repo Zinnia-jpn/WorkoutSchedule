@@ -1,14 +1,19 @@
 <h1>ログイン</h1>
-<%= form_tag do %>
+
+<% if @error.present? %>
+  <%= @error %>
+<% end %>
+
+<%= form_with url: "login", local: true do |f| %>
   <table border="1">
     <tr>
       <th>メールアドレス</th>
-      <td><input name="email"></td>
+      <td><%= f.email_field :email, value: params[:email] %></td>
     </tr>
     <tr>
       <th>パスワード</th>
-      <td><input name="password"></td>
+      <td><%= f.password_field :password %></td>
     </tr>
   </table>
-  <input type="submit" value="ログイン">
+  <%= f.submit "ログイン" %>
 <% end %>
