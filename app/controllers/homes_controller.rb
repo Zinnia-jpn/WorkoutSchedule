@@ -15,4 +15,9 @@ class HomesController < ApplicationController
       render "login_form"
     end
   end
+
+  def logout
+    session[:id] = nil
+    redirect_to "/"
+  end
 end
