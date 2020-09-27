@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
   def login
     @user = User.find_by(email: params[:email])
     if @user && @user.authenticate(params[:password])
-      session[:id] = @user.id
+      session[:user_id] = @user.id
       flash[:success] = "ログインしました"
       redirect_to "/user"
     else
@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
   end
 
   def logout
-    session[:id] = nil
+    session[:user_id] = nil
     flash[:success] = "ログアウトしました"
     redirect_to "/"
   end
