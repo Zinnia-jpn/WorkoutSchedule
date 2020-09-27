@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'sessions/login_form'
   post "logout" => "homes#logout"
   get "login" => "homes#login_form"
   post "login" => "homes#login"
