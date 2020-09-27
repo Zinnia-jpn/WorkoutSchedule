@@ -9,6 +9,7 @@ class HomesController < ApplicationController
     @user = User.find_by(email: params[:email])
     if @user && @user.authenticate(params[:password])
       session[:id] = @user.id
+      flash[:success] = "ログインしました"
       redirect_to "/user"
     else
       @error = "メールアドレスかパスワードが間違っています"
@@ -18,6 +19,7 @@ class HomesController < ApplicationController
 
   def logout
     session[:id] = nil
+    flash[:success] = "ログアウトしました"
     redirect_to "/"
   end
 end
