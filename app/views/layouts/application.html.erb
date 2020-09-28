@@ -10,9 +10,11 @@
   </head>
 
   <body>
+    <%= render partial: "layouts/header" %>
     <% flash.each do |message_type, message| %>
       <%= message %>
     <% end %>
     <%= yield %>
+    <%= render partial: "layouts/footer" %>
   </body>
 </html>
