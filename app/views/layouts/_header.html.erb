@@ -1,0 +1,20 @@
+<header>
+  <ul>
+    <% if session[:user_id].present? %>
+      <li>Workoutスケジュール管理アプリ</li>
+    <% else %>
+      <li><%= link_to("Workoutスケジュール管理アプリ", "/") %></li>
+    <% end %>
+  </ul>
+  <ul>
+    <% if session[:user_id].present? %>
+      <li>項目入力</li>
+      <li>スケジュール確認</li>
+      <li><%= link_to("ユーザー情報", "/user") %></li>
+      <li><%= link_to("ログアウト", "/logout", method: :post) %></li>
+    <% else %>
+      <li>新規登録</li>
+      <li><%= link_to("ログイン", "/login") %></li>
+    <% end %>
+  </ul>
+</header>
