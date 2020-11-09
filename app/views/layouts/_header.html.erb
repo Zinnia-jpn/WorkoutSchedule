@@ -9,7 +9,7 @@
   <ul>
     <% if session[:user_id].present? %>
       <li>項目入力</li>
-      <li>スケジュール確認</li>
+      <li><%= link_to("スケジュール確認", schedule_path) %></li>
       <li><%= link_to("ユーザー情報", user_path) %></li>
       <li><%= link_to("ログアウト", logout_path, method: :post) %></li>
     <% else %>
