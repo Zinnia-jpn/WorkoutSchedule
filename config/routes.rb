@@ -7,5 +7,5 @@ Rails.application.routes.draw do
   post "user/create" => "users#create"
   get "signup" => "users#new"
   get "user" => "users#show"
-  get "/" => "homes#top"
+  root "homes#top"
 end
