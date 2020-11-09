@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     @user = User.new(name: params[:name], email: params[:email], password: params[:password], image: "default_user_image.jpeg")
     if @user.save
       flash[:success] = "ユーザー登録が完了しました"
-      redirect_to "/schedule"
+      redirect_to schedule_url
     else
       render "new"
     end

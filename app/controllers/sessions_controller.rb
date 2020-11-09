@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
       flash[:success] = "ログインしました"
-      redirect_to "/user"
+      redirect_to user_url
     else
       @error = "メールアドレスかパスワードが間違っています"
       render "login_form"
@@ -20,6 +20,6 @@ class SessionsController < ApplicationController
   def logout
     session[:user_id] = nil
     flash[:success] = "ログアウトしました"
-    redirect_to "/"
+    redirect_to root_url
   end
 end

@@ -4,7 +4,7 @@ RSpec.describe "Users", type: :request do
   describe "#show" do
     context "正常なHTTPリクエストを送った時" do
       example "リクエストが成功する" do
-        get "/user"
+        get user_path
         expect(response).to have_http_status(:success)
       end
     end

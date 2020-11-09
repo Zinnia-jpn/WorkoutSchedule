@@ -4,7 +4,7 @@ RSpec.describe "Schedules", type: :request do
 
   describe "GET /schedule" do
     it "returns http success" do
-      get "/schedule"
+      get schedule_path
       expect(response).to have_http_status(:success)
     end
   end
