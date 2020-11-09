@@ -1,0 +1,27 @@
+<h1>新規登録</h1>
+
+<% if @user.errors %>
+  <ul>
+    <% @user.errors.full_messages.each do |m| %>
+      <li><%= m %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_with url: user_create_path, local: true do |f| %>
+  <table border="1">
+    <tr>
+      <th>名前</th>
+      <td><%= f.text_field :name, value: params[:name] %></td>
+    </tr>
+    <tr>
+      <th>メールアドレス</th>
+      <td><%= f.email_field :email, value: params[:email] %></td>
+    </tr>
+    <tr>
+      <th>パスワード</th>
+      <td><%= f.password_field :password %></td>
+    </tr>
+  </table>
+  <%= f.submit "登録" %>
+<% end %>
