@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
       flash[:success] = "ログインしました"
-      redirect_to user_url
+      redirect_to schedule_url
     else
       @error = "メールアドレスかパスワードが間違っています"
       render "login_form"
