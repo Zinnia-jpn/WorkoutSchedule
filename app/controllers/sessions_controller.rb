@@ -1,6 +1,4 @@
 class SessionsController < ApplicationController
-  # CSRFトークンチェックでのエラーを回避
-  skip_before_action :verify_authenticity_token
 
   def login_form
   end
