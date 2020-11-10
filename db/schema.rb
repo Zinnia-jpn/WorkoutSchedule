@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_28_052730) do
+ActiveRecord::Schema.define(version: 2020_11_09_072548) do
 
   create_table "exercise_categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -28,6 +28,23 @@ ActiveRecord::Schema.define(version: 2020_09_28_052730) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
+  end
+
+  create_table "workouts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.date "date", null: false
+    t.boolean "whether_plan", default: true, null: false
+    t.integer "exercise_id", null: false
+    t.string "muscle_parts_id"
+    t.integer "weight", limit: 2
+    t.integer "rep", limit: 1
+    t.integer "set", limit: 1
+    t.integer "interval", limit: 1
+    t.integer "time", limit: 2
+    t.integer "intensity", limit: 1
+    t.string "remark"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
 end
