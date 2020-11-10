@@ -1,7 +1,7 @@
 <header>
   <ul>
     <% if session[:user_id].present? %>
-      <li>Workoutスケジュール管理アプリ</li>
+      <li><%= link_to("Workoutスケジュール管理アプリ", schedule_path) %></li>
     <% else %>
       <li><%= link_to("Workoutスケジュール管理アプリ", root_path) %></li>
     <% end %>
