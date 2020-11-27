@@ -3,11 +3,11 @@
 <table border="1">
   <tr>
     <th>名前</th>
-    <td>テキスト</td>
+    <td><%= @user.name %></td>
   </tr>
   <tr>
     <th>メールアドレス</th>
-    <td>テキスト</td>
+    <td><%= @user.email %></td>
   </tr>
 </table>
 <a><%= link_to("編集", user_edit_path) %></a>
