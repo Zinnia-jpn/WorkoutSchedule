@@ -2,11 +2,30 @@ require 'rails_helper'
 
 RSpec.describe "Sessions", type: :request do
 
-  describe "GET /login_form" do
-    it "returns http success" do
-      get "/sessions/login_form"
-      expect(response).to have_http_status(:success)
+  describe "#login_form" do
+    context "正常なHTTPリクエストを送った時" do
+      example "リクエストが成功する" do
+        get login_path
+        expect(response).to have_http_status(:success)
+      end
     end
   end
 
+  describe "#login" do
+    context "正常なHTTPリクエストを送った時" do
+      example "リクエストが成功する" do
+        post login_path
+        expect(response).to have_http_status(:success)
+      end
+    end
+  end
+
+  # describe "#logout" do
+  #   context "正常なHTTPリクエストを送った時" do
+  #     example "リクエストが成功する" do
+  #       post logout_path
+  #       expect(response).to have_http_status(:success)
+  #     end
+  #   end
+  # end
 end
