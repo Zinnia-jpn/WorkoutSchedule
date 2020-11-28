@@ -14,7 +14,7 @@ ActiveRecord::Schema.define(version: 2020_11_10_073449) do
 
   create_table "exercise_categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
-    t.boolean "whether_aerobic", default: false, null: false
+    t.integer "muscle_parts_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
