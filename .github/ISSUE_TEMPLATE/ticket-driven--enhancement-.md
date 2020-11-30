@@ -7,13 +7,7 @@ assignees: Zinnia-jpn
 
 ---
 
-## 概要
-- What
-
-- Why
-
 ## ToDo
-- [ ] 
 
 ## 追加タスク
 
