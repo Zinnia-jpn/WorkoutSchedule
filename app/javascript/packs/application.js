@@ -17,3 +17,6 @@ require('jquery')
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
+
+// jsファイルの読み込み
+require ('workout.js')
