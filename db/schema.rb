@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_10_073449) do
+ActiveRecord::Schema.define(version: 2020_12_05_083601) do
 
   create_table "exercise_categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 2020_11_10_073449) do
     t.integer "weight", limit: 2
     t.integer "rep", limit: 1
     t.integer "set", limit: 1
-    t.integer "interval", limit: 1
+    t.integer "interval", limit: 2
     t.integer "time", limit: 2
     t.integer "intensity", limit: 1
     t.string "remark"
