@@ -1,6 +1,7 @@
 FactoryBot.define do
   # 無酸素運動
   factory :workout, class: Workout do
+    association :user
     user_id { 1 }
     date { "2020-11-09" }
     whether_plan { true }
@@ -17,6 +18,7 @@ FactoryBot.define do
 
   # 有酸素運動
   factory :workout_2, class: Workout do
+    association :user
     user_id { 1 }
     date { "2020-11-09" }
     whether_plan { true }
@@ -29,21 +31,5 @@ FactoryBot.define do
     time { 15 }
     intensity { 3 }
     remark { "次は時間を長めに取る" }
-  end
-
-  # 運動部位のみ
-  factory :workout_3, class: Workout do
-    user_id { 1 }
-    date { "2020-11-09" }
-    whether_plan { true }
-    exercise_id { 1 }
-    muscle_parts_id { 1 }
-    weight { nil }
-    rep { nil }
-    set { nil }
-    interval { nil }
-    time { nil }
-    intensity { nil }
-    remark { nil }
   end
 end
