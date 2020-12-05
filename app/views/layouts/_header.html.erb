@@ -8,8 +8,9 @@
   </ul>
   <ul>
     <% if session[:user_id].present? %>
-      <li>項目入力</li>
       <li><%= link_to("スケジュール確認", schedule_path) %></li>
+      <li><%= link_to("計画種目を記録",  controller: "workouts", action: "new", flag: "true") %></li>
+      <li><%= link_to("実施済み種目を記録",  controller: "workouts", action: "new", flag: "false") %></li>
       <li><%= link_to("ユーザー情報", user_path) %></li>
       <li><%= link_to("ログアウト", logout_path, method: :post) %></li>
     <% else %>

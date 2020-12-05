@@ -1,0 +1,58 @@
+<%= form_with url: workout_create_path, local: true, id: "detail-table" do |f| %>
+  <table border="1">
+    <% if @muscle_part_id != 0 && @muscle_part_id != nil %>
+      <tr>
+        <th>詳細種目</th>
+        <td>
+          <%= f.collection_select :exercise_category_id, @exercise_categories, :id, :name,
+                                  {:prompt => "選択してください"}, value: params[:exercise_category] %>
+        </td>
+      </tr>
+      <tr>
+        <th>日付</th>
+        <td><%= raw sprintf(
+                        f.date_select(:date, order: [:year, :month, :day], use_month_numbers: true,
+                                      start_year:2020, end_year:2060, default: Date.today,
+                                      date_separator: '%s'), # 年月日区切りをそれぞれ指定
+                        '年 ', '月 ') + '日' %></td>
+      </tr>
+      <tr>
+        <th>予定<br>
+          (実施済みの場合はチェックを外す)</th>
+        <td><%= f.check_box :plan_flag, {checked: @plan_flag}, checked_value = "true", unchecked_value = "false" %></td>
+      </tr>
+      <% if @muscle_part_id == 1 # 有酸素 %>
+        <tr>
+          <th>運動時間（分）</th>
+          <td><%= f.number_field :time, value: params[:time], min:1, max:600, step: 1 %></td>
+        </tr>
+        <tr>
+          <th>運動強度</th>
+          <td><%= f.select :intensity, {"楽": 1, "やや楽": 2, "中": 3, "ややきつめ": 4, "きつい": 5}, value: params[:intensity] %></td>
+        </tr>
+      <% else # 無酸素 %>
+        <tr>
+          <th>重量（kg）</th>
+          <td><%= f.number_field :weight, value: params[:weight], min:1, max:500, step: 1 %></td>
+        </tr>
+        <tr>
+          <th>レップ数</th>
+          <td><%= f.number_field :rep, value: params[:rep], min:1, max:255, step: 1 %></td>
+        </tr>
+        <tr>
+          <th>セット数</th>
+          <td><%= f.number_field :set, value: params[:set], min:1, max:255, step: 1 %></td>
+        </tr>
+        <tr>
+          <th>インターバル（秒）</th>
+          <td><%= f.number_field :interval, value: params[:interval], min:1, max:255, step: 1 %></td>
+        </tr>
+      <% end %>
+      <tr>
+        <th>備考</th>
+        <td><%= f.text_field :remark, value: params[:remark] %></td>
+      </tr>
+    <% end %>
+  </table>
+  <%= f.submit "送信" %>
+<% end %>
