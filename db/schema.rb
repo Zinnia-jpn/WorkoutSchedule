@@ -10,18 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_05_083601) do
+ActiveRecord::Schema.define(version: 2020_12_05_102220) do
 
-  create_table "exercise_categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
-    t.integer "muscle_parts_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "muscle_parts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "image", null: false
+  create_table "records", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.date "date", null: false
+    t.boolean "plan_flag", default: true, null: false
+    t.integer "workout_id", null: false
+    t.integer "weight", limit: 2
+    t.integer "rep", limit: 1
+    t.integer "set", limit: 1
+    t.integer "interval", limit: 2
+    t.integer "time", limit: 2
+    t.integer "intensity", limit: 1
+    t.string "remark"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -37,18 +45,8 @@ ActiveRecord::Schema.define(version: 2020_12_05_083601) do
   end
 
   create_table "workouts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.date "date", null: false
-    t.boolean "whether_plan", default: true, null: false
-    t.integer "exercise_id", null: false
-    t.string "muscle_parts_id"
-    t.integer "weight", limit: 2
-    t.integer "rep", limit: 1
-    t.integer "set", limit: 1
-    t.integer "interval", limit: 2
-    t.integer "time", limit: 2
-    t.integer "intensity", limit: 1
-    t.string "remark"
+    t.string "name", null: false
+    t.integer "category_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
