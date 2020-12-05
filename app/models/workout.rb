@@ -1,5 +1,5 @@
 class Workout < ApplicationRecord
-  belongs_to :user, foreign_key: "user_id"
+  belongs_to :user, primary_key: "user_id", foreign_key: "id"
 
   validates :user_id, presence: true
   validates :date, presence: true

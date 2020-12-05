@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Workout, type: :model do
-
   describe "#全般" do
     describe "#無酸素運動" do
       context "正常な値を送信した時" do
@@ -16,15 +15,6 @@ RSpec.describe Workout, type: :model do
       context "正常な値を送信した時" do
         example "保存に成功する" do
           user = build(:workout_2)
-          expect(user).to be_valid
-        end
-      end
-    end
-
-    describe "#運動部位のみ" do
-      context "正常な値を送信した時" do
-        example "保存に成功する" do
-          user = build(:workout_3)
           expect(user).to be_valid
         end
       end
