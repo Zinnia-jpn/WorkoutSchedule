@@ -1,6 +1,6 @@
-<%= form_with url: workout_create_path, local: true, id: "detail-table" do |f| %>
-  <table border="1">
-    <% if @muscle_part_id != 0 && @muscle_part_id != nil %>
+<% if @muscle_part_id != 0 && @muscle_part_id != nil %>
+  <%= form_with url: workout_create_path, local: true, id: "detail-table" do |f| %>
+    <table border="1">
       <tr>
         <th>詳細種目</th>
         <td>
@@ -52,7 +52,7 @@
         <th>備考</th>
         <td><%= f.text_field :remark, value: params[:remark] %></td>
       </tr>
-    <% end %>
-  </table>
-  <%= f.submit "送信" %>
+    </table>
+    <%= f.submit "送信" %>
+  <% end %>
 <% end %>
