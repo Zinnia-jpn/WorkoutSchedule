@@ -60,4 +60,13 @@ RSpec.describe Record, type: :model do
       end
     end
   end
+
+  describe "#cardio_flag" do
+    context "空の場合" do
+      example "保存に失敗する" do
+        record = build(:record, cardio_flag: nil)
+        expect(record).not_to be_valid
+      end
+    end
+  end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_05_102220) do
+ActiveRecord::Schema.define(version: 2020_12_06_093228) do
 
   create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 2020_12_05_102220) do
     t.date "date", null: false
     t.boolean "plan_flag", default: true, null: false
     t.integer "workout_id", null: false
+    t.boolean "cardio_flag", default: false, null: false
     t.integer "weight", limit: 2
     t.integer "rep", limit: 1
     t.integer "set", limit: 1
