@@ -19,4 +19,4 @@ require('jquery')
 // const imagePath = (name) => images(name, true)
 
 // jsファイルの読み込み
-require ('workout.js')
+require ('record.js')

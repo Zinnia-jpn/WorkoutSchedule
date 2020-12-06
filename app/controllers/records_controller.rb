@@ -1,20 +1,20 @@
-class WorkoutsController < ApplicationController
+class RecordsController < ApplicationController
 
   def new
     if params[:flag] != "true" && params[:flag] != "false"
       params[:flag] = "true"
     end
     convert_flag_to_boolean_type(params[:flag])
-    @workout = Workout.new()
+    @record = Record.new()
   end
 
   def create
     convert_flag_to_boolean_type(params[:plan_flag])
-    @workout = Workout.new(
+    @record = Record.new(
         user_id: session[:user_id],
-        date: Date.today,
-        whether_plan: @plan_flag,
-        exercise_id: params[:exercise_category_id],
+        date: params[:date],
+        plan_flag: @plan_flag,
+        workout_id: params[:workout_id],
         weight: params[:weight],
         rep: params[:rep],
         set: params[:set],
@@ -23,7 +23,7 @@ class WorkoutsController < ApplicationController
         intensity: params[:intensity],
         remark: params[:remark]
     )
-    if @workout.save
+    if @record.save
       flash[:success] = "記録が完了しました"
       redirect_to schedule_url
     else
@@ -31,11 +31,11 @@ class WorkoutsController < ApplicationController
     end
   end
 
-  # app/javascript/workout.jsからAjaxで送信された値を元にフォームを生成
-  def dynamic_select_muscle_part
+  # app/javascript/record.jsからAjaxで送信された値を元にフォームを生成
+  def dynamic_select_category
     convert_flag_to_boolean_type(params[:flag])
-    @muscle_part_id = params[:muscle_part_id].to_i
-    @exercise_categories = ExerciseCategory.where(muscle_parts_id: params[:muscle_part_id])
+    @category_id = params[:category_id].to_i
+    @workouts = Workout.where(category_id: params[:category_id])
   end
 
   # 引数をboolean型に変換

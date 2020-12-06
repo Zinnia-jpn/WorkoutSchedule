@@ -1,11 +1,11 @@
-<% if @muscle_part_id != 0 && @muscle_part_id != nil %>
-  <%= form_with url: workout_create_path, local: true, id: "detail-table" do |f| %>
+<% if @category_id != 0 && @category_id != nil %>
+  <%= form_with url: record_create_path, local: true, id: "details-table" do |f| %>
     <table border="1">
       <tr>
         <th>詳細種目</th>
         <td>
-          <%= f.collection_select :exercise_category_id, @exercise_categories, :id, :name,
-                                  {:prompt => "選択してください"}, value: params[:exercise_category] %>
+          <%= f.collection_select :workout_id, @workouts, :id, :name,
+                                  {:prompt => "選択してください"}, value: params[:workout_id] %>
         </td>
       </tr>
       <tr>
@@ -21,14 +21,14 @@
           (実施済みの場合はチェックを外す)</th>
         <td><%= f.check_box :plan_flag, {checked: @plan_flag}, checked_value = "true", unchecked_value = "false" %></td>
       </tr>
-      <% if @muscle_part_id == 1 # 有酸素 %>
+      <% if @category_id == 1 # 有酸素 %>
         <tr>
           <th>運動時間（分）</th>
           <td><%= f.number_field :time, value: params[:time], min:1, max:600, step: 1 %></td>
         </tr>
         <tr>
           <th>運動強度</th>
-          <td><%= f.select :intensity, {"楽": 1, "やや楽": 2, "中": 3, "ややきつめ": 4, "きつい": 5}, value: params[:intensity] %></td>
+          <td><%= f.select :intensity, {"楽": 1, "やや楽": 2, "中": 3, "ややきつめ": 4, "きつめ": 5}, value: params[:intensity] %></td>
         </tr>
       <% else # 無酸素 %>
         <tr>
