@@ -1,8 +1,8 @@
 <h1>ワークアウト入力フォーム</h1>
 
-<% if @workout.errors %>
+<% if @record.errors %>
   <ul>
-    <% @workout.errors.full_messages.each do |m| %>
+    <% @record.errors.full_messages.each do |m| %>
       <li><%= m %></li>
     <% end %>
   </ul>
@@ -13,12 +13,12 @@
     <tr>
       <th>カテゴリ</th>
       <td>
-        <%= collection_select(:muscle_part, :id, MusclePart.all, :id, :name,
-                              {:prompt => "選択してください"}, {id: "normal-muscle-part-select"}) %>
+        <%= collection_select(:category, :id, Category.all, :id, :name,
+                              {prompt: "選択してください"}, {id: "category-select"}) %>
         <%= hidden_field_tag "plan[flag]", @plan_flag # jQueryに値を渡す用
         %>
       </td>
     </tr>
   </table>
-  <div id="workout-details"></div>
+  <div id="record-details"></div>
 </div>

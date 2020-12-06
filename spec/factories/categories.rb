@@ -1,6 +1,5 @@
 FactoryBot.define do
-  factory :muscle_part do
+  factory :category do
     name { "MyString" }
-    image { "MyString" }
   end
 end
