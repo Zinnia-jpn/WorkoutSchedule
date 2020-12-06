@@ -15,6 +15,6 @@ end
 
 CSV.foreach("db/csv/records.csv") do |row|
   Record.create!(user_id: row[0], date: row[1], plan_flag: row[2], workout_id: row[3],
-                weight: row[4], rep: row[5], set: row[6], interval: row[7], time: row[8],
-                intensity: row[9], remark: row[10])
+                 cardio_flag: row[4], weight: row[5], rep: row[6], set: row[7], interval: row[8],
+                 time: row[9], intensity: row[10], remark: row[11])
 end

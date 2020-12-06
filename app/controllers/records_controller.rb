@@ -15,6 +15,7 @@ class RecordsController < ApplicationController
         date: params[:date],
         plan_flag: @plan_flag,
         workout_id: params[:workout_id],
+        cardio_flag: params[:cardio_flag],
         weight: params[:weight],
         rep: params[:rep],
         set: params[:set],
@@ -36,6 +37,11 @@ class RecordsController < ApplicationController
     convert_flag_to_boolean_type(params[:flag])
     @category_id = params[:category_id].to_i
     @workouts = Workout.where(category_id: params[:category_id])
+    if @category_id == 1
+      @cardio_flag = true
+    else
+      @cardio_flag = false
+    end
   end
 
   # 引数をboolean型に変換

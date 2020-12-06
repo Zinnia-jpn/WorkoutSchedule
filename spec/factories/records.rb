@@ -6,6 +6,7 @@ FactoryBot.define do
     date { "2020-11-09" }
     plan_flag { true }
     workout_id { 2 }
+    cardio_flag { false }
     weight { 30 }
     rep { 10 }
     set { 3 }
@@ -22,6 +23,7 @@ FactoryBot.define do
     date { "2020-11-09" }
     plan_flag { true }
     workout_id { 3 }
+    cardio_flag { true }
     weight { nil }
     rep { nil }
     set { nil }

@@ -1,5 +1,6 @@
 <% if @category_id != 0 && @category_id != nil %>
   <%= form_with url: record_create_path, local: true, id: "details-table" do |f| %>
+    <%= f.hidden_field :cardio_flag, value: @cardio_flag %>
     <table border="1">
       <tr>
         <th>詳細種目</th>
