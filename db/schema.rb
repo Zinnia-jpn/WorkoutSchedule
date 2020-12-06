@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_06_141507) do
+ActiveRecord::Schema.define(version: 2020_12_06_144107) do
 
   create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 2020_12_06_141507) do
     t.integer "set", limit: 1
     t.integer "interval", limit: 2
     t.integer "time", limit: 2
-    t.integer "intensity", limit: 1
+    t.integer "intensity_id", limit: 1
     t.string "remark"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
