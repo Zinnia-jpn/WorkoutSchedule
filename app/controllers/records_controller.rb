@@ -12,7 +12,7 @@ class RecordsController < ApplicationController
     convert_flag_to_boolean_type(params[:plan_flag])
     @record = Record.new(
         user_id: session[:user_id],
-        date: Date.today,
+        date: params[:date],
         plan_flag: @plan_flag,
         workout_id: params[:workout_id],
         weight: params[:weight],
