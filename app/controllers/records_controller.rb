@@ -21,7 +21,7 @@ class RecordsController < ApplicationController
         set: params[:set],
         interval: params[:interval],
         time: params[:time],
-        intensity: params[:intensity],
+        intensity_id: params[:intensity_id],
         remark: params[:remark]
     )
     if @record.save
@@ -42,6 +42,7 @@ class RecordsController < ApplicationController
     else
       @cardio_flag = false
     end
+    @intensities = Intensity.all
   end
 
   # 引数をboolean型に変換

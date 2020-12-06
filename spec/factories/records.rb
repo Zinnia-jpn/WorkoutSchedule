@@ -12,7 +12,7 @@ FactoryBot.define do
     set { 3 }
     interval { 45 }
     time { nil }
-    intensity { nil }
+    intensity_id { nil }
     remark { "少し負荷が軽かった" }
   end
 
@@ -29,7 +29,7 @@ FactoryBot.define do
     set { nil }
     interval { nil }
     time { 15 }
-    intensity { 3 }
+    intensity_id { 3 }
     remark { "次は時間を長めに取る" }
   end
 end
