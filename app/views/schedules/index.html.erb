@@ -7,7 +7,7 @@
     <table border="1">
       <tr>
         <th>種目名</th>
-        <th>運動時間（分）</th>
+        <th>運動時間</th>
         <th>運動強度</th>
         <th>備考</th>
       </tr>
@@ -15,8 +15,8 @@
         <% if record.cardio_flag == true %>
           <tr>
             <td><%= @workouts.find_by(id: record.workout_id).name %></td>
-            <td><%= record.time.present? ? record.time : "- -" %></td>
-            <td><%= record.intensity.present? ? record.intensity : "- -" %></td>
+            <td><%= record.time.present? ? "#{record.time}分" : "- -" %></td>
+            <td><%= record.intensity_id.present? ? @intensities.find_by(id: record.intensity_id).name : "- -" %></td>
             <td><%= record.remark.present? ? record.remark : "- - " %></td>
           </tr>
         <% end %>
@@ -41,10 +41,10 @@
         <% if record.cardio_flag == false %>
           <tr>
             <td><%= @workouts.find_by(id: record.workout_id).name %></td>
-            <td><%= record.weight.present? ? record.weight : "- -" %></td>
-            <td><%= record.rep.present? ? record.rep : "- -" %></td>
-            <td><%= record.set.present? ? record.set : "- -" %></td>
-            <td><%= record.interval.present? ? record.interval : "- -" %></td>
+            <td><%= record.weight.present? ? "#{record.weight}kg" : "- -" %></td>
+            <td><%= record.rep.present? ? "#{record.rep}回" : "- -" %></td>
+            <td><%= record.set.present? ? "#{record.set}セット" : "- -" %></td>
+            <td><%= record.interval.present? ? "#{record.interval}秒" : "- -" %></td>
             <td><%= record.remark.present? ? record.remark : "- -" %></td>
           </tr>
         <% end %>
