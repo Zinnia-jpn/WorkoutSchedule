@@ -18,3 +18,7 @@ CSV.foreach("db/csv/records.csv") do |row|
                  cardio_flag: row[4], weight: row[5], rep: row[6], set: row[7], interval: row[8],
                  time: row[9], intensity: row[10], remark: row[11])
 end
+
+CSV.foreach("db/csv/intensities.csv") do |row|
+  Intensity.create!(id: row[0], name: row[1])
+end
