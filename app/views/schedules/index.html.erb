@@ -1,2 +1,6 @@
-<h1>Schedules#index</h1>
-<p>Find me in app/views/schedules/index.html.erb</p>
+<h1><%= @user.name %>さんのスケジュール</h1>
+
+<i class="fa fa-check-circle"></i>
+
+<%= render partial: "date_details", locals: { records: @today_records, text: "本日" } %>
+<%= render partial: "date_details", locals: { records: @tomorrow_records, text: "翌日" } %>
