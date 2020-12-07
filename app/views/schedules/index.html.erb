@@ -1,6 +1,6 @@
 <h1><%= @user.name %>さんのスケジュール</h1>
 
-<i class="fa fa-check-circle"></i>
+<button class="schedule-table-switch" value="date">前後3日間</button>
+<button class="schedule-table-switch" value="month">月ごと</button>
 
-<%= render partial: "date_details", locals: { records: @today_records, text: "本日" } %>
-<%= render partial: "date_details", locals: { records: @tomorrow_records, text: "翌日" } %>
+<div id="schedule-details"></div>

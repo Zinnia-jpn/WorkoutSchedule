@@ -20,3 +20,4 @@ require('jquery')
 
 // jsファイルの読み込み
 require ('record.js')
+require ('schedule.js')
