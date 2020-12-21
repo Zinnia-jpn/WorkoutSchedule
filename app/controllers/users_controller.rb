@@ -25,7 +25,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find_by(id: session[:user_id])
     if @user.authenticate(params[:current_password])
-      if params[:password] == params[:password_2]
+      if params[:password] == params[:password_confirmation]
         if @user.update(name: params[:name], email: params[:email], password: params[:password])
           redirect_to user_url
         else
