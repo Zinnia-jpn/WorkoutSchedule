@@ -1,4 +1,4 @@
-<h1>ワークアウト入力フォーム</h1>
+<h1><%= t("records.new.title") %></h1>
 
 <% if @record.errors %>
   <ul>
@@ -11,10 +11,10 @@
 <div class="form">
   <table border="1">
     <tr>
-      <th>カテゴリ</th>
+      <th><%= t("records.new.category") %></th>
       <td>
         <%= collection_select(:category, :id, Category.all, :id, :name,
-                              {prompt: "選択してください"}, {id: "category-select"}) %>
+                              {prompt: t("helpers.select.prompt")}, {id: "category-select"}) %>
         <%= hidden_field_tag "plan[flag]", @plan_flag # jQueryに値を渡す用
         %>
       </td>

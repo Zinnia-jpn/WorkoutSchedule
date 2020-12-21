@@ -3,14 +3,14 @@
     <%= f.hidden_field :cardio_flag, value: @cardio_flag %>
     <table border="1">
       <tr>
-        <th>詳細種目</th>
+        <th><%= Record.human_attribute_name(:workout_id) %></th>
         <td>
           <%= f.collection_select :workout_id, @workouts, :id, :name,
-                                  {:prompt => "選択してください"}, value: params[:workout_id] %>
+                                  {:prompt => t("helpers.select.prompt")}, value: params[:workout_id] %>
         </td>
       </tr>
       <tr>
-        <th>日付</th>
+        <th><%= Record.human_attribute_name(:date) %></th>
         <td><%= raw sprintf(
                         f.date_select(:date, order: [:year, :month, :day], use_month_numbers: true,
                                       start_year:2020, end_year:2060, default: Date.today,
@@ -18,42 +18,44 @@
                         '年 ', '月 ') + '日' %></td>
       </tr>
       <tr>
-        <th>予定<br>
-          (実施済みの場合はチェックを外す)</th>
+        <th>
+          <%= Record.human_attribute_name(:plan_flag) %><br>
+          <%= t("records.form_details.plan_flag_notice") %>
+        </th>
         <td><%= f.check_box :plan_flag, {checked: @plan_flag}, checked_value = "true", unchecked_value = "false" %></td>
       </tr>
       <% if @category_id == 1 # 有酸素 %>
         <tr>
-          <th>運動時間（分）</th>
-          <td><%= f.number_field :time, value: params[:time], min:1, max:600, step: 1 %></td>
+          <th><%= Record.human_attribute_name(:time) %></th>
+          <td><%= f.number_field :time, value: params[:time], min:1, max:600, step: 1 %><%= t("datetime.prompts.minute") %></td>
         </tr>
         <tr>
-          <th>運動強度</th>
-          <td><%= f.collection_select :intensity_id, @intensities, :id, :name, {prompt: "選択してください"}, value: params[:intensity_id] %></td>
+          <th><%= Record.human_attribute_name(:intensity) %></th>
+          <td><%= f.collection_select :intensity_id, @intensities, :id, :name, {prompt: t("helpers.select.prompt")}, value: params[:intensity_id] %></td>
         </tr>
       <% else # 無酸素 %>
         <tr>
-          <th>重量（kg）</th>
-          <td><%= f.number_field :weight, value: params[:weight], min:1, max:500, step: 1 %></td>
+          <th><%= Record.human_attribute_name(:weight) %></th>
+          <td><%= f.number_field :weight, value: params[:weight], min:1, max:500, step: 1 %><%= t("records.form_details.unit.weight") %></td>
         </tr>
         <tr>
-          <th>レップ数</th>
-          <td><%= f.number_field :rep, value: params[:rep], min:1, max:255, step: 1 %></td>
+          <th><%= Record.human_attribute_name(:rep) %></th>
+          <td><%= f.number_field :rep, value: params[:rep], min:1, max:255, step: 1 %><%= t("records.form_details.unit.rep") %></td>
         </tr>
         <tr>
-          <th>セット数</th>
-          <td><%= f.number_field :set, value: params[:set], min:1, max:255, step: 1 %></td>
+          <th><%= Record.human_attribute_name(:set) %></th>
+          <td><%= f.number_field :set, value: params[:set], min:1, max:255, step: 1 %><%= t("records.form_details.unit.set") %></td>
         </tr>
         <tr>
-          <th>インターバル（秒）</th>
-          <td><%= f.number_field :interval, value: params[:interval], min:1, max:600, step: 1 %></td>
+          <th><%= Record.human_attribute_name(:interval) %></th>
+          <td><%= f.number_field :interval, value: params[:interval], min:1, max:600, step: 1 %><%= t("datetime.prompts.second") %></td>
         </tr>
       <% end %>
       <tr>
-        <th>備考</th>
+        <th><%= Record.human_attribute_name(:remark) %></th>
         <td><%= f.text_field :remark, value: params[:remark] %></td>
       </tr>
     </table>
-    <%= f.submit "送信" %>
+    <%= f.submit t("helpers.submit.create") %>
   <% end %>
 <% end %>

@@ -1,3 +1,3 @@
-<%= render partial: "date_details_tables", locals: {records: @today_records, text: "本日" } %>
-<%= render partial: "date_details_tables", locals: {records: @tomorrow_records, text: "翌日" } %>
-<%= render partial: "date_details_tables", locals: {records: @yesterday_records, text: "前日" } %>
+<%= render partial: "date_details_tables", locals: {records: @today_records, text: t("schedules.date_details.today") } %>
+<%= render partial: "date_details_tables", locals: {records: @tomorrow_records, text: t("schedules.date_details.tomorrow") } %>
+<%= render partial: "date_details_tables", locals: {records: @yesterday_records, text: t("schedules.date_details.yesterday") } %>

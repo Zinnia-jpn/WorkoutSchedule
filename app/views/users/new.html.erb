@@ -1,4 +1,4 @@
-<h1>新規登録</h1>
+<h1><%= t("users.new.title") %></h1>
 
 <% if @user.errors %>
   <ul>
@@ -11,17 +11,17 @@
 <%= form_with url: user_create_path, local: true do |f| %>
   <table border="1">
     <tr>
-      <th>名前</th>
+      <th><%= User.human_attribute_name(:name) %></th>
       <td><%= f.text_field :name, value: params[:name] %></td>
     </tr>
     <tr>
-      <th>メールアドレス</th>
+      <th><%= User.human_attribute_name(:email) %></th>
       <td><%= f.email_field :email, value: params[:email] %></td>
     </tr>
     <tr>
-      <th>パスワード</th>
+      <th><%= User.human_attribute_name(:password) %></th>
       <td><%= f.password_field :password %></td>
     </tr>
   </table>
-  <%= f.submit "登録" %>
+  <%= f.submit t("helpers.submit.create") %>
 <% end %>

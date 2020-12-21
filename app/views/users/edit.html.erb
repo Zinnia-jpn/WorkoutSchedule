@@ -1,4 +1,4 @@
-<h1>ユーザー情報編集</h1>
+<h1><%= t("users.edit.title") %></h1>
 
 <% if @error.present? %>
   <%= @error %>
@@ -15,25 +15,25 @@
 <%= form_with url: user_update_path, local: true do |f| %>
   <table border="1">
     <tr>
-      <th>名前</th>
+      <th><%= User.human_attribute_name(:name) %></th>
       <td><%= f.text_field :name, value: @user.name %></td>
     </tr>
     <tr>
-      <th>メールアドレス</th>
+      <th><%= User.human_attribute_name(:email) %></th>
       <td><%= f.email_field :email, value: @user.email %></td>
     </tr>
     <tr>
-      <th>現在のパスワード</th>
+      <th><%= User.human_attribute_name(:current_password) %></th>
       <td><%= f.password_field :current_password %></td>
     </tr>
     <tr>
-      <th>新しいパスワード</th>
+      <th><%= User.human_attribute_name(:new_password) %></th>
       <td><%= f.password_field :password %></td>
     </tr>
     <tr>
-      <th>新しいパスワードの再入力</th>
+      <th><%= User.human_attribute_name(:new_password_confirmation) %></th>
       <td><%= f.password_field :password_confirmation %></td>
     </tr>
   </table>
-  <%= f.submit "送信" %>
+  <%= f.submit t("helpers.submit.update") %>
 <% end %>

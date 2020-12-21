@@ -1,11 +1,11 @@
-<h2>月のスケジュール</h2>
+<h2><%= t("schedules.month_details.title") %></h2>
 <table border="1">
   <% if @month_records.present? %>
     <tr>
-      <th>済</th>
-      <th>日付</th>
-      <th>種目名</th>
-      <th colspan="3">内容</th>
+      <th><%= t("dictionary.schedule.th.plan_flag") %></th>
+      <th><%= Record.human_attribute_name(:date) %></th>
+      <th><%= Record.human_attribute_name(:workout_id) %></th>
+      <th colspan="3"><%= t("schedules.month_details.contents") %></th>
     </tr>
     <% @month_records.each do |record| %>
       <tr>
@@ -13,15 +13,15 @@
         <td><%= record.date %></td>
         <td><%= @workouts.find_by(id: record.workout_id).name %></td>
         <% if record.cardio_flag? %>
-          <td colspan="3"><%= record.time.present? ? "#{record.time}分" : "- -" %></td>
+          <td colspan="3"><%= record.time.present? ? t("dictionary.record.value.time", time: record.time) : "- -" %></td>
         <% else %>
-          <td><%= record.weight.present? ? "#{record.weight}kg" : "- -" %></td>
-          <td><%= record.rep.present? ? "#{record.rep}回" : "- -" %></td>
-          <td><%= record.set.present? ? "#{record.set}セット" : "- -" %></td>
+          <td><%= record.weight.present? ? t("dictionary.record.value.weight", weight: record.weight) : "- -" %></td>
+          <td><%= record.rep.present? ? t("dictionary.record.value.rep", rep: record.rep) : "- -" %></td>
+          <td><%= record.set.present? ? t("dictionary.record.value.set", set: record.set) : "- -" %></td>
         <% end %>
       </tr>
     <% end %>
   <% else %>
-    <h3>なし</h3>
+    <h3><%= t("schedules.date_details_tables.none") %></h3>
   <% end %>
 </table>
