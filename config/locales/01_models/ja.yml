@@ -1,0 +1,11 @@
+ja:
+  activerecord:
+    attributes:
+      user:
+        name: ユーザー名
+        email: メールアドレス
+        password: パスワード
+        image: プロフィール画像
+      record:
+        date: 日付
+        workout_id: 種目名

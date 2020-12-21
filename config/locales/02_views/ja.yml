@@ -1,0 +1,98 @@
+ja:
+  homes:
+    title: "Workoutスケジュール管理アプリ"
+  layouts:
+    header:
+      schedule: "スケジュール"
+      record: "新規記録"
+      user_name: "%{user_name}"
+      user: "ユーザー情報"
+    footer:
+      copyright: |-
+        "Shogo Makishima's Portfolio"
+        "©︎ 2020 Shogo Makishima"
+  sessions:
+    login_form:
+      title: "ログイン"
+  users:
+    new:
+      title: "ユーザー新規登録"
+      name: "ユーザー名"
+      email: "メールアドレス"
+      password: "パスワード"
+      submit: "登録"
+    show:
+      title: "%{user_name}さんのプロフィール"
+      name: "ユーザー名"
+      email: "メールアドレス"
+      password: "パスワード"
+    edit:
+      title: "プロフィール編集"
+      name: "ユーザー名"
+      email: "メールアドレス"
+      current_password: "現在のパスワード"
+      password: "新しいパスワード"
+      password_confirmation: "パスワード確認用(新しいパスワードを入力)"
+      image: "プロフィール画像"
+      submit: "送信"
+  schedules:
+    index:
+      title: "%{user_name}さんのスケジュール"
+      date_switch_button: "前後3日間"
+      month_switch_button: "前後3日間"
+    date_details:
+      today: "本日"
+      tomorrow: "翌日"
+      yesterday: "前日"
+    date_details_tables:
+      cardio_name: "有酸素運動"
+      cardio_flag: "済"
+      workout_id: "種目名"
+      time: "運動時間"
+      intensity: "運動強度"
+      remark: "備考"
+      weight_name: "無酸素運動"
+      weight: "重量"
+      rep: "レップ数"
+      set: "セット数"
+      interval: "インターバル"
+      none: "なし"
+      # 値関連
+      time_value: "%{time}分"
+      weight_value: "%{weight}kg"
+      rep_value: "%{rep}回"
+      set_value: "%{set}セット"
+      interval_value: "%{interval}秒"
+    month_details:
+      cardio_flag: "済"
+      date: "日付"
+      workout_id: "種目名"
+      contents: "内容"
+      none: "なし"
+      # 値関連
+      time_value: "%{time}分"
+      weight_value: "%{weight}kg"
+      rep_value: "%{rep}回"
+      set_value: "%{set}セット"
+      interval_value: "%{interval}秒"
+  records:
+    new:
+      title: "新規記録作成"
+      category: "カテゴリ"
+      prompt: "選択してください"
+    form_details:
+      workout: "詳細種目"
+      prompt: "選択してください"
+      date: "日付"
+      plan_flag: |-
+        "予定"
+        "(実施済みの場合はチェックを外す)"
+      time: "運動時間"
+      minutes: "分"
+      intensity: "運動強度"
+      weight: "重量"
+      weight_unit: "kg"
+      interval: "インターバル"
+      seconds: "秒"
+      remark: "備考"
+      submit: "送信"
