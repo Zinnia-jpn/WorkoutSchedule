@@ -1,16 +1,19 @@
 ja:
   sessions: # ←コントローラー名
     login: # ←メソッド
-      successed: "ログインしました" # ←メッセージ
-      failed: "メールアドレスかパスワードが間違っています"
+      success: "ログインしました" # ←メッセージ
+      failure: "メールアドレスかパスワードが間違っています"
     logout:
-      successed: "ログアウトしました"
+      success: "ログアウトしました"
   users:
     create:
-      successed: "ユーザー登録が完了しました"
+      success: "ユーザー登録が完了しました"
     update:
+      success: "ユーザープロフィールを変更しました"
       mismatch_current_pw: "現在のパスワードが間違っています"
       mismatch_new_pw: "新しいパスワードと再入力が一致していません"
   records:
     create:
-      success: "記録が完了しました"
+      success: "新規記録を作成しました"
+    update:
+      success: "記録を上書きしました"
