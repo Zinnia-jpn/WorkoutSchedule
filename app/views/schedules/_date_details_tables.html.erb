@@ -1,65 +1,61 @@
-<h2><%= text %>のスケジュール</h2>
+<h2><%= text %></h2>
 <% if records.present? %>
   <% if records.where(cardio_flag: true).present? %>
     <table border="1">
       <tr>
-        <th colspan="5">有酸素運動</th>
+        <th colspan="5"><%= t("schedules.date_details_tables.cardio") %></th>
       </tr>
       <tr>
-        <th>済</th>
-        <th>種目名</th>
-        <th>運動時間</th>
-        <th>運動強度</th>
-        <th>備考</th>
+        <th><%= t("dictionary.schedule.th.plan_flag") %></th>
+        <th><%= Record.human_attribute_name(:workout_id) %></th>
+        <th><%= Record.human_attribute_name(:time) %></th>
+        <th><%= Record.human_attribute_name(:intensity) %></th>
+        <th><%= Record.human_attribute_name(:remark) %></th>
       </tr>
       <% records.each do |record| %>
         <% if record.cardio_flag == true %>
           <tr>
             <td><%= record.plan_flag ? "" : "OK" %></td>
             <td><%= @workouts.find_by(id: record.workout_id).name %></td>
-            <td><%= record.time.present? ? "#{record.time}分" : "- -" %></td>
+            <td><%= record.time.present? ? t("dictionary.record.value.time", time: record.time) : "- -" %></td>
             <td><%= record.intensity_id.present? ? @intensities.find_by(id: record.intensity_id).name : "- -" %></td>
             <td><%= record.remark.present? ? record.remark : "- - " %></td>
           </tr>
         <% end %>
       <% end %>
     </table>
-  <% else %>
-    <p>なし</p>
   <% end %>
 
   <% if records.where(cardio_flag: false).present? %>
     <table border="1">
       <tr>
-        <th colspan="7">無酸素運動</th>
+        <th colspan="7"><%= t("schedules.date_details_tables.weight") %></th>
       </tr>
       <tr>
         <th>済</th>
-        <th>種目名</th>
-        <th>重量</th>
-        <th>レップ数</th>
-        <th>セット数</th>
-        <th>インターバル</th>
-        <th>備考</th>
+        <th><%= Record.human_attribute_name(:workout_id) %></th>
+        <th><%= Record.human_attribute_name(:weight) %></th>
+        <th><%= Record.human_attribute_name(:rep) %></th>
+        <th><%= Record.human_attribute_name(:set) %></th>
+        <th><%= Record.human_attribute_name(:interval) %></th>
+        <th><%= Record.human_attribute_name(:remark) %></th>
       </tr>
       <% records.each do |record| %>
         <% if record.cardio_flag == false %>
           <tr>
             <td><%= record.plan_flag ? "" : "OK" %></td>
             <td><%= @workouts.find_by(id: record.workout_id).name %></td>
-            <td><%= record.weight.present? ? "#{record.weight}kg" : "- -" %></td>
-            <td><%= record.rep.present? ? "#{record.rep}回" : "- -" %></td>
-            <td><%= record.set.present? ? "#{record.set}セット" : "- -" %></td>
-            <td><%= record.interval.present? ? "#{record.interval}秒" : "- -" %></td>
+            <td><%= record.weight.present? ? t("dictionary.record.value.weight", weight: record.weight) : "- -" %></td>
+            <td><%= record.rep.present? ? t("dictionary.record.value.rep", rep: record.rep) : "- -" %></td>
+            <td><%= record.set.present? ? t("dictionary.record.value.set", set: record.set) : "- -" %></td>
+            <td><%= record.interval.present? ? t("dictionary.record.value.interval", interval: record.interval) : "- -" %></td>
             <td><%= record.remark.present? ? record.remark : "- -" %></td>
           </tr>
         <% end %>
       <% end %>
     </table>
-  <% else %>
-    <p>なし</p>
   <% end %>
 
 <% else %>
-  <h3>なし</h3>
+  <h3><%= t("schedules.date_details_tables.none") %>></h3>
 <% end %>

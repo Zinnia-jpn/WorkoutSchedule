@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     @user = User.new(name: params[:name], email: params[:email], password: params[:password], image: "default_user_image.jpeg")
     if @user.save
       session[:user_id] = @user.id
-      flash[:success] = "ユーザー登録が完了しました"
+      flash[:success] = @error = t("users.create.success")
       redirect_to schedule_url
     else
       render "new"
@@ -25,18 +25,18 @@ class UsersController < ApplicationController
   def update
     @user = User.find_by(id: session[:user_id])
     if @user.authenticate(params[:current_password])
-      if params[:password] == params[:password_2]
+      if params[:password] == params[:password_confirmation]
         if @user.update(name: params[:name], email: params[:email], password: params[:password])
           redirect_to user_url
         else
           render "edit"
         end
       else
-        @error = "新しいパスワードと再入力が一致していません"
+        @error = t("users.update.mismatch_new_pw")
         render "edit"
       end
     else
-      @error = "現在のパスワードが間違っています"
+      @error = t("users.update.mismatch_current_pw")
       render "edit"
     end
   end

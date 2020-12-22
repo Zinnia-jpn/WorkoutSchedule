@@ -25,7 +25,7 @@ class RecordsController < ApplicationController
         remark: params[:remark]
     )
     if @record.save
-      flash[:success] = "記録が完了しました"
+      flash[:success] = t("records.create.success")
       redirect_to schedule_url
     else
       render "new"

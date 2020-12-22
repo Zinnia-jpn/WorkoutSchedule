@@ -1,6 +1,6 @@
-<h1><%= @user.name %>さんのスケジュール</h1>
+<h1><%=t("schedules.index.title", user_name: @user.name) %></h1>
 
-<button class="schedule-table-switch" value="date">前後3日間</button>
-<button class="schedule-table-switch" value="month">月ごと</button>
+<button class="schedule-table-switch" value="date"><%=t("schedules.index.date_switch_button") %></button>
+<button class="schedule-table-switch" value="month"><%=t("schedules.index.month_switch_button") %></button>
 
 <div id="schedule-details"></div>
