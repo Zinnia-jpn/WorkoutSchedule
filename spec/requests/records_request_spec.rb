@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Workouts", type: :request do
+RSpec.describe "Records", type: :request do
   describe "#new" do
     context "正常なHTTPリクエストを送った時" do
       context "適切なパラメータ(flag: true)を渡した時" do
