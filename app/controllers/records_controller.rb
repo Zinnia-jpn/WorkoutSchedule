@@ -9,10 +9,11 @@ class RecordsController < ApplicationController
   end
 
   def create
+    date = divided_value_that_date_type_conversion(params["date(1i)"].to_i, params["date(2i)"].to_i, params["date(3i)"].to_i)
     convert_flag_to_boolean_type(params[:plan_flag])
     @record = Record.new(
         user_id: session[:user_id],
-        date: params[:date],
+        date: date,
         plan_flag: @plan_flag,
         workout_id: params[:workout_id],
         cardio_flag: params[:cardio_flag],
@@ -48,5 +49,10 @@ class RecordsController < ApplicationController
   # 引数をboolean型に変換
   def convert_flag_to_boolean_type(flag)
     @plan_flag = ActiveRecord::Type::Boolean.new.cast flag
+  end
+
+  # 分割された値をdate型に変換
+  def divided_value_that_date_type_conversion(year, month, day)
+    return Date.new(year, month, day)
   end
 end
