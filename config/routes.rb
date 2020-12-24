@@ -6,8 +6,10 @@ Rails.application.routes.draw do
   get "record/new" => "records#new"
 
   # schedules
-  get "dynamic_select_tables" => "schedules#dynamic_select_tables" # Ajax送信先(スケジュール切り替え)
-  get "schedule" => "schedules#index"
+  post "dynamic_select_month" => "schedules#dynamic_select_month" # 月ごとのスケジュール表示
+  get "schedule/dynamic_select_date" => "schedules#dynamic_select_date" # Ajax送信先(前後3日間の切り替え)
+  get "schedule/month" => "schedules#month"
+  get "schedule/date" => "schedules#date"
 
   # sessions
   post "logout" => "sessions#logout"

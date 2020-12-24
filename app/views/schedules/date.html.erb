@@ -1,0 +1,9 @@
+<%= render partial: "header" %>
+
+<button class="date-table-switch" value="yesterday"><%= t("schedules.date.yesterday") %></button>
+<button class="date-table-switch" value="today"><%= t("schedules.date.today") %></button>
+<button class="date-table-switch" value="tomorrow"><%= t("schedules.date.tomorrow") %></button>
+
+<div id="schedule-details">
+  <%= render partial: "date_details", locals: {records: @date_records, text: t("schedules.date.today") } %>
+</div>
