@@ -3,6 +3,7 @@ ja:
     schedule:
       th:
         plan_flag: "済"
+      none: "なし"
     record:
       value:
         time: "%{time}分"
@@ -40,22 +41,20 @@ ja:
     edit:
       title: "プロフィール編集"
   schedules:
-    index:
+    header:
       title: "%{user_name}さんのスケジュール"
-      date_switch_button: "前後3日間"
-      month_switch_button: "今月"
-    date_details:
+      date_switch_link: "前後3日間"
+      month_switch_link: "月ごと"
+    date:
       today: "本日"
       tomorrow: "翌日"
       yesterday: "前日"
-    date_details_tables:
+    date_details:
       cardio: "有酸素運動"
       weight: "無酸素運動"
-      none: "なし"
     month_details:
-      title: "今月"
+      title: "%{year}年 %{month}月"
       contents: "内容"
-      none: "なし"
   records:
     new:
       title: "新規記録"

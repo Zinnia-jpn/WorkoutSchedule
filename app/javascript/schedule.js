@@ -1,14 +1,24 @@
 document.addEventListener('turbolinks:load', function () {
     $(function() {
-        // 切り替えボタンを選択するとAjaxでコントローラーに送信
-        $(function() {
-            $('.schedule-table-switch').click(function() {
+        // 前後3日間の切り替えボタンを押すとAjaxで送信
+        $(function scheduleTableSwitch() {
+            $('.date-table-switch').click(function() {
                 $.ajax({
-                    url: 'dynamic_select_tables',
+                    url: 'dynamic_select_date',
                     type: 'GET',
                     data: { value: $(this).val() },
                     dataType: 'script'
                 });
+            });
+        });
+
+        // 月選択のモーダル機能
+        $(function() {
+            $('#select-month-button').click(function() {
+                $('#select-month-modal').fadeIn();
+            });
+            $('#month-modal-close').click(function() {
+                $('#select-month-modal').fadeOut();
             });
         });
     });

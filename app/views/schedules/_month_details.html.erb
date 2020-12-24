@@ -1,11 +1,14 @@
-<h2><%= t("schedules.month_details.title") %></h2>
+<h2 id="select-month-button">
+  <%= t("schedules.month_details.title", year: @select_year_month.year, month: @select_year_month.month) %>
+</h2>
+
 <table border="1">
   <% if @month_records.present? %>
     <tr>
       <th><%= t("dictionary.schedule.th.plan_flag") %></th>
       <th><%= Record.human_attribute_name(:date) %></th>
       <th><%= Record.human_attribute_name(:workout_id) %></th>
-      <th colspan="3"><%= t("schedules.month_details.contents") %></th>
+      <th colspan="3"><%= t("schedules.month_details_table.contents") %></th>
     </tr>
     <% @month_records.each do |record| %>
       <tr>
@@ -22,6 +25,6 @@
       </tr>
     <% end %>
   <% else %>
-    <h3><%= t("schedules.date_details_tables.none") %></h3>
+    <h3><%= t("dictionary.schedule.none") %></h3>
   <% end %>
 </table>

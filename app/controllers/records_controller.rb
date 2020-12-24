@@ -28,14 +28,13 @@ class RecordsController < ApplicationController
     )
     if @record.save
       flash[:success] = t("records.create.success")
-      redirect_to schedule_url
+      redirect_to record_new_url
     else
       render "new"
     end
   end
 
-  # app/javascript/record.jsからAjaxで送信された値を元にフォームを生成
-  def dynamic_select_category
+  def dynamic_select_category # app/javascript/record.jsからAjaxで送信された値を元にフォームを生成
     @plan_flag = convert_flag_to_boolean_type(params[:flag])
     @category_id = params[:category_id].to_i
     @workouts = Workout.where(category_id: params[:category_id])
@@ -47,13 +46,11 @@ class RecordsController < ApplicationController
     @intensities = Intensity.all
   end
 
-  # 引数をboolean型に変換
-  def convert_flag_to_boolean_type(flag)
+  def convert_flag_to_boolean_type(flag) # 引数をboolean型に変換
     return ActiveRecord::Type::Boolean.new.cast flag
   end
 
-  # 分割された値をdate型に変換
-  def divided_value_that_date_type_conversion(year, month, day)
+  def divided_value_that_date_type_conversion(year, month, day) # 分割された値をdate型に束ねる
     return Date.new(year, month, day)
   end
 end
