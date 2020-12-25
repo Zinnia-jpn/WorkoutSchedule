@@ -12,6 +12,8 @@ ja:
       success: "ユーザープロフィールを変更しました"
       mismatch_current_pw: "現在のパスワードが間違っています"
       mismatch_new_pw: "新しいパスワードと再入力が一致していません"
+    destroy:
+      error: "予期せぬエラーが発生、アカウントを削除できませんでした"
   records:
     create:
       success: "新規記録を作成しました"

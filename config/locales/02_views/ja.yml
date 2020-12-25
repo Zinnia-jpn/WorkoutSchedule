@@ -15,6 +15,10 @@ ja:
   homes: # 各View
     top:
       title: "Workoutスケジュール管理アプリ"
+    account_deleted_notification:
+      title_1: "アカウントの削除が完了しました"
+      title_2: "今までご利用いただきありがとうございました"
+      top's_link: "ホーム画面に戻る"
   layouts:
     header:
       schedule: "スケジュール"

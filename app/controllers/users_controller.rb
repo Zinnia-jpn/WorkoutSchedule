@@ -40,4 +40,14 @@ class UsersController < ApplicationController
       render "edit"
     end
   end
+
+  def destroy
+    if @user.destroy
+      session[:user_id] = nil
+      redirect_to account_deleted_url
+    else
+      flash[:danger] = "エラーが発生しました"
+      render "show"
+    end
+  end
 end

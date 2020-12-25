@@ -19,5 +19,6 @@ require('jquery')
 // const imagePath = (name) => images(name, true)
 
 // jsファイルの読み込み
+require ('user.js')
 require ('record.js')
 require ('schedule.js')

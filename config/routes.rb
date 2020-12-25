@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   get "login" => "sessions#login_form"
 
   # users
+  post "user/delete" => "users#destroy"
   post "user/update" => "users#update"
   get "user/edit" => "users#edit"
   post "user/create" => "users#create"
@@ -24,5 +25,6 @@ Rails.application.routes.draw do
   get "user" => "users#show"
 
   # homes
+  get "account/deleted" => "homes#account_deleted_notification"
   root "homes#top"
 end
