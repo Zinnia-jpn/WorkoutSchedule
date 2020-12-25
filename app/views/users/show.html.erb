@@ -10,5 +10,14 @@
     <td><%= @user.email %></td>
   </tr>
 </table>
-<a><%= link_to(t("users.show.edit"), user_edit_path) %></a>
-<a><%= t("users.show.delete") %></a>
+<a><%= link_to t("users.show.edit"), user_edit_path %></a>
+<a id="user-delete-button"><%= t("users.show.delete") %></a>
+
+<div id="delete-modal">
+  <p>
+    本当にアカウントを削除しますか？<br>
+    （削除すると記録も全て削除されます）
+  </p>
+  <%= button_to "はい", user_delete_path %>
+  <button id="close-delete-modal">いいえ</button>
+</div>
