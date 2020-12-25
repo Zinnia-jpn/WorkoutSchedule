@@ -28,6 +28,10 @@ gem 'bcrypt', '~> 3.1.7'
 # 国際化API
 gem 'rails-i18n'
 
+# 画像アップローダー関連Gem
+gem 'carrierwave' # アップロード機能
+gem 'mini_magick' # リサイズ
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
