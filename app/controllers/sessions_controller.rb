@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
       flash[:success] = t("sessions.login.success")
-      redirect_to schedule_url
+      redirect_to schedule_date_url
     else
       @error = t("sessions.login.failure")
       render "login_form"
