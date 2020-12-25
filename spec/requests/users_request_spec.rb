@@ -28,22 +28,31 @@ RSpec.describe "Users", type: :request do
     end
   end
 
-  # describe "#edit" do
-  #   context "正常なHTTPリクエストを送った時" do
-  #     example "リクエストが成功する" do
-  #       user = build(:user)
-  #       session[user_id] = user.id
-  #       expect(response).to have_http_status(:success)
-  #     end
-  #   end
-  # end
+  describe "#edit" do
+    context "正常なHTTPリクエストを送った時" do
+      example "リクエストが成功する" do
+        user = build(:user)
+        session[user_id] = user.id
+        expect(response).to have_http_status(:success)
+      end
+    end
+  end
 
-  # describe "#update" do
-  #   context "正常なHTTPリクエストを送った時" do
-  #     example "リクエストが成功する" do
-  #       post user_update_path
-  #       expect(response).to have_http_status(:success)
-  #     end
-  #   end
-  # end
+  describe "#update" do
+    context "正常なHTTPリクエストを送った時" do
+      example "リクエストが成功する" do
+        post user_update_path
+        expect(response).to have_http_status(:success)
+      end
+    end
+  end
+
+  describe "#destroy" do
+    context "正常なHTTPリクエストを送った時" do
+      example "リクエストが成功する" do
+        post user_delete_path
+        expect(response).to have_http_status(:success)
+      end
+    end
+  end
 end
