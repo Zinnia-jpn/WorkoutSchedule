@@ -12,7 +12,7 @@ class UsersController < ApplicationController
     if @user.save
       session[:user_id] = @user.id
       flash[:success] = @error = t("users.create.success")
-      redirect_to schedule_url
+      redirect_to schedule_date_url
     else
       render "new"
     end
