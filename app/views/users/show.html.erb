@@ -18,10 +18,7 @@
 <a id="user-delete-button"><%= t("users.show.delete") %></a>
 
 <div id="delete-modal">
-  <p>
-    本当にアカウントを削除しますか？<br>
-    （削除すると記録も全て削除されます）
-  </p>
-  <%= button_to "はい", user_delete_path %>
-  <button id="close-delete-modal">いいえ</button>
+  <p><%= simple_format t("users.show.delete_message") %></p>
+  <%= button_to t("dictionary.yes"), user_delete_path %>
+  <button id="close-delete-modal"><%= t("dictionary.no") %></button>
 </div>
