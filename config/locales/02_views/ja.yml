@@ -44,6 +44,9 @@ ja:
       title: "%{user_name}さんのプロフィール"
       edit: "編集"
       delete: "削除"
+      delete_message: |
+        本当にアカウントを削除しますか？
+        （削除すると記録も全て削除されます）
     edit:
       title: "プロフィール編集"
       revert_image_button: "画像を初期状態に戻す"
