@@ -8,10 +8,10 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(name: params[:name], email: params[:email], password: params[:password], image: "default_user_image.jpeg")
+    @user = User.new(name: params[:name], email: params[:email], password: params[:password])
     if @user.save
       session[:user_id] = @user.id
-      flash[:success] = @error = t("users.create.success")
+      flash[:success] = t("users.create.success")
       redirect_to schedule_date_url
     else
       render "new"
@@ -26,7 +26,8 @@ class UsersController < ApplicationController
     @user = User.find_by(id: session[:user_id])
     if @user.authenticate(params[:current_password])
       if params[:password] == params[:password_confirmation]
-        if @user.update(name: params[:name], email: params[:email], password: params[:password])
+        if @user.update(name: params[:name], email: params[:email], password: params[:password], image: params[:image])
+          flash[:success] = t("users.update.success")
           redirect_to user_url
         else
           render "edit"
@@ -49,5 +50,21 @@ class UsersController < ApplicationController
       flash[:danger] = "エラーが発生しました"
       render "show"
     end
+  end
+
+  def revert_image
+    @user.remove_image!
+    if @user.save
+      flash[:success] = t("users.revert_image.success")
+      redirect_to user_url
+    else
+      flash[:denger] = t("users.revert_image.error")
+      render "edit"
+    end
+  end
+
+  private
+  def user_params
+    params.require(:user).permit(:name, :email, :password, :image)
   end
 end

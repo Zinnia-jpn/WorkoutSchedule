@@ -15,6 +15,14 @@
 <%= form_with url: user_update_path, local: true do |f| %>
   <table border="1">
     <tr>
+      <th><%= User.human_attribute_name(:image) %></th>
+      <td>
+        <%= f.file_field :image, accept: 'image/jpeg,image/gif,image/png' %><br>
+        <%= f.hidden_field :image_cache, value: params[:image_cache] %>
+        <a id="revert-image-button"><%= t("users.edit.revert_image_button") %></a>
+      </td>
+    </tr>
+    <tr>
       <th><%= User.human_attribute_name(:name) %></th>
       <td><%= f.text_field :name, value: @user.name %></td>
     </tr>
@@ -23,6 +31,7 @@
       <td><%= f.email_field :email, value: @user.email %></td>
     </tr>
     <tr>
+
       <th><%= User.human_attribute_name(:current_password) %></th>
       <td><%= f.password_field :current_password %></td>
     </tr>
@@ -37,3 +46,9 @@
   </table>
   <%= f.submit t("helpers.submit.update") %>
 <% end %>
+
+<div id="revert-image-modal">
+  <p><%= t("users.edit.revert_image_message") %></p>
+  <%= button_to t("dictionary.yes"), user_revert_image_path %>
+  <button id="close-revert-image-modal"><%= t("dictionary.no") %></button>
+</div>

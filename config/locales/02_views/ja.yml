@@ -1,5 +1,7 @@
 ja:
   dictionary: # 複数のViewで使用
+    "yes": "はい"
+    "no": "いいえ"
     schedule:
       th:
         plan_flag: "済"
@@ -44,6 +46,8 @@ ja:
       delete: "削除"
     edit:
       title: "プロフィール編集"
+      revert_image_button: "画像を初期状態に戻す"
+      revert_image_message: "画像を初期状態に戻します。よろしいですか？"
   schedules:
     header:
       title: "%{user_name}さんのスケジュール"

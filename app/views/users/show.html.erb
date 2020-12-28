@@ -1,5 +1,9 @@
 <h1><%= t("users.show.title", user_name: @user.name) %></h1>
-<h2><%= User.human_attribute_name(:image) %></h2>
+<% if @user.image? %>
+  <%= image_tag @user.image.url %>
+<% else %>
+  <%= image_tag "/images/default_user_image.jpeg" %>
+<% end %>
 <table border="1">
   <tr>
     <th><%= User.human_attribute_name(:name) %></th>
