@@ -31,6 +31,7 @@ gem 'rails-i18n'
 # 画像アップローダー関連Gem
 gem 'carrierwave' # アップロード機能
 gem 'mini_magick' # リサイズ
+gem 'uuid' # 一意のファイル名をランダムに作成
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
