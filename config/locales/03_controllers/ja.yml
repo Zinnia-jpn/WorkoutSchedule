@@ -14,6 +14,9 @@ ja:
       mismatch_new_pw: "新しいパスワードと再入力が一致していません"
     destroy:
       error: "予期せぬエラーが発生、アカウントを削除できませんでした"
+    revert_image:
+      success: "画像が初期状態に戻りました"
+      error: "予期せぬエラーが発生、画像を変更できませんでした"
   records:
     create:
       success: "新規記録を作成しました"

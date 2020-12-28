@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   get "login" => "sessions#login_form"
 
   # users
+  post "user/revert_image" => "users#revert_image"
   post "user/delete" => "users#destroy"
   post "user/update" => "users#update"
   get "user/edit" => "users#edit"

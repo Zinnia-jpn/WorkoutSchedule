@@ -55,4 +55,13 @@ RSpec.describe "Users", type: :request do
       end
     end
   end
+
+  describe "#revert_image" do
+    context "正常なHTTPリクエストを送った時" do
+      example "リクエストが成功する" do
+        post user_revert_image_path
+        expect(response).to have_http_status(:success)
+      end
+    end
+  end
 end
