@@ -17,4 +17,22 @@ RSpec.describe "Records", type: :request do
       end
     end
   end
+
+  describe "#edit" do
+    context "正常なHTTPリクエストを送った時" do
+      example "リクエストが成功する" do
+        get record_edit_path, params: {id: 1}
+        expect(response).to have_http_status(:success)
+      end
+    end
+  end
+
+  describe "#update" do
+    context "正常なHTTPリクエストを送った時" do
+      example "リクエストが成功する" do
+        post record_update_path
+        expect(response).to have_http_status(:success)
+      end
+    end
+  end
 end
