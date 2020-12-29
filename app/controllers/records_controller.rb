@@ -1,11 +1,9 @@
 class RecordsController < ApplicationController
 
   def new
-    if params[:flag] != "true" && params[:flag] != "false"
-      params[:flag] = "true"
-    end
     @plan_flag = convert_flag_to_boolean_type(params[:flag])
     @record = Record.new()
+    @url = record_create_path
   end
 
   def create
@@ -34,16 +32,46 @@ class RecordsController < ApplicationController
     end
   end
 
-  def dynamic_select_category # app/javascript/record.jsからAjaxで送信された値を元にフォームを生成
-    @plan_flag = convert_flag_to_boolean_type(params[:flag])
-    @category_id = params[:category_id].to_i
-    @workouts = Workout.where(category_id: params[:category_id])
-    if @category_id == 1
-      @cardio_flag = true
+  def edit
+    @url = record_update_path
+    record_required_data_get
+    @record = Record.find_by(id: params[:id])
+    @plan_flag = @record.plan_flag
+    @cardio_flag = @record.cardio_flag.to_s
+    # workout_idからcatecory_idを逆引き
+    @current_workout = Workout.find_by(id: @record.workout_id)
+    @category_id = @current_workout.category_id
+    @workouts = Workout.where(category_id: @current_workout.category_id) # workoutセレクトボックスの選択肢
+    @record_date = @record.date
+  end
+
+  def update
+    @record = Record.find_by(id: params[:id])
+    date = divided_value_that_date_type_conversion(params["date(1i)"].to_i, params["date(2i)"].to_i, params["date(3i)"].to_i)
+    plan_flag = convert_flag_to_boolean_type(params[:plan_flag])
+    cardio_flag = convert_flag_to_boolean_type(params[:cardio_flag])
+    if @record.update(date: date, plan_flag: plan_flag, workout_id: params[:workout_id], cardio_flag: cardio_flag,
+                      weight: params[:weight], rep: params[:rep], set: params[:set], interval: params[:interval],
+                      time: params[:time], intensity_id: params[:intensity_id], remark: params[:remark])
+      flash[:success] = t("records.update.success")
+      redirect_to schedule_month_url
     else
-      @cardio_flag = false
+      render "edit"
     end
+  end
+
+  def dynamic_select_category # app/javascript/record.jsからAjaxで送信された値を元にフォームを生成
     @intensities = Intensity.all
+    @url = params[:url]
+    @workouts = Workout.where(category_id: params[:category_id])
+    # @recordに必要なデータを生成
+    date = divided_value_that_date_type_conversion(params[:year].to_i, params[:month].to_i, params[:day].to_i)
+    plan_flag = convert_flag_to_boolean_type(params[:plan_flag])
+    params[:category_id].to_i == 1 ? cardio_flag = true : cardio_flag = false
+    @record = Record.new(id: params[:id], date: date, plan_flag: plan_flag, workout_id: params[:workout_id],
+                         cardio_flag: cardio_flag, weight: params[:weight], rep: params[:rep], set: params[:set],
+                         interval: params[:interval], time: params[:time], intensity_id: params[:intensity_id],
+                         remark: params[:remark])
   end
 
   def convert_flag_to_boolean_type(flag) # 引数をboolean型に変換

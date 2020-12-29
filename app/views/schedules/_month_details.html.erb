@@ -2,7 +2,7 @@
   <%= t("schedules.month_details.title", year: @select_year_month.year, month: @select_year_month.month) %>
 </h2>
 
-<table border="1">
+<table>
   <% if @month_records.present? %>
     <tr>
       <th><%= t("dictionary.schedule.th.plan_flag") %></th>
@@ -22,6 +22,7 @@
           <td><%= record.rep.present? ? t("dictionary.record.value.rep", rep: record.rep) : "- -" %></td>
           <td><%= record.set.present? ? t("dictionary.record.value.set", set: record.set) : "- -" %></td>
         <% end %>
+        <td class="border_none"><%= link_to "編集", controller: "records", action: "edit", id: record.id %></td>
       </tr>
     <% end %>
   <% else %>

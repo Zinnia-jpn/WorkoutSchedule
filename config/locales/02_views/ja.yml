@@ -67,9 +67,11 @@ ja:
       title: "%{year}年 %{month}月"
       contents: "内容"
   records:
+    category: "カテゴリ"
     new:
       title: "新規記録"
-      category: "カテゴリ"
+    edit:
+      title: "記録編集"
     form_details:
       plan_flag_notice: "(実施済みの場合はチェックを外す)"
       unit:
