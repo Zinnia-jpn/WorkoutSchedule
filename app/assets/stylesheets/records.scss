@@ -5,3 +5,15 @@
 #normal-table {
   display: none;
 }
+
+table {
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid black;
+}
+
+.border_none {
+  border: 0px none;
+}
