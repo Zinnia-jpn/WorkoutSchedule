@@ -6,7 +6,7 @@
       <th><%= Record.human_attribute_name(:workout_id) %></th>
       <td>
         <%= f.collection_select :workout_id, @workouts, :id, :name,
-                                {:prompt => t("helpers.select.prompt"), selected: @category_id} %>
+                                {:prompt => t("helpers.select.prompt"), selected: @record.workout_id} %>
       </td>
     </tr>
     <tr>
