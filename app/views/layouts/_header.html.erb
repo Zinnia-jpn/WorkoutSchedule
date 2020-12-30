@@ -1,16 +1,15 @@
 <header>
   <ul>
     <% if session[:user_id].present? %>
-      <li><%= link_to("Workoutスケジュール管理アプリ", schedule_date_path) %></li>
+      <li><%= link_to t("layouts.header.title"), schedule_date_path %></li>
     <% else %>
-      <li><%= link_to("Workoutスケジュール管理アプリ", root_path) %></li>
+      <li><%= link_to t("layouts.header.title"), root_path %></li>
     <% end %>
   </ul>
   <ul>
     <% if session[:user_id].present? %>
       <li><%= link_to t("layouts.header.schedule"), schedule_date_path %></li>
-      <li><%= link_to t("layouts.header.record"), controller: "records", action: "new", flag: "true" %></li>
-      <li><%= link_to t("layouts.header.record"), controller: "records", action: "new", flag: "false" %></li>
+      <li><%= link_to t("layouts.header.record"), record_new_path %></li>
       <li><%= link_to t("layouts.header.user"), user_path %></li>
       <li><%= link_to t("layouts.header.logout"), logout_path, method: :post %></li>
     <% else %>
