@@ -16,13 +16,14 @@ ja:
 
   homes: # 各View
     top:
-      title: "Workoutスケジュール管理アプリ"
+      title: "ワークアウト管理アプリへようこそ！"
     account_deleted_notification:
       title_1: "アカウントの削除が完了しました"
       title_2: "今までご利用いただきありがとうございました"
       top's_link: "ホーム画面に戻る"
   layouts:
     header:
+      title: "ワークアウト管理アプリ"
       schedule: "スケジュール"
       record: "新規記録"
       user_name: "%{user_name}"
