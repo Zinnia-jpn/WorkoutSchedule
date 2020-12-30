@@ -1,7 +1,6 @@
 class RecordsController < ApplicationController
 
   def new
-    @plan_flag = convert_flag_to_boolean_type(params[:flag])
     @record = Record.new()
     @url = record_create_path
   end
@@ -36,7 +35,6 @@ class RecordsController < ApplicationController
     @url = record_update_path
     record_required_data_get
     @record = Record.find_by(id: params[:id])
-    @plan_flag = @record.plan_flag
     @cardio_flag = @record.cardio_flag.to_s
     # workout_idからcatecory_idを逆引き
     @current_workout = Workout.find_by(id: @record.workout_id)
@@ -72,13 +70,17 @@ class RecordsController < ApplicationController
     @url = params[:url]
     @workouts = Workout.where(category_id: params[:category_id])
     # @recordに必要なデータを生成
-    date = divided_value_that_date_type_conversion(params[:year].to_i, params[:month].to_i, params[:day].to_i)
-    plan_flag = convert_flag_to_boolean_type(params[:plan_flag])
     params[:category_id].to_i == 1 ? cardio_flag = true : cardio_flag = false
-    @record = Record.new(id: params[:id], date: date, plan_flag: plan_flag, workout_id: params[:workout_id],
-                         cardio_flag: cardio_flag, weight: params[:weight], rep: params[:rep], set: params[:set],
-                         interval: params[:interval], time: params[:time], intensity_id: params[:intensity_id],
-                         remark: params[:remark])
+    if params[:plan_flag].present?
+      date = divided_value_that_date_type_conversion(params[:year].to_i, params[:month].to_i, params[:day].to_i)
+      plan_flag = convert_flag_to_boolean_type(params[:plan_flag])
+      @record = Record.new(id: params[:id], date: date, plan_flag: plan_flag, workout_id: params[:workout_id],
+                           cardio_flag: cardio_flag, weight: params[:weight], rep: params[:rep], set: params[:set],
+                           interval: params[:interval], time: params[:time], intensity_id: params[:intensity_id],
+                           remark: params[:remark])
+    else
+      @record = Record.new(date: Date.today, plan_flag: true, cardio_flag: cardio_flag)
+    end
   end
 
   def convert_flag_to_boolean_type(flag) # 引数をboolean型に変換
