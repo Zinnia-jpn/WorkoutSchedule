@@ -33,11 +33,11 @@ class UsersController < ApplicationController
           render "edit"
         end
       else
-        @error = t("users.update.mismatch_new_pw")
+        @user.errors.add(:base, t("users.update.mismatch_new_pw"))
         render "edit"
       end
     else
-      @error = t("users.update.mismatch_current_pw")
+      @user.errors.add(:base, t("users.update.mismatch_current_pw"))
       render "edit"
     end
   end
@@ -47,7 +47,7 @@ class UsersController < ApplicationController
       session[:user_id] = nil
       redirect_to account_deleted_url
     else
-      flash[:danger] = "エラーが発生しました"
+      flash[:danger] = t("users.destroy.error")
       render "show"
     end
   end
@@ -58,7 +58,7 @@ class UsersController < ApplicationController
       flash[:success] = t("users.revert_image.success")
       redirect_to user_url
     else
-      flash[:denger] = t("users.revert_image.error")
+      flash[:danger] = t("users.revert_image.error")
       render "edit"
     end
   end

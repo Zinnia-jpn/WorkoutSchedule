@@ -1,9 +1,5 @@
 <h1><%= t("users.edit.title") %></h1>
 
-<% if @error.present? %>
-  <%= @error %>
-<% end %>
-
 <% if @user.errors.present? %>
   <ul>
     <% @user.errors.full_messages.each do |m| %>

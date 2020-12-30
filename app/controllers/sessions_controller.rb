@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
       flash[:success] = t("sessions.login.success")
       redirect_to schedule_date_url
     else
-      @error = t("sessions.login.failure")
+      flash[:danger] = t("sessions.login.failure")
       render "login_form"
     end
   end

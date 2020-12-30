@@ -1,6 +1,6 @@
 <h1><%= t("users.new.title") %></h1>
 
-<% if @user.errors %>
+<% if @user.errors.present? %>
   <ul>
     <% @user.errors.full_messages.each do |m| %>
       <li><%= m %></li>
