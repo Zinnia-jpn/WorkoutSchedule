@@ -9,15 +9,5 @@ document.addEventListener('turbolinks:load', function () {
                 $('#delete-modal').fadeOut();
             });
         });
-
-        // ユーザー画像初期化の確認モーダル機能
-        $(function() {
-            $('#revert-image-button').click(function() {
-                $('#revert-image-modal').fadeIn();
-            });
-            $('#close-revert-image-modal').click(function() {
-                $('#revert-image-modal').fadeOut();
-            });
-        });
     });
 });

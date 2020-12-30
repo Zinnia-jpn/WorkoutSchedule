@@ -19,7 +19,7 @@
       <td>
         <%= f.file_field :image, accept: 'image/jpeg,image/gif,image/png' %><br>
         <%= f.hidden_field :image_cache, value: params[:image_cache] %>
-        <a id="revert-image-button"><%= t("users.edit.revert_image_button") %></a>
+        <%= link_to t("users.edit.revert_image_button"), user_revert_image_path, method: :post, data: { confirm: t("users.edit.revert_image_message") } %>
       </td>
     </tr>
     <tr>
@@ -46,9 +46,3 @@
   </table>
   <%= f.submit t("helpers.submit.update") %>
 <% end %>
-
-<div id="revert-image-modal">
-  <p><%= t("users.edit.revert_image_message") %></p>
-  <%= button_to t("dictionary.yes"), user_revert_image_path %>
-  <button id="close-revert-image-modal"><%= t("dictionary.no") %></button>
-</div>
