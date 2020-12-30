@@ -1,6 +1,6 @@
 <h1><%= t("records.edit.title") %> </h1>
 
-<% if @record.errors %>
+<% if @record.errors.present? %>
   <ul>
     <% @record.errors.full_messages.each do |m| %>
       <li><%= m %></li>

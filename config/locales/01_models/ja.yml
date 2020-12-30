@@ -4,6 +4,7 @@ ja:
       user: ユーザー
       record: ワークアウト記録
     attributes:
+      base: "" # オリジナルのエラーメッセージを表示するために必要
       user:
         name: ユーザー名
         email: メールアドレス

@@ -1,9 +1,5 @@
 <h1><%= t("sessions.login_form.title") %></h1>
 
-<% if @error.present? %>
-  <%= @error %>
-<% end %>
-
 <%= form_with url: login_path, local: true do |f| %>
   <table border="1">
     <tr>
