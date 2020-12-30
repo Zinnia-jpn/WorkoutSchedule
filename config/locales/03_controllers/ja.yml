@@ -22,3 +22,5 @@ ja:
       success: "新規記録を作成しました"
     update:
       success: "記録を上書きしました"
+    destroy:
+      success: "記録を削除しました"
