@@ -60,6 +60,13 @@ class RecordsController < ApplicationController
     end
   end
 
+  def destroy
+    @record = Record.find_by(id: params[:id])
+    @record.destroy
+    flash[:success] = t("records.destroy.success")
+    redirect_to schedule_month_url
+  end
+
   def dynamic_select_category # app/javascript/record.jsからAjaxで送信された値を元にフォームを生成
     @intensities = Intensity.all
     @url = params[:url]

@@ -22,7 +22,8 @@
           <td><%= record.rep.present? ? t("dictionary.record.value.rep", rep: record.rep) : "- -" %></td>
           <td><%= record.set.present? ? t("dictionary.record.value.set", set: record.set) : "- -" %></td>
         <% end %>
-        <td class="border_none"><%= link_to "編集", controller: "records", action: "edit", id: record.id %></td>
+        <td class="border_none"><%= link_to t("schedules.edit"), controller: "records", action: "edit", id: record.id %></td>
+        <td class="border_none"><%= link_to t("schedules.delete"), record_destroy_path(id: record.id), method: :post, data: { confirm: t("schedules.delete_message")} %></td>
       </tr>
     <% end %>
   <% else %>

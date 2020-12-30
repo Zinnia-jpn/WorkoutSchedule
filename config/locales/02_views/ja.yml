@@ -52,6 +52,9 @@ ja:
       revert_image_button: "画像を初期状態に戻す"
       revert_image_message: "画像を初期状態に戻します。よろしいですか？"
   schedules:
+    edit: "編集"
+    delete: "削除"
+    delete_message: "本当に記録を削除してもよろしいですか？"
     header:
       title: "%{user_name}さんのスケジュール"
       date_switch_link: "前後3日間"
