@@ -1,5 +1,6 @@
 class SchedulesController < ApplicationController
 # アソシエーション
+  before_action :logged_in_user
   before_action :record_required_data_get, only: [:date, :dynamic_select_date, :month, :dynamic_select_month]
 
 # アクション
