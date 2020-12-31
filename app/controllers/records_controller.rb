@@ -1,5 +1,5 @@
 class RecordsController < ApplicationController
-  before_action :logged_in_user
+  before_action :login_check
 
   def new
     @record = Record.new()
@@ -11,7 +11,7 @@ class RecordsController < ApplicationController
     plan_flag = convert_flag_to_boolean_type(params[:plan_flag])
     cardio_flag = convert_flag_to_boolean_type(params[:cardio_flag])
     @record = Record.new(
-        user_id: session[:user_id],
+        user_id: @current_user.id,
         date: date,
         plan_flag: plan_flag,
         workout_id: params[:workout_id],
@@ -33,9 +33,10 @@ class RecordsController < ApplicationController
   end
 
   def edit
+    @record = Record.find_by(id: params[:id])
+    check_created_user(@record)
     @url = record_update_path
     record_required_data_get
-    @record = Record.find_by(id: params[:id])
     @cardio_flag = @record.cardio_flag.to_s
     # workout_idからcatecory_idを逆引き
     @current_workout = Workout.find_by(id: @record.workout_id)
@@ -46,6 +47,8 @@ class RecordsController < ApplicationController
 
   def update
     @record = Record.find_by(id: params[:id])
+    check_created_user(@record)
+    redirect_to schedule_date_url unless current_user?(record_user)
     date = divided_value_that_date_type_conversion(params["date(1i)"].to_i, params["date(2i)"].to_i, params["date(3i)"].to_i)
     plan_flag = convert_flag_to_boolean_type(params[:plan_flag])
     cardio_flag = convert_flag_to_boolean_type(params[:cardio_flag])
@@ -90,5 +93,10 @@ class RecordsController < ApplicationController
 
   def divided_value_that_date_type_conversion(year, month, day) # 分割された値をdate型に束ねる
     return Date.new(year, month, day)
+  end
+
+  def check_created_user(record) # 現在のユーザーとrecordを作成したユーザーが一致するかチェック
+    created_user = User.find_by(id: record.user_id)
+    redirect_to schedule_date_url unless current_user?(created_user)
   end
 end

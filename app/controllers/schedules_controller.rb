@@ -1,9 +1,7 @@
 class SchedulesController < ApplicationController
-# アソシエーション
-  before_action :logged_in_user
+  before_action :login_check
   before_action :record_required_data_get, only: [:date, :dynamic_select_date, :month, :dynamic_select_month]
 
-# アクション
   def date
     @select_value = "today"
     get_date_records(Date.today)
@@ -29,13 +27,13 @@ class SchedulesController < ApplicationController
     get_month_records(@select_year_month)
   end
 
-# アクションにて使用するメソッド
+# アクションで使用するメソッド
   def get_date_records(select_date) # 指定された日のRecordを取得
-    @date_records = Record.new().get_specified_records(@user.id, select_date)
+    @date_records = Record.new().get_specified_records(@current_user.id, select_date)
   end
 
   def get_month_records(select_month) # 指定された月のRecordを取得
     specified_month = select_month.in_time_zone.all_month # 指定された月の初日から末日まで
-    @month_records = Record.new().get_specified_records(@user.id, specified_month)
+    @month_records = Record.new().get_specified_records(@current_user.id, specified_month)
   end
 end

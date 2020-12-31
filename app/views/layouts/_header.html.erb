@@ -1,6 +1,6 @@
 <header>
   <ul>
-    <% if session[:user_id].present? %>
+    <% if logged_in? %>
       <li><%= link_to t("layouts.header.title"), schedule_date_path %></li>
     <% else %>
       <li><%= link_to t("layouts.header.title"), root_path %></li>
