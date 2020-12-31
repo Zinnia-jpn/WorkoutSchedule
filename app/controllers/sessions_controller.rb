@@ -1,23 +1,23 @@
 class SessionsController < ApplicationController
-  before_action :logged_in_user, only: [:logout]
+  before_action :login_check, only: [:logout]
 
   def login_form
   end
 
   def login
-    @user = User.find_by(email: params[:email])
-    if @user && @user.authenticate(params[:password])
-      session[:user_id] = @user.id
+    user = User.find_by(email: params[:email])
+    if user && user.authenticate(params[:password])
+      log_in(user)
       flash[:success] = t("sessions.login.success")
       redirect_to schedule_date_url
     else
-      flash[:danger] = t("sessions.login.failure")
+      @login_error =  t("sessions.login.failure")
       render "login_form"
     end
   end
 
   def logout
-    session[:user_id] = nil
+    log_out
     flash[:success] = t("sessions.logout.success")
     redirect_to root_url
   end

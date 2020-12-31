@@ -1,8 +1,7 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:show, :edit, :update, :destroy, :revert_image]
+  before_action :login_check, only: [:show, :edit, :update, :destroy, :revert_image]
 
   def show
-    @user = User.find_by(id: session[:user_id])
   end
 
   def new
@@ -12,7 +11,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(name: params[:name], email: params[:email], password: params[:password])
     if @user.save
-      session[:user_id] = @user.id
+      log_in(@user)
       flash[:success] = t("users.create.success")
       redirect_to schedule_date_url
     else
@@ -21,11 +20,11 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find_by(id: session[:user_id])
+    @user = @current_user
   end
 
   def update
-    @user = User.find_by(id: session[:user_id])
+    @user = @current_user
     if @user.authenticate(params[:current_password])
       if params[:password] == params[:password_confirmation]
         if @user.update(name: params[:name], email: params[:email], password: params[:password], image: params[:image])
@@ -45,8 +44,8 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    if @user.destroy
-      session[:user_id] = nil
+    if @current_user.destroy
+      log_out
       redirect_to account_deleted_url
     else
       flash[:danger] = t("users.destroy.error")
@@ -55,8 +54,8 @@ class UsersController < ApplicationController
   end
 
   def revert_image
-    @user.remove_image!
-    if @user.save
+    @current_user.remove_image!
+    if @current_user.save
       flash[:success] = t("users.revert_image.success")
       redirect_to user_url
     else

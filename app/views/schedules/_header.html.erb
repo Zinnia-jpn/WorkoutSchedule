@@ -1,4 +1,4 @@
-<h1><%=t("schedules.header.title", user_name: @user.name) %></h1>
+<h1><%=t("schedules.header.title", name: @current_user.name) %></h1>
 
 <a><%= link_to t("schedules.header.date_switch_link"), schedule_date_path %></a>
 <a><%= link_to t("schedules.header.month_switch_link"), schedule_month_path %></a>
