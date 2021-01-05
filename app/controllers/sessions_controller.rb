@@ -8,6 +8,7 @@ class SessionsController < ApplicationController
     user = User.find_by(email: params[:email])
     if user && user.authenticate(params[:password])
       log_in(user)
+      params[:remember] == "1" ? remember(user) : forget(user)
       flash[:success] = t("sessions.login.success")
       redirect_to schedule_date_url
     else
