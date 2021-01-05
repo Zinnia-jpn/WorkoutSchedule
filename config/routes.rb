@@ -21,8 +21,8 @@ Rails.application.routes.draw do
 
   # users
   post "user/revert_image" => "users#revert_image"
-  post "user/delete" => "users#destroy"
-  post "user/update" => "users#update"
+  delete "user/delete" => "users#destroy"
+  patch "user/update" => "users#update"
   get "user/edit" => "users#edit"
   post "user/create" => "users#create"
   get "signup" => "users#new"

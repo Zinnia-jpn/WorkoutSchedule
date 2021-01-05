@@ -1,7 +1,7 @@
 ja:
-  sessions: # ←コントローラー名
-    login: # ←メソッド
-      success: "ログインしました" # ←メッセージ
+  sessions:
+    login:
+      success: "ログインしました"
       failure: "メールアドレスかパスワードが間違っています"
     logout:
       success: "ログアウトしました"
@@ -10,13 +10,9 @@ ja:
       success: "ユーザー登録が完了しました"
     update:
       success: "ユーザープロフィールを変更しました"
-      mismatch_current_pw: "現在のパスワードが間違っています"
-      mismatch_new_pw: "新しいパスワードと再入力が一致していません"
-    destroy:
-      error: "予期せぬエラーが発生、アカウントを削除できませんでした"
+      mismatch: "が間違っています"
     revert_image:
       success: "画像が初期状態に戻りました"
-      error: "予期せぬエラーが発生、画像を変更できませんでした"
   records:
     create:
       success: "新規記録を作成しました"
