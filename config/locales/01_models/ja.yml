@@ -12,6 +12,7 @@ ja:
         current_password: 現在のパスワード
         new_password: 新しいパスワード
         new_password_confirmation: パスワード確認(新しいパスワードを入力)
+        remember: ログイン状態を保持する
         image: プロフィール画像
       record:
         date: 日付

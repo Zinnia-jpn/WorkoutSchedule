@@ -16,6 +16,10 @@
       <th><%= User.human_attribute_name(:password) %></th>
       <td><%= f.password_field :password %></td>
     </tr>
+    <tr>
+      <th><%= f.label :remember, User.human_attribute_name(:remember) %></th>
+      <td><%= f.check_box :remember %></td>
+    </tr>
   </table>
   <%= f.submit t("helpers.submit.submit") %>
 <% end %>

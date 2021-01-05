@@ -2,7 +2,7 @@ require "csv"
 # coding: utf-8
 
 CSV.foreach("db/csv/users.csv") do |row|
-  User.create!(name: row[0], email: row[1], password: row[2], password_confirmation: row[2], image: row[3].present? ? File.open("#{Rails.root}/db/fixtures/#{row[3]}") : nil)
+  User.create!(name: row[0], email: row[1], password: row[2], password_confirmation: row[2], remember_digest: row[3], image: row[4].present? ? File.open("#{Rails.root}/db/fixtures/#{row[3]}") : nil)
 end
 
 CSV.foreach("db/csv/categories.csv") do |row|
