@@ -1,9 +1,7 @@
 <h1><%= t("users.show.title", name: @current_user.name) %></h1>
-<% if @current_user.image? %>
-  <%= image_tag @current_user.image.url %>
-<% else %>
-  <%= image_tag "/images/default_user_image.jpeg" %>
-<% end %>
+
+<%= image_tag image(@current_user) %>
+
 <table border="1">
   <tr>
     <th><%= User.human_attribute_name(:name) %></th>
@@ -19,6 +17,6 @@
 
 <div id="delete-modal">
   <p><%= simple_format t("users.show.delete_message") %></p>
-  <%= button_to t("dictionary.yes"), user_delete_path %>
+  <%= button_to t("dictionary.yes"), user_delete_path, method: :delete %>
   <button id="close-delete-modal"><%= t("dictionary.no") %></button>
 </div>

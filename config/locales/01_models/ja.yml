@@ -4,15 +4,15 @@ ja:
       user: ユーザー
       record: ワークアウト記録
     attributes:
-      base: "" # オリジナルのエラーメッセージを表示するために必要
       user:
         name: ユーザー名
         email: メールアドレス
         password: パスワード
+        password_confirmation: パスワード確認(再入力)
         current_password: 現在のパスワード
         new_password: 新しいパスワード
-        new_password_confirmation: パスワード確認(新しいパスワードを入力)
-        remember: ログイン状態を保持する
+        new_password_confirmation: 新しいパスワード確認(再入力)
+        remember: ログイン状態を保持
         image: プロフィール画像
       record:
         date: 日付

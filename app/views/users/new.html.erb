@@ -1,14 +1,8 @@
 <h1><%= t("users.new.title") %></h1>
 
-<% if @user.errors.present? %>
-  <ul>
-    <% @user.errors.full_messages.each do |m| %>
-      <li><%= m %></li>
-    <% end %>
-  </ul>
-<% end %>
+<%= render partial: "error_messages" %>
 
-<%= form_with url: user_create_path, local: true do |f| %>
+<%= form_with model: @user, url: user_create_path, local: true do |f| %>
   <table border="1">
     <tr>
       <th><%= User.human_attribute_name(:name) %></th>
@@ -21,6 +15,10 @@
     <tr>
       <th><%= User.human_attribute_name(:password) %></th>
       <td><%= f.password_field :password %></td>
+    </tr>
+    <tr>
+      <th><%= User.human_attribute_name(:password_confirmation) %></th>
+      <td><%= f.password_field :password_confirmation %></td>
     </tr>
   </table>
   <%= f.submit t("helpers.submit.create") %>

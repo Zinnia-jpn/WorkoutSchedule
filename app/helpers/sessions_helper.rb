@@ -11,7 +11,7 @@ module SessionsHelper
 
   # session,cookieを元に@current_userを取得
   def current_user
-    if (user_id = session[:user_id].present?) # user_idに代入した上で、user_idが存在しているか
+    if (user_id = session[:user_id]) # user_idに代入した上で、user_idが存在しているか
       @current_user ||= User.find_by(id: user_id)
     elsif (user_id = cookies.signed[:user_id]) # 永続セッションが存在する場合「ログイン処理,@current_userへの代入」を行う
       user = User.find_by(id: user_id)

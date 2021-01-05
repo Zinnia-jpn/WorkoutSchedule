@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session
 
   def login_check
-      redirect_to root_url unless logged_in?
+    redirect_to root_url unless logged_in?
   end
 
   def record_required_data_get # Recordの表示に必要なデータを取得
