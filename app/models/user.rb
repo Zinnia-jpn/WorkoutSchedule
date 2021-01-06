@@ -4,8 +4,15 @@ class User < ApplicationRecord
   has_many :records, primary_key: "id", foreign_key: "user_id", dependent: :destroy
   mount_uploader :image, ImageUploader
 
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  VALID_PASSWORD_REGEX =/\A(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[\d])\w{8,30}\z/
   validates :name, presence: true
-  validates :email, presence: true, uniqueness: { case_sensitive: false }
+  validates :email, presence: true, uniqueness: { case_sensitive: false },
+            format: { with: VALID_EMAIL_REGEX,
+                      message: "の形式が有効ではありません" }
+  validates :password, format: { with: VALID_PASSWORD_REGEX,
+                                 message: "は半角8~30文字で、英大文字・英小文字・数字をそれぞれ１文字以上含む必要があります" },
+            if: :password_was_entered? # 両方未入力の場合Bcryptのバリデーションに引っかかる
 
   # 永続セッションに必要なトークンをハッシュ化してremember_digestカラムに記録
   def remember
@@ -36,5 +43,10 @@ class User < ApplicationRecord
   # ランダムな文字列を生成
   def User.new_token
     SecureRandom.urlsafe_base64
+  end
+
+  # password欄・再入力欄の片方でも入力されているか
+  def password_was_entered?
+    password.present? || password_confirmation.present?
   end
 end
