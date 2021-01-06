@@ -6,7 +6,7 @@
         <th colspan="5"><%= t("schedules.date_details.cardio") %></th>
       </tr>
       <tr>
-        <th><%= t("dictionary.schedule.th.plan_flag") %></th>
+        <th><%= t("dictionary.table.do_flag") %></th>
         <th><%= Record.human_attribute_name(:workout_id) %></th>
         <th><%= Record.human_attribute_name(:time) %></th>
         <th><%= Record.human_attribute_name(:intensity) %></th>
@@ -15,7 +15,7 @@
       <% records.each do |record| %>
         <% if record.cardio_flag == true %>
           <tr>
-            <td><%= record.plan_flag ? "" : "OK" %></td>
+            <td><%= record.do_flag ? "" : "OK" %></td>
             <td><%= @workouts.find_by(id: record.workout_id).name %></td>
             <td><%= record.time.present? ? t("dictionary.record.value.time", time: record.time) : "- -" %></td>
             <td><%= record.intensity_id.present? ? @intensities.find_by(id: record.intensity_id).name : "- -" %></td>
@@ -35,7 +35,7 @@
         <th colspan="7"><%= t("schedules.date_details.weight") %></th>
       </tr>
       <tr>
-        <th>済</th>
+        <th><%= t("dictionary.table.do_flag") %></th>
         <th><%= Record.human_attribute_name(:workout_id) %></th>
         <th><%= Record.human_attribute_name(:weight) %></th>
         <th><%= Record.human_attribute_name(:rep) %></th>
@@ -46,7 +46,7 @@
       <% records.each do |record| %>
         <% if record.cardio_flag == false %>
           <tr>
-            <td><%= record.plan_flag ? "" : "OK" %></td>
+            <td><%= record.do_flag ? "OK" : "" %></td>
             <td><%= @workouts.find_by(id: record.workout_id).name %></td>
             <td><%= record.weight.present? ? t("dictionary.record.value.weight", weight: record.weight) : "- -" %></td>
             <td><%= record.rep.present? ? t("dictionary.record.value.rep", rep: record.rep) : "- -" %></td>

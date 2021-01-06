@@ -9,7 +9,7 @@ document.addEventListener("turbolinks:load", function () {
                     data: {
                         category_id: $(this).has('option:selected').val(), url: $('#url').val(),
                         id: $('#id').val(), year: $('#_date_1i').val(), month: $('#_date_2i').val(), day: $('#_date_3i').val(),
-                        plan_flag: $('#plan_flag').val(), time: $('#time').val(), intensity: $('#intensity').val(),
+                        do_flag: $('#do_flag').prop('checked'), time: $('#time').val(), intensity: $('#intensity').val(),
                         weight: $('#weight').val(), rep: $('#rep').val(), set: $('#set').val(), interval: $('#interval').val(),
                         remark: $('#remark').val()
                     },

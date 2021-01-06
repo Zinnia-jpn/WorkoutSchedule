@@ -8,12 +8,12 @@ class RecordsController < ApplicationController
 
   def create
     date = divided_value_that_date_type_conversion(params["date(1i)"].to_i, params["date(2i)"].to_i, params["date(3i)"].to_i)
-    plan_flag = convert_flag_to_boolean_type(params[:plan_flag])
+    do_flag = convert_flag_to_boolean_type(params[:do_flag])
     cardio_flag = convert_flag_to_boolean_type(params[:cardio_flag])
     @record = Record.new(
         user_id: @current_user.id,
         date: date,
-        plan_flag: plan_flag,
+        do_flag: do_flag,
         workout_id: params[:workout_id],
         cardio_flag: cardio_flag,
         weight: params[:weight],
@@ -50,9 +50,9 @@ class RecordsController < ApplicationController
     check_created_user(@record)
     redirect_to schedule_date_url unless current_user?(record_user)
     date = divided_value_that_date_type_conversion(params["date(1i)"].to_i, params["date(2i)"].to_i, params["date(3i)"].to_i)
-    plan_flag = convert_flag_to_boolean_type(params[:plan_flag])
+    do_flag = convert_flag_to_boolean_type(params[:do_flag])
     cardio_flag = convert_flag_to_boolean_type(params[:cardio_flag])
-    if @record.update(date: date, plan_flag: plan_flag, workout_id: params[:workout_id], cardio_flag: cardio_flag,
+    if @record.update(date: date, do_flag: do_flag, workout_id: params[:workout_id], cardio_flag: cardio_flag,
                       weight: params[:weight], rep: params[:rep], set: params[:set], interval: params[:interval],
                       time: params[:time], intensity_id: params[:intensity_id], remark: params[:remark])
       flash[:success] = t("records.update.success")
@@ -75,15 +75,15 @@ class RecordsController < ApplicationController
     @workouts = Workout.where(category_id: params[:category_id])
     # @recordに必要なデータを生成
     params[:category_id].to_i == 1 ? cardio_flag = true : cardio_flag = false
-    if params[:plan_flag].present?
+    if params[:do_flag].present?
       date = divided_value_that_date_type_conversion(params[:year].to_i, params[:month].to_i, params[:day].to_i)
-      plan_flag = convert_flag_to_boolean_type(params[:plan_flag])
-      @record = Record.new(id: params[:id], date: date, plan_flag: plan_flag, workout_id: params[:workout_id],
+      do_flag = convert_flag_to_boolean_type(params[:do_flag])
+      @record = Record.new(id: params[:id], date: date, do_flag: do_flag, workout_id: params[:workout_id],
                            cardio_flag: cardio_flag, weight: params[:weight], rep: params[:rep], set: params[:set],
                            interval: params[:interval], time: params[:time], intensity_id: params[:intensity_id],
                            remark: params[:remark])
     else
-      @record = Record.new(date: Date.today, plan_flag: true, cardio_flag: cardio_flag)
+      @record = Record.new(date: Date.today, do_flag: false, cardio_flag: cardio_flag)
     end
   end
 

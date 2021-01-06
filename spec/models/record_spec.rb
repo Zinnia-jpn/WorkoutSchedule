@@ -43,10 +43,10 @@ RSpec.describe Record, type: :model do
     end
   end
 
-  describe "#plan_flag" do
+  describe "#do_flag" do
     context "空の場合" do
       example "保存に失敗する" do
-        record = build(:record, plan_flag: nil)
+        record = build(:record, do_flag: nil)
         expect(record).not_to be_valid
       end
     end
