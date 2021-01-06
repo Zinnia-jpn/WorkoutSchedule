@@ -3,14 +3,14 @@
   <%= f.hidden_field :cardio_flag, value: @record.cardio_flag %>
   <table border="1">
     <tr>
-      <th><%= Record.human_attribute_name(:workout_id) %></th>
+      <th><%= Record.human_attribute_name(:workout_id) %><span><%= t("dictionary.table.required") %></span></th>
       <td>
         <%= f.collection_select :workout_id, @workouts, :id, :name,
                                 {:prompt => t("helpers.select.prompt"), selected: @record.workout_id} %>
       </td>
     </tr>
     <tr>
-      <th><%= Record.human_attribute_name(:date) %></th>
+      <th><%= Record.human_attribute_name(:date) %><span><%= t("dictionary.table.required") %></span></th>
       <td><%= raw sprintf(
                       f.date_select(:date, order: [:year, :month, :day], use_month_numbers: true,
                                     start_year:2020, end_year:2040, default: @record.date,
@@ -26,33 +26,33 @@
     </tr>
     <% if @record.cardio_flag # 有酸素 %>
       <tr>
-        <th><%= Record.human_attribute_name(:time) %></th>
+        <th><%= Record.human_attribute_name(:time) %><span><%= t("dictionary.table.optional") %></span></th>
         <td><%= f.number_field :time, value: @record.time, min:1, max:600, step: 1 %><%= t("datetime.prompts.minute") %></td>
       </tr>
       <tr>
-        <th><%= Record.human_attribute_name(:intensity) %></th>
+        <th><%= Record.human_attribute_name(:intensity) %><span><%= t("dictionary.table.optional") %></span></th>
         <td><%= f.collection_select :intensity_id, @intensities, :id, :name, {prompt: t("helpers.select.prompt"), selected: @record.intensity_id} %></td>
       </tr>
     <% else # 無酸素 %>
       <tr>
-        <th><%= Record.human_attribute_name(:weight) %></th>
+        <th><%= Record.human_attribute_name(:weight) %><span><%= t("dictionary.table.optional") %></span></th>
         <td><%= f.number_field :weight, value: @record.weight, min:1, max:500, step: 1 %><%= t("records.form_details.unit.weight") %></td>
       </tr>
       <tr>
-        <th><%= Record.human_attribute_name(:rep) %></th>
+        <th><%= Record.human_attribute_name(:rep) %><span><%= t("dictionary.table.optional") %></span></th>
         <td><%= f.number_field :rep, value: @record.rep, min:1, max:255, step: 1 %><%= t("records.form_details.unit.rep") %></td>
       </tr>
       <tr>
-        <th><%= Record.human_attribute_name(:set) %></th>
+        <th><%= Record.human_attribute_name(:set) %><span><%= t("dictionary.table.optional") %></span></th>
         <td><%= f.number_field :set, value: @record.set, min:1, max:255, step: 1 %><%= t("records.form_details.unit.set") %></td>
       </tr>
       <tr>
-        <th><%= Record.human_attribute_name(:interval) %></th>
+        <th><%= Record.human_attribute_name(:interval) %><span><%= t("dictionary.table.optional") %></span></th>
         <td><%= f.number_field :interval, value: @record.interval, min:1, max:600, step: 1 %><%= t("datetime.prompts.second") %></td>
       </tr>
     <% end %>
     <tr>
-      <th><%= Record.human_attribute_name(:remark) %></th>
+      <th><%= Record.human_attribute_name(:remark) %><span><%= t("dictionary.table.optional") %></span></th>
       <td><%= f.text_field :remark, value: @record.remark %></td>
     </tr>
   </table>
