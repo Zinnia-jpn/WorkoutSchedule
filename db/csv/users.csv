@@ -1,3 +1,4 @@
-User1,user1@mail.com,Password1,,
-User2,user2@mail.com,Password2,,
-User3,user3@mail.com,Password3,,
+name,email,password,password_confirmation,remember_digest,image
+User1,user1@mail.com,Password1,Password1,,
+User2,user2@mail.com,Password2,Password2,,
+User3,user3@mail.com,Password3,Password3,,
