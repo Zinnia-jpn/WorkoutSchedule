@@ -18,11 +18,8 @@
                       '年 ', '月 ') + '日' %></td>
     </tr>
     <tr>
-      <th>
-        <%= Record.human_attribute_name(:plan_flag) %><br>
-        <%= t("records.form_details.plan_flag_notice") %>
-      </th>
-      <td><%= f.check_box :plan_flag, {checked: @record.plan_flag}, checked_value = "true", unchecked_value = "false" %></td>
+      <th><%= f.label :do_flag, Record.human_attribute_name(:do_flag) %></th>
+      <td><%= f.check_box :do_flag, { checked: @record.do_flag } %></td>
     </tr>
     <% if @record.cardio_flag # 有酸素 %>
       <tr>

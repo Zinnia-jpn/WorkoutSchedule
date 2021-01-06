@@ -5,7 +5,7 @@ ja:
     table:
       required: "必須"
       optional: "任意"
-      plan_flag: "済"
+      do_flag: "済"
       none: "なし"
     record:
       value:
@@ -78,7 +78,6 @@ ja:
     edit:
       title: "記録編集"
     form_details:
-      plan_flag_notice: "(実施済みの場合はチェックを外す)"
       unit:
         weight: "kg"
         rep: "回"

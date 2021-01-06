@@ -4,7 +4,7 @@ FactoryBot.define do
     association :user
     user_id { 1 }
     date { "2020-11-09" }
-    plan_flag { true }
+    do_flag { true }
     workout_id { 2 }
     cardio_flag { false }
     weight { 30 }
@@ -21,7 +21,7 @@ FactoryBot.define do
     association :user
     user_id { 1 }
     date { "2020-11-09" }
-    plan_flag { true }
+    do_flag { true }
     workout_id { 3 }
     cardio_flag { true }
     weight { nil }
