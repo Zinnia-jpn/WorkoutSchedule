@@ -75,19 +75,15 @@ class RecordsController < ApplicationController
     @workouts = Workout.where(category_id: params[:category_id])
     # @recordに必要なデータを生成
     params[:category_id].to_i == 1 ? cardio_flag = true : cardio_flag = false
-    puts params[:do_flag]
     if params[:do_flag].present?
       date = divided_value_that_date_type_conversion(params[:year].to_i, params[:month].to_i, params[:day].to_i)
       do_flag = convert_flag_to_boolean_type(params[:do_flag])
-      puts params[:do_flag]
-      puts do_flag
       @record = Record.new(id: params[:id], date: date, do_flag: do_flag, workout_id: params[:workout_id],
                            cardio_flag: cardio_flag, weight: params[:weight], rep: params[:rep], set: params[:set],
                            interval: params[:interval], time: params[:time], intensity_id: params[:intensity_id],
                            remark: params[:remark])
     else
       @record = Record.new(date: Date.today, do_flag: false, cardio_flag: cardio_flag)
-      puts @record.do_flag
     end
   end
 
