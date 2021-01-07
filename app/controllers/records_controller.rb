@@ -3,7 +3,6 @@ class RecordsController < ApplicationController
 
   def new
     @record = Record.new()
-    @url = record_create_path
   end
 
   def create
@@ -35,7 +34,6 @@ class RecordsController < ApplicationController
   def edit
     @record = Record.find_by(id: params[:id])
     check_created_user(@record)
-    @url = record_update_path
     record_required_data_get
     @cardio_flag = @record.cardio_flag.to_s
     # workout_idからcatecory_idを逆引き
@@ -48,7 +46,6 @@ class RecordsController < ApplicationController
   def update
     @record = Record.find_by(id: params[:id])
     check_created_user(@record)
-    redirect_to schedule_date_url unless current_user?(record_user)
     date = divided_value_that_date_type_conversion(params["date(1i)"].to_i, params["date(2i)"].to_i, params["date(3i)"].to_i)
     do_flag = convert_flag_to_boolean_type(params[:do_flag])
     cardio_flag = convert_flag_to_boolean_type(params[:cardio_flag])
