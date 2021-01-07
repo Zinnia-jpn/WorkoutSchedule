@@ -44,7 +44,6 @@ class RecordsController < ApplicationController
   end
 
   def update
-    puts "通過"
     @record = Record.find_by(id: params[:id])
     check_created_user(@record)
     date = divided_value_that_date_type_conversion(params["date(1i)"].to_i, params["date(2i)"].to_i, params["date(3i)"].to_i)
