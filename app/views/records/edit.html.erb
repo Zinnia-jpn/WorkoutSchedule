@@ -1,15 +1,6 @@
 <h1><%= t("records.edit.title") %></h1>
 
-<% if @record.errors.present? %>
-  <ul>
-    <% @record.errors.full_messages.each do |m| %>
-      <li><%= m %></li>
-    <% end %>
-  </ul>
-<% end %>
-
-<% # JQueryに渡す値 %>
-<%= hidden_field_tag "url", @url %>
+<%= render partial: "error_messages" %>
 
 <div class="form">
   <table border="1">

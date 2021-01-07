@@ -1,4 +1,5 @@
-<%= form_with url: @url, local: true, id: "details-table" do |f| %>
+<%= form_with url: post_url, local: true, id: "details-table" do |f| %>
+  <%= puts post_url %>
   <%= f.hidden_field :id, value: @record.id %>
   <%= f.hidden_field :cardio_flag, value: @record.cardio_flag %>
   <table border="1">
