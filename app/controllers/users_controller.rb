@@ -37,6 +37,7 @@ class UsersController < ApplicationController
 
   def destroy
     user = @current_user
+    user.remove_image!
     log_out
     user.destroy
     session[:account_deleted] = true
