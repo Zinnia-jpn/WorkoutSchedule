@@ -1,5 +1,5 @@
 module ApplicationHelper
-  # Headerのリンク先を返す
+  # Headerタイトルのリンク先を返す
   def header_title_path
     logged_in? ? schedule_date_path : root_path
   end
