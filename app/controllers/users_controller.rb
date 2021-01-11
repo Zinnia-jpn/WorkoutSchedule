@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_action :login_check, only: [:show, :edit, :update, :destroy, :revert_image]
+  before_action :logged_in_check, only: [:show, :edit, :update, :destroy, :revert_image]
+  before_action :not_logged_in_check, only: [:new, :create]
 
   def new
     @user = User.new()
@@ -38,6 +39,7 @@ class UsersController < ApplicationController
     user = @current_user
     log_out
     user.destroy
+    session[:account_deleted] = true
     redirect_to account_deleted_url
   end
 

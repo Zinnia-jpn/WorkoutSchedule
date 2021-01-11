@@ -1,5 +1,5 @@
 class SchedulesController < ApplicationController
-  before_action :login_check
+  before_action :logged_in_check
   before_action :record_required_data_get, only: [:date, :dynamic_select_date, :month, :dynamic_select_month]
 
   def date
