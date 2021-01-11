@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
-  before_action :login_check, only: [:logout]
+  before_action :logged_in_check, only: [:logout]
+  before_action :not_logged_in_check, only: [:login_form, :login]
 
   def login_form
   end

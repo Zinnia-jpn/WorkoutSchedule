@@ -1,5 +1,5 @@
 class RecordsController < ApplicationController
-  before_action :login_check
+  before_action :logged_in_check
 
   def new
     @record = Record.new()
