@@ -43,7 +43,7 @@
   }
 }
 
-.nav-style {
+.nav-style { // ナビバーに使用するCSS
   ul {
     padding: 0;
     list-style: none;
@@ -51,4 +51,8 @@
   a:hover {
     text-decoration: none;
   }
+}
+
+.error-messages {
+  color: $error-text-color;
 }
