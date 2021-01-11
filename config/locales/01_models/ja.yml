@@ -15,9 +15,9 @@ ja:
         remember: ログイン状態を保持
         image: プロフィール画像
       record:
+        workout_id: 種目名
         date: 日付
         do_flag: 実施の有無
-        workout_id: 種目名
         weight: 重量
         rep: レップ数
         set: セット数

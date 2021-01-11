@@ -1,0 +1,31 @@
+// 背景色
+$base-theme-color: whitesmoke;
+$main-theme-color: tan;
+$nav-theme-color: #877666;
+$footer-theme-color: dimgray;
+
+// フォントカラー
+$title-text-color: #602D1D;
+$blackish-text-color: #404048;
+$whitish-text-color: white;
+$error-text-color: orangered;
+
+// 書体
+$title-font-family: "YuGothic", "YuGothic", "Hiragino Kaku Gothic ProN", sans-serif;
+
+// 幅
+$breakpoints: (
+        xs-max: 543px,
+        md-min: 544px,
+        lg-min: 768px
+);
+$header-nav-widths: (
+        md: 75px,
+        lg: 120px
+);
+
+// 高さ
+$header-heights: (
+        xs-md: 50px,
+        lg: 80px
+);

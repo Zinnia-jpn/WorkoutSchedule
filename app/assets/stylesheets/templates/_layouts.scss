@@ -1,0 +1,120 @@
+// Header
+header {
+  position: relative;
+  z-index: 2;
+  background: $main-theme-color;
+  height: map-get($header-heights, xs-md);
+  @include lg {
+    height: map-get($header-heights, lg);
+  }
+}
+
+.left-nav {
+  position: absolute;
+  height: 100%;
+  @include flexBox(center, 0, column);
+}
+
+.header-title {
+  font-family: $title-font-family;
+  font-weight: bold;
+  font-size: 1.25rem;
+  padding-left: 1vw;
+  &:link, &:visited, &:hover, &:active {
+    color: $title-text-color;
+  }
+  @include lg {
+    font-size: 1.75rem;
+  }
+}
+
+.right-nav {
+  float: right;
+  height: 100%;
+  @include md {
+    @include flexBox(0, 0, column);
+  }
+}
+
+.header-menu-icon {
+  @include xsSizeOnly;
+  height: 100%;
+  @include bottonStyleReset;
+  color: $blackish-text-color;
+  padding: 0 3vw;
+  margin: auto 0 auto auto;
+  font-size: 1.65rem;
+}
+
+.header-nav-container {
+  @include xsSizeHidden;
+  @include xs {
+    positon: relative;
+    z-index: 2;
+    width: 100vw;
+  }
+}
+
+.header-right-item {
+  background: $nav-theme-color;
+  @include xs {
+    border-bottom: 1px solid white;
+  }
+  @include md {
+    float: left;
+    border-left: 1px solid #cccccc;
+  }
+  a {
+    @include flexBox(center, center, column);
+    @include xs {
+      padding: 20px 0;
+    }
+    @include md {
+      width: map-get($header-nav-widths, md);
+      height: map-get($header-heights, xs-md);
+
+    }
+    @include lg {
+      width: map-get($header-nav-widths, lg);
+      height: map-get($header-heights, lg);
+    }
+    &:link, &:visited, &:hover, &:active {
+      color: $whitish-text-color;
+    }
+    &:hover {
+      opacity: 0.6;
+    }
+  }
+  &__material-icon {
+    @include xsSizeHidden;
+    padding-bottom: 4px;
+    font-size: 1.25rem;
+    @include lg {
+      padding-bottom: 7px;
+      font-size: 2.5rem;
+    }
+  }
+  &__name {
+    font-size: 1rem;
+    @include md {
+      font-size: 0.5rem;
+    }
+    @include lg {
+      font-size: 0.8rem;
+    }
+  }
+}
+
+#menu-open { // jqueryによるメニュー開閉に必要
+  display: inherit;
+}
+
+// Footer
+footer {
+  background-color: $footer-theme-color;
+  color: $whitish-text-color;
+  margin-top: auto;
+  padding: 14px 0;
+  text-align: center;
+  font-size: 0.8rem;
+}

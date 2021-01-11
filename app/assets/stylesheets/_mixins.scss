@@ -1,0 +1,53 @@
+// レスポンシブ
+@mixin xs {
+  @media screen and (max-width: map-get($breakpoints, xs-max)) {
+    @content;
+  }
+}
+
+@mixin md {
+  @media screen and (min-width: map-get($breakpoints, md-min)) {
+    @content;
+  }
+}
+
+@mixin lg {
+  @media screen and (min-width: map-get($breakpoints, lg-min)) {
+    @content;
+  }
+}
+
+// 部品
+@mixin xsSizeOnly {
+  display: inherit;
+  @include md {
+    display: none;
+  }
+}
+
+@mixin xsSizeHidden {
+  display: none;
+  @include md {
+    display: inherit;
+  }
+}
+
+@mixin bottonStyleReset {
+  appearance: none;
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+@mixin flexBox($justify: 0, $align: 0, $column: 0) {
+  display: flex;
+  @if($justify) { // 水平方向
+    justify-content: $justify;
+  }
+  @if($align != 0) { // 垂直方向
+    align-items: $align;
+  }
+  @if($column != 0) { // 縦並び
+    flex-direction: $column;
+  }
+}

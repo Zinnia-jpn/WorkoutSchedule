@@ -1,1 +1,27 @@
-<h1><%= t("homes.top.title") %></h1>
+<div class="homes-top-wrapper">
+  <%= simple_format t("homes.top.warning_message"), class: "warning-message" %>
+  <h1><%= t("homes.top.title", title: t("layouts.header.title")) %></h1>
+  <div class="app-description">
+    <h2><%= t("homes.top.app_description.title") %></h2>
+    <%= simple_format t("homes.top.app_description.text") %>
+  </div>
+  <h3><%= t("homes.top.record_details.title") %></h3>
+  <div class="top-list-container">
+    <div class="top-list-container__content">
+      <h4><i class="fas fa-dumbbell"></i>&nbsp;<%= t("dictionary.name.weight") %></h4>
+      <ul>
+        <% @weight_items.each do |name| %>
+          <li><%= Record.human_attribute_name(name) %></li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="top-list-container__content">
+      <h4><i class="fas fa-biking"></i>&nbsp;<%= t("dictionary.name.cardio") %></h4>
+      <ul>
+        <% @cardio_items.each do |name| %>
+          <li><%= Record.human_attribute_name(name) %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>

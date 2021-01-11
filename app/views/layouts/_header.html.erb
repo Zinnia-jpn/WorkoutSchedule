@@ -1,20 +1,53 @@
 <header>
-  <ul>
-    <% if logged_in? %>
-      <li><%= link_to t("layouts.header.title"), schedule_date_path %></li>
-    <% else %>
-      <li><%= link_to t("layouts.header.title"), root_path %></li>
-    <% end %>
-  </ul>
-  <ul>
-    <% if logged_in? %>
-      <li><%= link_to t("layouts.header.schedule"), schedule_date_path %></li>
-      <li><%= link_to t("layouts.header.record"), record_new_path %></li>
-      <li><%= link_to t("layouts.header.user"), user_path %></li>
-      <li><%= link_to t("layouts.header.logout"), logout_path, method: :post %></li>
-    <% else %>
-      <li><%= link_to t("layouts.header.signup"), signup_path %></li>
-      <li><%= link_to t("layouts.header.login"), login_path %></li>
-    <% end %>
-  </ul>
+  <div class="left-nav nav-style">
+    <%= link_to t("layouts.header.title"), header_title_path, class: "header-title" %>
+  </div>
+  <div class="right-nav nav-style">
+     <%= button_tag class: "header-menu-icon", id: "header-menu-button" do %>
+       <i class="fas fa-bars"></i>
+     <% end %>
+     <div class="header-nav-container">
+       <ul>
+         <% if logged_in? %>
+           <li class="header-right-item">
+             <%= link_to schedule_date_path do %>
+               <i class="far fa-calendar-alt header-right-item__material-icon"></i>
+               <span class="header-right-item__name"><%= t("layouts.header.schedule") %></span>
+             <% end %>
+           </li>
+           <li class="header-right-item">
+             <%= link_to record_new_path do %>
+               <i class="fas fa-feather-alt header-right-item__material-icon"></i>
+               <span class="header-right-item__name"><%= t("layouts.header.record") %></span>
+             <% end %>
+           </li>
+           <li class="header-right-item">
+             <%= link_to user_path do %>
+               <i class="fas fa-user header-right-item__material-icon"></i>
+               <span class="header-right-item__name"><%= t("layouts.header.user") %></span>
+             <% end %>
+           </li>
+           <li class="header-right-item">
+             <%= link_to logout_path, method: :post do %>
+               <i class="fas fa-sign-out-alt header-right-item__material-icon"></i>
+               <span class="header-right-item__name"><%= t("layouts.header.logout") %></span>
+             <% end %>
+           </li>
+         <% else %>
+           <li class="header-right-item">
+             <%= link_to signup_path do %>
+               <i class="fas fa-user-plus header-right-item__material-icon"></i>
+               <span class="header-right-item__name"><%= t("layouts.header.signup") %></span>
+             <% end %>
+           </li>
+           <li class="header-right-item">
+             <%= link_to login_path do %>
+               <i class="fas fa-sign-in-alt header-right-item__material-icon"></i>
+               <span class="header-right-item__name"><%= t("layouts.header.login") %></span>
+             <% end %>
+           </li>
+         <% end %>
+       </ul>
+     </div>
+   </div>
 </header>

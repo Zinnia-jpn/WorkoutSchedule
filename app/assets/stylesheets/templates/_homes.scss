@@ -1,0 +1,42 @@
+// top
+.homes-top-wrapper {
+  text-align: center;
+}
+
+.warning-message {
+  color: $error-text-color;
+  font-weight: bold;
+  padding-top: 40px;
+}
+
+.app-description p {
+  @include xs {
+    text-align: left;
+  }
+}
+
+.top-list-container {
+  text-align: left;
+  @include flexBox(center, 0, 0);
+  &__content {
+    padding: 0 3vw;
+    @include xs {
+      ul {
+        padding-left: 25px;
+        li {
+          font-size: 0.9rem;
+        }
+      }
+    }
+  }
+}
+
+// account_deleted_notification
+.account-deleted-wrapper {
+  text-align: center;
+  @include xs {
+    h1 {
+      font-size: 6.5vw;
+    }
+  }
+}
