@@ -8,13 +8,16 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
-    <%= render partial: "layouts/header" %>
-    <% flash.each do |message_type, message| %>
-      <%= message %>
-    <% end %>
-    <%= yield %>
-    <%= render partial: "layouts/footer" %>
+    <div class="body-wrapper">
+      <%= render partial: "layouts/header" %>
+      <% flash.each do |message_type, message| %>
+        <div class="alert alert-<%= message_type %> text-center"><%= message %></div>
+      <% end %>
+      <div class="main-wrapper">
+        <%= yield %>
+      </div>
+      <%= render partial: "layouts/footer" %>
+    </div>
   </body>
 </html>

@@ -1,0 +1,54 @@
+.body-wrapper {
+  background: $base-theme-color;
+  color: $blackish-text-color;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  h1 {
+    padding: 1.2rem 0;
+  }
+  h2 {
+    padding: 1rem 0;
+  }
+  h3 {
+    padding: 0.8rem 0;
+  }
+  h4 {
+    padding: 0.5rem 0;
+  }
+  @include xs {
+    h1 {
+      font-size: 8vw;
+    }
+    h2 {
+      font-size: 7vw;
+    }
+    h3 {
+      font-size: 6vw;
+    }
+    h4 {
+      font-size: 4.5vw;
+    }
+  }
+}
+
+.main-wrapper {
+  padding: 30px;
+  @include md {
+    margin: 0 auto;
+    width: map-get($breakpoints, md-min);
+  }
+  @include lg {
+    width: map-get($breakpoints, lg-min);
+  }
+}
+
+.nav-style {
+  ul {
+    padding: 0;
+    list-style: none;
+  }
+  a:hover {
+    text-decoration: none;
+  }
+}

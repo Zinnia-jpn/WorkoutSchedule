@@ -1,3 +1,4 @@
 <footer>
-  <small><%= simple_format t("layouts.footer.copyright") %></small>
+  <%= t("layouts.footer.title") %><br>
+  <%= t("layouts.footer.copyright", year: Date.today.year) %>
 </footer>

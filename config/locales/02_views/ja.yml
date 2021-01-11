@@ -1,7 +1,10 @@
 ja:
   dictionary: # 複数のViewで使用
-    "yes": "はい"
-    "no": "いいえ"
+    name:
+      "yes": "はい"
+      "no": "いいえ"
+      weight: "無酸素運動"
+      cardio: "有酸素運動"
     table:
       required: "必須"
       optional: "任意"
@@ -17,14 +20,24 @@ ja:
 
   homes: # 各View
     top:
-      title: "ワークアウト管理アプリへようこそ！"
+      title: "%{title}"
+      warning_message: |-
+        ※ これはポートフォリオとして作成したWebサービスです。
+        正式なWebサービスではありません。
+      app_description:
+        title: "アプリの特徴"
+        text: |-
+          日々のトレーニングを簡単に記録・管理できるアプリです。
+          有酸素運動にも対応しており、内容を詳細まで記録できます。
+      record_details:
+        title: "記録できる内容"
     account_deleted_notification:
-      title_1: "アカウントの削除が完了しました"
-      title_2: "今までご利用いただきありがとうございました"
+      h1: "アカウントを削除しました"
+      text: "今までご利用いただきありがとうございました。"
       top's_link: "ホーム画面に戻る"
   layouts:
     header:
-      title: "ワークアウト管理アプリ"
+      title: "ワークアウト管理App"
       schedule: "スケジュール"
       record: "新規記録"
       user_name: "%{name}"
@@ -33,9 +46,8 @@ ja:
       signup: "新規登録"
       login: "ログイン"
     footer:
-      copyright: |
-        Shogo Makishima's Portfolio
-        ©︎ 2020 Shogo Makishima
+      title: "Shogo Makishima's Portfolio"
+      copyright:  "©︎ 2020-%{year} Shogo Makishima"
   sessions:
     login_form:
       title: "ユーザーログイン"
@@ -65,9 +77,6 @@ ja:
       today: "本日"
       tomorrow: "翌日"
       yesterday: "前日"
-    date_details:
-      cardio: "有酸素運動"
-      weight: "無酸素運動"
     month_details:
       title: "%{year}年 %{month}月"
       contents: "内容"

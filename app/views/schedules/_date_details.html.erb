@@ -3,7 +3,7 @@
   <% if records.where(cardio_flag: true).present? %>
     <table>
       <tr>
-        <th colspan="5"><%= t("schedules.date_details.cardio") %></th>
+        <th colspan="5"><%= t("dictionary.name.cardio") %></th>
       </tr>
       <tr>
         <th><%= t("dictionary.table.do_flag") %></th>
@@ -32,7 +32,7 @@
   <% if records.where(cardio_flag: false).present? %>
     <table>
       <tr>
-        <th colspan="7"><%= t("schedules.date_details.weight") %></th>
+        <th colspan="7"><%= t("dictionary.name.weight") %></th>
       </tr>
       <tr>
         <th><%= t("dictionary.table.do_flag") %></th>
