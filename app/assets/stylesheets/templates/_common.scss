@@ -120,15 +120,18 @@ table {
     }
   }
 
+  th, td {
+    padding: 0.35rem;
+  }
+
   th {
     background-color: $accent-theme-color;
     color: $whitish-text-color;
-    @include xs {
-      padding-left: 2vw;
-    }
+    width: 30%;
   }
 
   td {
     background-color: $td-theme-color;
+    width: 70%;
   }
 }

@@ -1,16 +1,8 @@
 <h1><%= t("records.new.title") %></h1>
-
 <%= render partial: "error_messages" %>
-
-<div class="form">
-  <table border="1">
-    <tr>
-      <th><%= t("records.category") %></th>
-      <td>
-        <%= collection_select(:category, :id, Category.all, :id, :name,
-                              {prompt: t("helpers.select.prompt")}, {id: "category-select"}) %>
-      </td>
-    </tr>
-  </table>
-  <div id="record-details"></div>
+<div class="mb-3">
+  <div class="mb-2"><%= t("records.category") %></div>
+  <%= collection_select(:category, :id, Category.all, :id, :name,
+                            {prompt: t("helpers.select.prompt")}, {id: "category-select"}) %>
 </div>
+<div id="record-details" class="record-details-layout"></div>
