@@ -8,22 +8,24 @@
     <% end %>
   </div>
   <%= form_with url: login_path, local: true do |f| %>
-    <div class="user-form-item">
-      <div class="user-form-item__label">
+    <div class="mb-4">
+      <div class="py-2">
         <i class="far fa-envelope"></i>&nbsp;<%= f.label :email, User.human_attribute_name(:email) %>
+        <span class="required-icon"><%= t("dictionary.table.required") %></span>
       </div>
-      <%= f.email_field :email, value: params[:email], class: "user-form-item__text-input" %>
+      <%= f.email_field :email, value: params[:email], class: "input-field" %>
     </div>
-    <div class="user-form-item">
-      <div class="user-form-item__label">
-        <i class="fas fa-key"></i>&nbsp;<%= f.label :password, User.human_attribute_name(:password) %>
+    <div class="mb-4">
+      <div class="py-2">
+        <i class="fas fa-unlock-alt"></i>&nbsp;<%= f.label :password, User.human_attribute_name(:password) %>
+        <span class="required-icon"><%= t("dictionary.table.required") %></span>
       </div>
-      <%= f.password_field :password, class: "user-form-item__text-input" %>
+      <%= f.password_field :password, class: "input-field" %>
     </div>
-    <div class="user-form-item">
+    <div class="mb-4">
       <%= f.label :remember, User.human_attribute_name(:remember) %>
       <%= f.check_box :remember %>
     </div>
-  <%= f.submit t("helpers.submit.submit") %>
+  <%= f.submit t("helpers.submit.submit"), class: "custom-button" %>
   <% end %>
 </div>

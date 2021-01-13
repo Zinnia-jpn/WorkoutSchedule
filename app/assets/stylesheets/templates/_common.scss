@@ -1,34 +1,30 @@
+// 全般
+#overlay {
+  display: none;
+  width: 100%;
+  height: 100%;
+  background-color: gray;
+  opacity: 0.4;
+  position: fixed;
+  z-index: 50;
+  top: 0;
+  left: 0;
+}
+
 .body-wrapper {
   background: $base-theme-color;
   color: $blackish-text-color;
-  display: flex;
-  flex-direction: column;
+  @include flexBox(0, 0, column);
   min-height: 100vh;
-  h1 {
-    padding: 1.2rem 0;
-  }
-  h2 {
-    padding: 1rem 0;
-  }
-  h3 {
-    padding: 0.8rem 0;
-  }
-  h4 {
-    padding: 0.5rem 0;
-  }
+  h1 { padding: 1.2rem 0; }
+  h2 { padding: 1rem 0; }
+  h3 { padding: 0.8rem 0; }
+  h4 { padding: 0.5rem 0; }
   @include xs {
-    h1 {
-      font-size: 8vw;
-    }
-    h2 {
-      font-size: 7vw;
-    }
-    h3 {
-      font-size: 6vw;
-    }
-    h4 {
-      font-size: 4.5vw;
-    }
+    h1 { font-size: 8vw; }
+    h2 { font-size: 7vw; }
+    h3 { font-size: 6vw; }
+    h4 { font-size: 4.5vw; }
   }
 }
 
@@ -43,11 +39,12 @@
   }
 }
 
-.nav-style { // ナビバーに使用するCSS
+.nav-style {
   ul {
     padding: 0;
     list-style: none;
   }
+
   a:hover {
     text-decoration: none;
   }
@@ -55,4 +52,83 @@
 
 .error-messages {
   color: $error-text-color;
+}
+
+// 部品
+.custom-button {
+  @include buttonStyleReset;
+  @include customButtonStyle;
+}
+
+.custom-modal {
+  display: none;
+  width: 80vw;
+  background: $base-theme-color;
+  border: 1px solid black;
+  border-radius: 0.75rem;
+  padding: 3rem 1rem;
+  text-align: center;
+  position: fixed;
+  z-index: 100;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  @include md {
+    width: 70%;
+  }
+}
+
+.required-icon {
+  @include textIcon;
+  color: $required-icon-color;
+  border: 1px solid $required-icon-color;
+}
+
+.optional-icon {
+  @include textIcon;
+  color: $optional-icon-color;
+  border: 1px solid #333333; // グレー
+}
+
+// フォーム関連
+.input-field {
+  width: 16.1rem;
+  @include md {
+    width: 20rem;
+  }
+}
+
+.button-group {
+  @include flexBox(center, 0, 0);
+  margin: 2rem 0;
+
+  button, input {
+    margin: 0 3vw;
+  }
+}
+
+// テーブル関連
+table {
+  width: 100%;
+  border-collapse: collapse;
+
+  tr {
+    border-bottom: 2px solid white;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  th {
+    background-color: $accent-theme-color;
+    color: $whitish-text-color;
+    @include xs {
+      padding-left: 2vw;
+    }
+  }
+
+  td {
+    background-color: $td-theme-color;
+  }
 }

@@ -4,7 +4,7 @@ module ApplicationHelper
     logged_in? ? schedule_date_path : root_path
   end
 
-  # 失敗時のurl（遷移元）を返す
+  # 遷移元のURLに書き換えるjsのpathを返す
   def javascript_path
     url = get_previous_path
     previous_controller = url[:controller]

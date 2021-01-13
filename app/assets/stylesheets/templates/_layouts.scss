@@ -1,7 +1,7 @@
 // Header
 header {
   position: relative;
-  z-index: 2;
+  z-index: 25;
   background: $main-theme-color;
   height: map-get($header-heights, xs-md);
   @include lg {
@@ -39,7 +39,7 @@ header {
 .header-menu-icon {
   @include xsSizeOnly;
   height: 100%;
-  @include bottonStyleReset;
+  @include buttonStyleReset;
   color: $blackish-text-color;
   padding: 0 3vw;
   margin: auto 0 auto auto;
@@ -56,7 +56,7 @@ header {
 }
 
 .header-right-item {
-  background: $nav-theme-color;
+  background: $accent-theme-color;
   @include xs {
     border-bottom: 1px solid white;
   }
