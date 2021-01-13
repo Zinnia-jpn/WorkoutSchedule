@@ -6,10 +6,10 @@
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
     <div class="body-wrapper">
+      <div id="overlay"></div>
       <%= render partial: "layouts/header" %>
       <% flash.each do |message_type, message| %>
         <div class="alert alert-<%= message_type %> text-center"><%= message %></div>

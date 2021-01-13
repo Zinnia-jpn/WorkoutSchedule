@@ -1,8 +1,10 @@
-<% if @user.errors.present? %>
-  <%= javascript_pack_tag javascript_path %>
-  <ul>
-    <% @user.errors.full_messages.each do |m| %>
-      <li><%= m %></li>
-    <% end %>
-  </ul>
-<% end %>
+<div class="error-messages">
+  <% if @user.errors.present? %>
+    <%= javascript_pack_tag javascript_path %>
+    <ul>
+      <% @user.errors.full_messages.each do |m| %>
+        <li><%= m %></li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>

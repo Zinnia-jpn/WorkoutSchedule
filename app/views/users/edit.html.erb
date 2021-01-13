@@ -1,37 +1,55 @@
 <h1><%= t("users.edit.title") %></h1>
-
 <%= render partial: "error_messages" %>
-
 <%= form_with model: @user, url: user_update_path, local: true do |f| %>
-  <table border="1">
-    <tr>
-      <th><%= f.label :image, User.human_attribute_name(:image) %></th>
-      <td>
-        <%= f.file_field :image, accept: 'image/jpeg,image/gif,image/png' %><br>
-        <%= f.hidden_field :image_cache %>
-        <%= link_to t("users.edit.revert_image_button"), user_revert_image_path, method: :post, data: { confirm: t("users.edit.revert_image_message") } %>
-      </td>
-    </tr>
-    <tr>
-      <th><%= f.label :name, User.human_attribute_name(:name) %></th>
-      <td><%= f.text_field :name, value: @user.name %></td>
-    </tr>
-    <tr>
-      <th><%= f.label :email, User.human_attribute_name(:email) %></th>
-      <td><%= f.email_field :email, value: @user.email %></td>
-    </tr>
-    <tr>
-      <th><%= f.label :current_password, User.human_attribute_name(:current_password) %></th>
-      <td><%= f.password_field :current_password %></td>
-    </tr>
-    <tr>
-      <th><%= f.label :password, User.human_attribute_name(:new_password) %></th>
-      <td><%= f.password_field :password %></td>
-    </tr>
-    <tr>
-      <th><%= f.label :password_confirmation, User.human_attribute_name(:new_password_confirmation) %></th>
-      <td><%= f.password_field :password_confirmation %></td>
-    </tr>
-  </table>
-  <%= f.submit t("helpers.submit.update") %>
+  <div class="mb-4">
+    <div class="py-2">
+      <i class="far fa-image"></i>&nbsp;<%= f.label :image, User.human_attribute_name(:image) %>
+      <span class="optional-icon"><%= t("dictionary.table.optional") %></span>
+    </div>
+    <%= f.file_field :image, accept: 'image/jpeg,image/gif,image/png', class: "mb-2" %><br>
+    <%= button_tag t("users.edit.revert_image.button"), type: "button", id: "open-revert-image-modal", class: "custom-button" %>
+  </div>
+  <div class="mb-4">
+    <div class="py-2">
+      <i class="fas fa-signature"></i>&nbsp;<%= f.label :name, User.human_attribute_name(:name) %>
+      <span class="required-icon"><%= t("dictionary.table.required") %></span>
+    </div>
+    <%= f.text_field :name, value: @user.name, class: "input-field" %>
+  </div>
+  <div class="mb-4">
+    <div class="py-2">
+      <i class="far fa-envelope"></i>&nbsp;<%= f.label :email, User.human_attribute_name(:email) %>
+      <span class="required-icon"><%= t("dictionary.table.required") %></span>
+    </div>
+    <%= f.email_field :email, value: @user.email, class: "input-field" %>
+  </div>
+  <div class="mb-4">
+    <div class="py-2">
+      <i class="fas fa-unlock-alt"></i>&nbsp;<%= f.label :current_password, User.human_attribute_name(:current_password) %>
+      <span class="required-icon"><%= t("dictionary.table.required") %></span>
+    </div>
+    <%= f.password_field :current_password, class: "input-field" %>
+  </div>
+  <div class="mb-4">
+    <div class="py-2">
+      <i class="password-icon__new fas fa-key"></i>&nbsp;<%= f.label :password, User.human_attribute_name(:new_password) %>
+      <span class="optional-icon"><%= t("dictionary.table.optional") %></span>
+    </div>
+    <%= f.password_field :password, class: "input-field" %>
+  </div>
+  <div class="mb-4">
+    <div class="py-2">
+      <i class="password-icon__confirmation fas fa-key"></i>&nbsp;<%= f.label :password_confirmation, User.human_attribute_name(:new_password_confirmation) %>
+    </div>
+    <%= f.password_field :password_confirmation, class: "input-field" %>
+  </div>
+  <%= f.submit t("helpers.submit.update"), class: "custom-button" %>
 <% end %>
+
+<div id="revert-image-modal" class="custom-modal">
+  <%= simple_format t("users.edit.revert_image.message") %>
+  <div class="button-group">
+    <%= button_to t("dictionary.name.yes"), user_revert_image_path, method: :post, class: "custom-button" %>
+    <%= button_tag t("dictionary.name.no"), id: "close-revert-image-modal", class: "custom-button" %>
+  </div>
+</div>

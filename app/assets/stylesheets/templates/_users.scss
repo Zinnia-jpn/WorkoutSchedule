@@ -1,15 +1,56 @@
-#user-delete-button {
-  cursor : pointer;
+// ユーザー関連フォーム
+.password-icon {
+  &__new {
+    color: #f8b500; // 黄色
+  }
+
+  &__confirmation {
+    color: gray;
+  }
 }
 
-#delete-modal {
-  display: none;
+// show
+.user-show-wrapper {
+  th, td {
+    padding: 1.25rem 0 1.25rem 1.2rem;
+    @include xs {
+      font-size: 0.6rem;
+      padding: 0.85rem 0 0.85rem 1.2rem;
+    }
+  }
+
+  th {
+    width: 35%;
+    position: relative;
+
+    &:after {
+      display: block;
+      content: "";
+      width: 0px;
+      height: 0px;
+      position: absolute;
+      top: calc(50% - 0.9rem); // 一番上の頂点の位置
+      right: - (0.9rem - 0.05rem); // th右側面から出す幅
+      border: {
+        style: solid;
+        width: 0.9rem;
+        right-width: 0;
+        color: transparent;
+        left-color: $accent-theme-color;
+      }
+    }
+  }
+
+  td {
+    width: 65%;
+  }
 }
 
-#revert-image-button {
-  cursor : pointer;
-}
-
-#revert-image-modal {
-  display: none;
+.user-image {
+  border-radius: 1rem;
+  @include flexBox(center, 0, 0);
+  margin: 1.5rem auto;
+  @include xs {
+    width: 40%;
+  }
 }

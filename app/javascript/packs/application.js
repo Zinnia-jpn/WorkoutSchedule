@@ -1,5 +1,4 @@
 // Bootstrap
-import 'bootstrap'
 import '../stylesheets/application'
 
 // Awesome
@@ -15,6 +14,7 @@ require("channels")
 require('jquery')
 
 // Templates
+require('common.js')
 require('layout.js')
 require('user.js')
 require('record.js')

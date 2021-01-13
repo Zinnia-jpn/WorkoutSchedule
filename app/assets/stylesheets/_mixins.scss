@@ -32,11 +32,23 @@
   }
 }
 
-@mixin bottonStyleReset {
+@mixin buttonStyleReset {
   appearance: none;
   background-color: transparent;
   border: none;
   outline: none;
+}
+
+@mixin customButtonStyle {
+  background-color: white;
+  color: $blackish-text-color;
+  padding: 0.25rem 0.6rem;
+  border: 1px solid black;
+  border-radius: 0.25rem;
+  &:hover {
+    background: lightgray;
+    opacity: 0.9;
+  }
 }
 
 @mixin flexBox($justify: 0, $align: 0, $column: 0) {
@@ -50,4 +62,13 @@
   @if($column != 0) { // 縦並び
     flex-direction: $column;
   }
+}
+
+@mixin textIcon {
+  background: white;
+  border-radius: 0.35rem;
+  padding: 0.2rem 0.55rem;
+  margin-left: 1rem;
+  font-size: 0.85rem;
+  font-weight: bold;
 }

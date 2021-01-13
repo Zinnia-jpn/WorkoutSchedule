@@ -1,22 +1,26 @@
-<h1><%= t("users.show.title", name: @current_user.name) %></h1>
+<div class="user-show-wrapper">
+  <h1><%= t("users.show.title") %></h1>
+  <%= image_tag image(@current_user), class: "user-image" %>
+  <table>
+    <tr>
+      <th><%= User.human_attribute_name(:name) %></th>
+      <td class="user-info"><%= @current_user.name %></td>
+    </tr>
+    <tr>
+      <th><%= User.human_attribute_name(:email) %></th>
+      <td class="user-info"><%= @current_user.email %></td>
+    </tr>
+  </table>
+  <div class="button-group">
+    <%= button_to t("users.show.edit"), user_edit_path, method: :get, class: "custom-button" %>
+    <%= button_tag t("users.show.delete"), id: "open-account-delete-modal", class: "custom-button" %>
+  </div>
+</div>
 
-<%= image_tag image(@current_user) %>
-
-<table border="1">
-  <tr>
-    <th><%= User.human_attribute_name(:name) %></th>
-    <td><%= @current_user.name %></td>
-  </tr>
-  <tr>
-    <th><%= User.human_attribute_name(:email) %></th>
-    <td><%= @current_user.email %></td>
-  </tr>
-</table>
-<a><%= link_to t("users.show.edit"), user_edit_path %></a>
-<a id="user-delete-button"><%= t("users.show.delete") %></a>
-
-<div id="delete-modal">
-  <p><%= simple_format t("users.show.delete_message") %></p>
-  <%= button_to t("dictionary.name.yes"), user_delete_path, method: :delete %>
-  <button id="close-delete-modal"><%= t("dictionary.name.no") %></button>
+<div id="account-delete-modal" class="custom-modal">
+  <%= simple_format t("users.show.delete_message") %>
+  <div class="button-group">
+    <%= button_to t("dictionary.name.yes"), user_delete_path, method: :delete, class: "custom-button" %>
+    <%= button_tag t("dictionary.name.no"), id: "close-account-delete-modal", class: "custom-button" %>
+  </div>
 </div>
