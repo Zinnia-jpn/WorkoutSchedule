@@ -1,32 +1,47 @@
-<h2 id="select-month-button">
-  <%= t("schedules.month_details.title", year: @select_year_month.year, month: @select_year_month.month) %>
-</h2>
+<div class="select-month">
+  <span id="open-select-month-modal">
+    <%= t("schedules.month_details.title", year: @select_year_month.year, month: @select_year_month.month) %>&nbsp;<i class="fas fa-chevron-down"></i>
+  </span>
+</div>
 
-<table>
-  <% if @month_records.present? %>
-    <tr>
-      <th><%= t("dictionary.table.do_flag") %></th>
-      <th><%= Record.human_attribute_name(:date) %></th>
-      <th><%= Record.human_attribute_name(:workout_id) %></th>
-      <th colspan="3"><%= t("schedules.month_details.contents") %></th>
-    </tr>
-    <% @month_records.each do |record| %>
+<% if @month_records.present? %>
+  <span class="scroll-message"><%= t("schedules.scroll_message") %></span>
+  <div class="schedule-table">
+    <table class="month-table">
       <tr>
-        <td><%= record.do_flag ? "OK" : "" %></td>
-        <td><%= record.date %></td>
-        <td><%= @workouts.find_by(id: record.workout_id).name %></td>
-        <% if record.cardio_flag? %>
-          <td colspan="3"><%= record.time.present? ? t("dictionary.record.value.time", time: record.time) : "- -" %></td>
-        <% else %>
-          <td><%= record.weight.present? ? t("dictionary.record.value.weight", weight: record.weight) : "- -" %></td>
-          <td><%= record.rep.present? ? t("dictionary.record.value.rep", rep: record.rep) : "- -" %></td>
-          <td><%= record.set.present? ? t("dictionary.record.value.set", set: record.set) : "- -" %></td>
-        <% end %>
-        <td class="border_none"><%= link_to t("schedules.edit"), controller: "records", action: "edit", id: record.id %></td>
-        <td class="border_none"><%= link_to t("schedules.delete"), record_destroy_path(id: record.id), method: :post, data: { confirm: t("schedules.delete_message")} %></td>
+        <th colspan="6" class="month-col__do-flag"><%= t("dictionary.table.do_flag") %></th>
+        <th colspan="16" class="month-col__date"><%= Record.human_attribute_name(:date) %></th>
+        <th colspan="36" class="month-col__workout"><%= Record.human_attribute_name(:workout_id) %></th>
+        <th colspan="27" class="month-col__contents"><%= t("schedules.month_details.contents") %></th>
+        <th colspan="6" class="month-col__edit"><%= t("schedules.edit") %></th>
+        <th colspan="6" class="month-col__delete"><%= t("schedules.delete") %></th>
       </tr>
-    <% end %>
-  <% else %>
-    <h3><%= t("dictionary.table.none") %></h3>
-  <% end %>
-</table>
+      <% @month_records.each do |record| %>
+        <tr>
+          <td colspan="6" class="month-col__do-flag"><%= record.do_flag ? "OK" : "" %></td>
+          <td colspan="16" class="month-col__date"><%= record.date %></td>
+          <td colspan="36" class="month-col__workout"><%= @workouts.find_by(id: record.workout_id).name %></td>
+          <% if record.cardio_flag? %>
+            <td colspan="27" class="month-col__time"><%= record.time.present? ? t("dictionary.record.value.time", time: record.time) : "- -" %></td>
+          <% else %>
+            <td colspan="9" class="month-col__weight"><%= record.weight.present? ? t("dictionary.record.value.weight", weight: record.weight) : "- -" %></td>
+            <td colspan="9" class="month-col__rep"><%= record.rep.present? ? t("dictionary.record.value.rep", rep: record.rep) : "- -" %></td>
+            <td colspan="9" class="month-col__set"><%= record.set.present? ? t("dictionary.record.value.set", set: record.set) : "- -" %></td>
+          <% end %>
+          <td  colspan="6" class="month-col__edit">
+            <%= link_to controller: "records", action: "edit", id: record.id do %>
+              <i class="fas fa-pen-fancy"></i>
+            <% end %>
+          </td>
+          <td  colspan="6" class="month-col__delete">
+            <%= link_to record_destroy_path(id: record.id), method: :post, data: { confirm: t("schedules.delete_message")} do %>
+              <i class="far fa-trash-alt"></i>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+<% else %>
+  <h3><%= t("dictionary.table.none") %></h3>
+<% end %>

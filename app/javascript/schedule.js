@@ -11,12 +11,19 @@ document.addEventListener('turbolinks:load', function() {
         });
     });
 
-    // 月選択のモーダル機能
+    // 月選択モーダルの開閉
     $(function() {
-        $('#select-month-button').click(function() {
+        $('#open-select-month-modal').on('click', function() {
+            $('#overlay').fadeIn();
             $('#select-month-modal').fadeIn();
         });
-        $('#month-modal-close').click(function() {
+        $('#close-select-month-modal').on('click' ,function() {
+            $('#overlay').fadeOut();
+            $('#select-month-modal').fadeOut();
+        });
+        // 月を選択して送信するとモーダルを閉じる
+        $('#select-month-submit').on('click', function() {
+            $('#overlay').fadeOut();
             $('#select-month-modal').fadeOut();
         });
     });

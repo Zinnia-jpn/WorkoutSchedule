@@ -72,8 +72,9 @@ ja:
     edit: "編集"
     delete: "削除"
     delete_message: "本当に記録を削除してもよろしいですか？"
+    scroll_message: "横スクロールで表移動 →"
     header:
-      title: "%{name}さんのスケジュール"
+      title: "スケジュール"
       date_switch_link: "前後3日間"
       month_switch_link: "月ごと"
     date:

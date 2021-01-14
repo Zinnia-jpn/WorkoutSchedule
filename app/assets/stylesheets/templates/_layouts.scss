@@ -13,6 +13,7 @@ header {
   position: absolute;
   height: 100%;
   @include flexBox(center, 0, column);
+  @include navbarStyle($title-text-color);
 }
 
 .header-title {
@@ -20,9 +21,6 @@ header {
   font-weight: bold;
   font-size: 1.25rem;
   padding-left: 1vw;
-  &:link, &:visited, &:hover, &:active {
-    color: $title-text-color;
-  }
   @include lg {
     font-size: 1.75rem;
   }
@@ -31,6 +29,7 @@ header {
 .right-nav {
   float: right;
   height: 100%;
+  @include navbarStyle($whitish-text-color);
   @include md {
     @include flexBox(0, 0, column);
   }
@@ -62,7 +61,7 @@ header {
   }
   @include md {
     float: left;
-    border-left: 1px solid #cccccc;
+    border-left: 1px solid $navbar-border-color;
   }
   a {
     @include flexBox(center, center, column);
@@ -77,9 +76,6 @@ header {
     @include lg {
       width: map-get($header-nav-widths, lg);
       height: map-get($header-heights, lg);
-    }
-    &:link, &:visited, &:hover, &:active {
-      color: $whitish-text-color;
     }
     &:hover {
       opacity: 0.6;
