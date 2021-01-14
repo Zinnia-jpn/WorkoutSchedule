@@ -1,11 +1,188 @@
-#select-month-button {
-  cursor : pointer;
+// navbar
+.schedule-navbar {
+  @include navbarStyle($title-text-color);
+  margin: 1.5rem 0;
+  font-weight: bold;
+
+  ul {
+    @include flexBox(center, center, 0);
+  }
+
+  li {
+    background: white;
+    width: 100%;
+    border: 2px solid $title-text-color;
+    border-collapse: collapse;
+
+    &:last-child {
+      border-left: none;
+    }
+
+    a {
+      @include flexBox(center, center, 0);
+      height: 2.75rem;
+
+      &:hover {
+        background-color: $td-theme-color;
+        opacity: 0.7;
+      }
+    }
+  }
 }
 
+// date
+.schedule-button-list {
+  @include navbarStyle($whitish-text-color);
+
+  ul {
+    @include flexBox(center, center, 0);
+  }
+
+  li {
+    margin: 0 5vw;
+
+    button {
+      width: 100%;
+      @include customButtonStyle;
+      @include flexBox(center, center, 0);
+      height: 2.75rem;
+
+      @include md {
+        width: 5rem;
+      }
+    }
+  }
+}
+
+// details共通
+.scroll-message {
+  font-size: 0.8rem;
+  @include lg {
+    display: none;
+  }
+}
+
+.schedule-table {
+  margin-bottom: 3rem;
+  font-size: 0.9rem;
+  text-align: center;
+
+  // lg以下のスクロール表示関連
+  overflow-x: scroll;
+  padding: 0.2rem;
+  border: 2px solid $blackish-text-color;
+  @include lg {
+    padding: 0;
+    border: none;
+  }
+
+  table {
+    width: map-get($breakpoints, lg-min);
+    table-layout: fixed;
+  }
+
+  th {
+    // width指定による表の幅固定
+    position: sticky;
+    top: 0;
+  }
+}
+
+// date_details
+.date-table {
+  tbody {
+    border-bottom: 2px dashed gray;
+
+    &:last-child { // 最下columnの点線非表示
+      border-bottom: none;
+    }
+
+    .col-weight__do-flag, .col-remark { // 点線と白線との重複対策
+      border-bottom: none;
+    }
+  }
+
+  tr {
+    border: none; // 白線によるレイアウト崩れ対策
+  }
+
+  th, td {
+    border: 1px solid $whitish-text-color;
+  }
+}
+
+.date-col { // weight,cardio共通CSS
+  &__do-flag, &__edit, &__delete {
+    width: 6%;
+  }
+
+  &__remark {
+    word-break: break-all;
+  }
+}
+
+.date-col-weight { // weightのみ
+  &__workout {
+    width: 82%;
+  }
+}
+
+.date-col-cardio { // cardioのみ
+  &__workout {
+    width: 46%;
+  }
+
+  &__time, &__intensity {
+    width: 18%;
+  }
+}
+
+// month
 #select-month-modal {
   display: none;
 }
 
-#month-modal-close {
-  cursor : pointer;
+#close-select-month-modal {
+  cursor: pointer;
+}
+
+.schedule-month-select-field {
+  margin-bottom: 2.75rem;
+}
+
+// month_details
+#open-select-month-modal {
+  cursor: pointer;
+}
+
+.select-month {
+  font-size: 2.25rem;
+  text-align: center;
+  padding: 1.5rem 0 2rem 0;
+}
+
+.month-table {
+  table-layout: fixed;
+}
+
+.month-col {
+  &__do-flag, &__edit, &__delete {
+    width: 6%;
+  }
+
+  &__date {
+    width: 16%;
+  }
+
+  &__workout {
+    width: 36%;
+  }
+
+  &__contents, &__time {
+    width: 27%;
+  }
+
+  &__weight, &__rep, &__set {
+    width: 9%;
+  }
 }

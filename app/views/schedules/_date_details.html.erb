@@ -1,64 +1,106 @@
 <h2><%= text %></h2>
 <% if records.present? %>
-  <% if records.where(cardio_flag: true).present? %>
-    <table>
-      <tr>
-        <th colspan="5"><%= t("dictionary.name.cardio") %></th>
-      </tr>
-      <tr>
-        <th><%= t("dictionary.table.do_flag") %></th>
-        <th><%= Record.human_attribute_name(:workout_id) %></th>
-        <th><%= Record.human_attribute_name(:time) %></th>
-        <th><%= Record.human_attribute_name(:intensity) %></th>
-        <th><%= Record.human_attribute_name(:remark) %></th>
-      </tr>
-      <% records.each do |record| %>
-        <% if record.cardio_flag == true %>
-          <tr>
-            <td><%= record.do_flag ? "" : "OK" %></td>
-            <td><%= @workouts.find_by(id: record.workout_id).name %></td>
-            <td><%= record.time.present? ? t("dictionary.record.value.time", time: record.time) : "- -" %></td>
-            <td><%= record.intensity_id.present? ? @intensities.find_by(id: record.intensity_id).name : "- -" %></td>
-            <td><%= record.remark.present? ? record.remark : "- - " %></td>
-            <td class="border_none"><%= link_to t("schedules.edit"), record_edit_path(id: record.id) %></td>
-            <td class="border_none"><%= link_to t("schedules.delete"), record_destroy_path(id: record.id), method: :post, data: { confirm: t("schedules.delete_message") } %></td>
-          </tr>
-        <% end %>
-
-      <% end %>
-    </table>
-  <% end %>
 
   <% if records.where(cardio_flag: false).present? %>
-    <table>
-      <tr>
-        <th colspan="7"><%= t("dictionary.name.weight") %></th>
-      </tr>
-      <tr>
-        <th><%= t("dictionary.table.do_flag") %></th>
-        <th><%= Record.human_attribute_name(:workout_id) %></th>
-        <th><%= Record.human_attribute_name(:weight) %></th>
-        <th><%= Record.human_attribute_name(:rep) %></th>
-        <th><%= Record.human_attribute_name(:set) %></th>
-        <th><%= Record.human_attribute_name(:interval) %></th>
-        <th><%= Record.human_attribute_name(:remark) %></th>
-      </tr>
-      <% records.each do |record| %>
-        <% if record.cardio_flag == false %>
-          <tr>
-            <td><%= record.do_flag ? "OK" : "" %></td>
-            <td><%= @workouts.find_by(id: record.workout_id).name %></td>
-            <td><%= record.weight.present? ? t("dictionary.record.value.weight", weight: record.weight) : "- -" %></td>
-            <td><%= record.rep.present? ? t("dictionary.record.value.rep", rep: record.rep) : "- -" %></td>
-            <td><%= record.set.present? ? t("dictionary.record.value.set", set: record.set) : "- -" %></td>
-            <td><%= record.interval.present? ? t("dictionary.record.value.interval", interval: record.interval) : "- -" %></td>
-            <td><%= record.remark.present? ? record.remark : "- -" %></td>
-            <td class="border_none"><%= link_to t("schedules.edit"), record_edit_path(id: record.id) %></td>
-            <td class="border_none"><%= link_to t("schedules.delete"), record_destroy_path(id: record.id), method: :post, data: { confirm: t("schedules.delete_message") } %></td>
-          </tr>
+    <h3><%= t("dictionary.name.weight") %></h3>
+    <span class="scroll-message"><%= t("schedules.scroll_message") %></span>
+    <div class="schedule-table">
+      <table class="date-table">
+        <thead>
+        <tr>
+          <th colspan="12" rowspan="3" class="date-col__do-flag"><%= t("dictionary.table.do_flag") %></th>
+          <th colspan="164" class="date-col-weight__workout"><%= Record.human_attribute_name(:workout_id) %></th>
+          <th colspan="12" class="date-col__edit"><%= t("schedules.edit") %></th>
+          <th colspan="12" class="date-col__delete"><%= t("schedules.delete") %></th>
+        </tr>
+        <tr>
+          <th colspan="47"><%= Record.human_attribute_name(:weight) %></th>
+          <th colspan="47"><%= Record.human_attribute_name(:rep) %></th>
+          <th colspan="47"><%= Record.human_attribute_name(:set) %></th>
+          <th colspan="47"><%= Record.human_attribute_name(:interval) %></th>
+        </tr>
+        <tr>
+          <th colspan="188"><%= Record.human_attribute_name(:remark) %></th>
+        </tr>
+        </thead>
+        <% records.each do |record| %>
+          <% if record.cardio_flag == false %>
+            <tbody>
+            <tr>
+              <td colspan="12" rowspan="3" class="date-col__do-flag"><%= record.do_flag ? "OK" : "" %></td>
+              <td colspan="164" class="date-col-weight__workout"><%= @workouts.find_by(id: record.workout_id).name %></td>
+              <td colspan="12" class="date-col__edit">
+                <%= link_to record_edit_path(id: record.id) do %>
+                  <i class="fas fa-pen-fancy"></i>
+                <% end %>
+              </td>
+              <td colspan="12" class="date-col__delete">
+                <%= link_to record_destroy_path(id: record.id), method: :post, data: {confirm: t("schedules.delete_message")} do %>
+                  <i class="far fa-trash-alt"></i>
+                <% end %>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="47"><%= record.weight.present? ? t("dictionary.record.value.weight", weight: record.weight) : "- -" %></td>
+              <td colspan="47"><%= record.rep.present? ? t("dictionary.record.value.rep", rep: record.rep) : "- -" %></td>
+              <td colspan="47"><%= record.set.present? ? t("dictionary.record.value.set", set: record.set) : "- -" %></td>
+              <td colspan="47"><%= record.interval.present? ? t("dictionary.record.value.interval", interval: record.interval) : "- -" %></td>
+            </tr>
+            <tr>
+              <td colspan="188" class="date-col__remark"><%= record.remark.present? ? record.remark : "- -" %></td>
+            </tr>
+            </tbody>
+          <% end %>
         <% end %>
-      <% end %>
-    </table>
+      </table>
+    </div>
+  <% end %>
+
+  <% if records.where(cardio_flag: true).present? %>
+    <h3><%= t("dictionary.name.cardio") %></h3>
+    <span class="scroll-message"><%= t("schedules.scroll_message") %></span>
+    <div class="schedule-table">
+      <table class="date-table schedule-table">
+        <thead>
+        <tr>
+          <th colspan="3" rowspan="2" class="date-col__do-flag"><%= t("dictionary.table.do_flag") %></th>
+          <th colspan="23" class="date-col-cardio__workout"><%= Record.human_attribute_name(:workout_id) %></th>
+          <th colspan="9" class="date-col-cardio__time"><%= Record.human_attribute_name(:time) %></th>
+          <th colspan="9" class="date-col-cardio__intensity"><%= Record.human_attribute_name(:intensity) %></th>
+          <th colspan="3" class="date-col__edit"><%= t("schedules.edit") %></th>
+          <th colspan="3" class="date-col__delete"><%= t("schedules.delete") %></th>
+        </tr>
+        <tr>
+          <th colspan="47"><%= Record.human_attribute_name(:remark) %></th>
+        </tr>
+        </thead>
+        <% records.each do |record| %>
+          <% if record.cardio_flag == true %>
+            <tbody>
+            <tr>
+              <td colspan="3" rowspan="2" class="date-col__do-flag"><%= record.do_flag ? "OK" : "" %></td>
+              <td colspan="23" class="date-col-cardio__workout"><%= @workouts.find_by(id: record.workout_id).name %></td>
+              <td colspan="9" class="date-col-cardio__time"><%= record.time.present? ? t("dictionary.record.value.time", time: record.time) : "- -" %></td>
+              <td colspan="9" class="date-col-cardio__intensity"><%= record.intensity_id.present? ? @intensities.find_by(id: record.intensity_id).name : "- -" %></td>
+              <td colspan="3" class="date-col__frame-out">
+                <%= link_to record_edit_path(id: record.id) do %>
+                  <i class="fas fa-pen-fancy"></i>
+                <% end %>
+              </td>
+              <td colspan="3" class="date-col__frame-out">
+                <%= link_to record_destroy_path(id: record.id), method: :post, data: {confirm: t("schedules.delete_message")} do %>
+                  <i class="far fa-trash-alt"></i>
+                <% end %>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="47"><%= record.remark.present? ? record.remark : "- - " %></td>
+            </tr>
+            </tbody>
+          <% end %>
+        <% end %>
+      </table>
+    </div>
   <% end %>
 
 <% else %>

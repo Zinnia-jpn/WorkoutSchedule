@@ -72,3 +72,20 @@
   font-size: 0.85rem;
   font-weight: bold;
 }
+
+@mixin navbarStyle($font-color) {
+  ul {
+    padding: 0;
+    list-style: none;
+  }
+
+  a {
+    &:hover {
+      text-decoration: none;
+    }
+
+    &:link, &:visited, &:hover, &:active {
+      color: $font-color;
+    }
+  }
+}

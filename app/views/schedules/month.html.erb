@@ -1,16 +1,14 @@
-<%= render partial: "header" %>
-
-<div id="select-month-modal">
-  <a id="month-modal-close">×</a>
-  <%= form_with url: dynamic_select_month_path, remote: true do |f| %>
+<%= render partial: "navbar" %>
+<div id="month-details-table">
+  <%= render partial: "month_details" %>
+</div>
+<div id="select-month-modal" class="custom-modal">
+  <%= form_with url: dynamic_select_month_path, class: "schedule-month-select-field", remote: true do |f| %>
     <%= raw sprintf(
                 f.date_select(:year_month, discard_day: true, order: [:year, :month],
                               use_month_numbers: true, start_year:2020, end_year:2040, default: Date.today,
-                              date_separator: '%s'), '年 ') + '月' %>
-    <%= f.submit t("helpers.submit.submit") %>
+                              date_separator: '%s'), '年 ') + '月' %>&nbsp;
+    <%= f.submit t("helpers.submit.submit"), id: "select-month-submit" %>
   <% end %>
-</div>
-
-<div id="month-details-table">
-  <%= render partial: "month_details" %>
+  <%= button_tag "閉じる", type: "button", id: "close-select-month-modal", class: "custom-button" %>
 </div>

@@ -1,6 +1,7 @@
 // 核となるCSS;
 @import "variables";
 @import "mixins";
+@import "common";
 
 // 各SCSS
 @import "templates/*";

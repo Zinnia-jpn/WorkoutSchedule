@@ -14,7 +14,7 @@
   th, td {
     padding: 1.25rem 0;
     @include xs {
-      font-size: 0.6rem;
+      font-size: 0.75rem;
       padding: 0.85rem 0;
     }
   }
@@ -29,8 +29,8 @@
       width: 0px;
       height: 0px;
       position: absolute;
-      top: calc(50% - 0.9rem); // 一番上の頂点の位置
-      right: - (0.9rem - 0.05rem); // th右側面から出す幅
+      top: calc(50% - 0.9rem);
+      right: - (0.9rem - 0.05rem);
       border: {
         style: solid;
         width: 0.9rem;
