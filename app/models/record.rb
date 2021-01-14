@@ -8,6 +8,12 @@ class Record < ApplicationRecord
   validates :do_flag, inclusion: { in: [true, false] }
   validates :workout_id, presence: true
   validates :cardio_flag, inclusion: { in: [true, false] }
+  validates :weight, length: { maximum: 500 }
+  validates :rep, length: { maximum: 500 }
+  validates :set, length: { maximum: 50 }
+  validates :interval, length: { maximum: 600 }
+  validates :time, length: { maximum: 600 }
+  validates :remark, length: { maximum: 255 }
 
 # Model内で使用するメソッド
   def get_current_user_records(user_id) # 現在のユーザーのRecordだけを全て取得

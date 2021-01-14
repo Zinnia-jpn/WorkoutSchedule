@@ -14,7 +14,7 @@
       <i class="fas fa-signature"></i>&nbsp;<%= f.label :name, User.human_attribute_name(:name) %>
       <span class="required-icon"><%= t("dictionary.table.required") %></span>
     </div>
-    <%= f.text_field :name, value: @user.name, class: "input-field" %>
+    <%= f.text_field :name, value: @user.name, class: "input-field", maxlength: 30 %>
   </div>
   <div class="mb-4">
     <div class="py-2">
