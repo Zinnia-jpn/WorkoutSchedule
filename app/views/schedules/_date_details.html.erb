@@ -30,12 +30,13 @@
               <td colspan="12" rowspan="3" class="date-col__do-flag"><%= record.do_flag ? "OK" : "" %></td>
               <td colspan="164" class="date-col-weight__workout"><%= @workouts.find_by(id: record.workout_id).name %></td>
               <td colspan="12" class="date-col__edit">
-                <%= link_to record_edit_path(id: record.id) do %>
+                <%= link_to edit_record_path(token: record.token), method: :get do %>
                   <i class="fas fa-pen-fancy"></i>
                 <% end %>
               </td>
               <td colspan="12" class="date-col__delete">
-                <%= link_to record_destroy_path(id: record.id), method: :post, data: {confirm: t("schedules.delete_message")} do %>
+                <%= link_to record_path(token: record.token), method: :delete,
+                            data: {confirm: t("schedules.delete_message")} do %>
                   <i class="far fa-trash-alt"></i>
                 <% end %>
               </td>
@@ -83,12 +84,13 @@
               <td colspan="9" class="date-col-cardio__time"><%= record.time.present? ? t("dictionary.record.value.time", time: record.time) : "- -" %></td>
               <td colspan="9" class="date-col-cardio__intensity"><%= record.intensity_id.present? ? @intensities.find_by(id: record.intensity_id).name : "- -" %></td>
               <td colspan="3" class="date-col__frame-out">
-                <%= link_to record_edit_path(id: record.id) do %>
+                <%= link_to edit_record_path(token: record.token), method: :get do %>
                   <i class="fas fa-pen-fancy"></i>
                 <% end %>
               </td>
               <td colspan="3" class="date-col__frame-out">
-                <%= link_to record_destroy_path(id: record.id), method: :post, data: {confirm: t("schedules.delete_message")} do %>
+                <%= link_to record_path(token: record.token), method: :delete,
+                            data: {confirm: t("schedules.delete_message")} do %>
                   <i class="far fa-trash-alt"></i>
                 <% end %>
               </td>

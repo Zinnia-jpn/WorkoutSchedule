@@ -29,12 +29,13 @@
             <td colspan="9" class="month-col__set"><%= record.set.present? ? t("dictionary.record.value.set", set: record.set) : "- -" %></td>
           <% end %>
           <td  colspan="6" class="month-col__edit">
-            <%= link_to controller: "records", action: "edit", id: record.id do %>
+            <%= link_to edit_record_path(token: record.token), method: :get do %>
               <i class="fas fa-pen-fancy"></i>
             <% end %>
           </td>
           <td  colspan="6" class="month-col__delete">
-            <%= link_to record_destroy_path(id: record.id), method: :post, data: { confirm: t("schedules.delete_message")} do %>
+            <%= link_to record_path(token: record.token), method: :delete,
+                        data: { confirm: t("schedules.delete_message")} do %>
               <i class="far fa-trash-alt"></i>
             <% end %>
           </td>
@@ -42,6 +43,7 @@
       <% end %>
     </table>
   </div>
+
 <% else %>
   <h3><%= t("dictionary.table.none") %></h3>
 <% end %>
