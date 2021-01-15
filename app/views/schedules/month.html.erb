@@ -1,14 +1,63 @@
-<%= render partial: "navbar" %>
-<div id="month-details-table">
-  <%= render partial: "month_details" %>
-</div>
 <div id="select-month-modal" class="custom-modal">
-  <%= form_with url: dynamic_select_month_path, class: "schedule-month-select-field", remote: true do |f| %>
+  <%= form_with url: schedule_receive_selection_path, method: :get, class: "schedule-select-field", local: true do |f| %>
     <%= raw sprintf(
-                f.date_select(:year_month, discard_day: true, order: [:year, :month],
-                              use_month_numbers: true, start_year:2020, end_year:2040, default: Date.today,
+                f.date_select(:date, discard_day: true,
+                              use_month_numbers: true, start_year: 2020, end_year: 2040, default: @select_date,
                               date_separator: '%s'), '年 ') + '月' %>&nbsp;
-    <%= f.submit t("helpers.submit.submit"), id: "select-month-submit" %>
+    <%= f.submit t("helpers.submit.submit"), class: "custom-button" %>
   <% end %>
   <%= button_tag "閉じる", type: "button", id: "close-select-month-modal", class: "custom-button" %>
 </div>
+
+<%= render partial: "navbar" %>
+
+<div class="select-date-title">
+  <span id="open-select-month-modal">
+    <%= t("schedules.month.title", year: @select_date.year, month: @select_date.month) %>&nbsp;
+    <i class="fas fa-chevron-down"></i>
+  </span>
+</div>
+
+<% if @date_records.present? %>
+  <span class="scroll-message"><%= t("schedules.scroll_message") %></span>
+  <div class="schedule-table">
+    <table class="month-table">
+      <tr>
+        <th colspan="6" class="month-col__do-flag"><%= t("dictionary.table.do_flag") %></th>
+        <th colspan="16" class="month-col__date"><%= Record.human_attribute_name(:date) %></th>
+        <th colspan="36" class="month-col__workout"><%= Record.human_attribute_name(:workout_id) %></th>
+        <th colspan="27" class="month-col__contents"><%= t("schedules.month.contents") %></th>
+        <th colspan="6" class="month-col__edit"><%= t("schedules.edit") %></th>
+        <th colspan="6" class="month-col__delete"><%= t("schedules.delete") %></th>
+      </tr>
+      <% @date_records.each do |record| %>
+        <tr>
+          <td colspan="6" class="month-col__do-flag"><%= record.do_flag ? "OK" : "" %></td>
+          <td colspan="16" class="month-col__date"><%= record.date %></td>
+          <td colspan="36" class="month-col__workout"><%= Workout.reference_data.find_by(id: record.workout_id).name %></td>
+          <% if record.cardio_flag? %>
+            <td colspan="27" class="month-col__time"><%= record.time.present? ? t("dictionary.record.value.time", time: record.time) : "- -" %></td>
+          <% else %>
+            <td colspan="9" class="month-col__weight"><%= record.weight.present? ? t("dictionary.record.value.weight", weight: record.weight) : "- -" %></td>
+            <td colspan="9" class="month-col__rep"><%= record.rep.present? ? t("dictionary.record.value.rep", rep: record.rep) : "- -" %></td>
+            <td colspan="9" class="month-col__set"><%= record.set.present? ? t("dictionary.record.value.set", set: record.set) : "- -" %></td>
+          <% end %>
+          <td colspan="6" class="month-col__edit">
+            <%= link_to edit_record_path(token: record.token), method: :get do %>
+              <i class="fas fa-pen-fancy"></i>
+            <% end %>
+          </td>
+          <td colspan="6" class="month-col__delete">
+            <%= link_to record_path(token: record.token), method: :delete,
+                        data: {confirm: t("schedules.delete_message")} do %>
+              <i class="far fa-trash-alt"></i>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+
+<% else %>
+  <h3><%= t("dictionary.table.none") %></h3>
+<% end %>

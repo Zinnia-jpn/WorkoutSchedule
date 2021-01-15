@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
       log_in(user)
       params[:remember] == "1" ? remember(user) : forget(user)
       flash[:success] = t("sessions.login.success")
-      redirect_to schedule_date_url
+      redirect_to schedule_day_url
     else
       @login_error =  t("sessions.login.failure")
       render "login_form"

@@ -9,11 +9,6 @@ class ApplicationController < ActionController::Base
 
   # ログインしていないかをチェック
   def not_logged_in_check
-    redirect_to schedule_date_url if logged_in?
-  end
-
-  def record_required_data_get # Recordの表示に必要なデータを取得
-    @workouts = Workout.all
-    @intensities = Intensity.all
+    redirect_to schedule_day_url if logged_in?
   end
 end

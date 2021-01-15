@@ -10,7 +10,7 @@
        <ul>
          <% if logged_in? %>
            <li class="header-right-item">
-             <%= link_to schedule_date_path do %>
+             <%= link_to schedule_day_path do %>
                <i class="far fa-calendar-alt header-right-item__material-icon"></i>
                <span class="header-right-item__name"><%= t("layouts.header.schedule") %></span>
              <% end %>

@@ -1,0 +1,142 @@
+<div id="select-day-modal" class="custom-modal">
+  <%= form_with url: schedule_receive_selection_path, method: :get, class: "schedule-select-field", local: true do |f| %>
+    <%= raw sprintf(
+                f.date_select(:date, order: [:year, :month, :day],
+                              use_month_numbers: true, start_year: 2020, end_year: 2040, default: @select_date,
+                              date_separator: '%s'), '年 ', '月 ') + '日' %>&nbsp;
+    <%= f.submit t("helpers.submit.submit"), class: "custom-button" %>
+  <% end %>
+  <%= button_tag "閉じる", type: "button", id: "close-select-day-modal", class: "custom-button" %>
+</div>
+
+<%= render partial: "navbar" %>
+
+<div class="schedule-button-list">
+  <ul>
+    <li><%= link_to t("schedules.day.yesterday"), schedule_day_path(date: {
+        year: Date.yesterday.year, month: Date.yesterday.month, day: Date.yesterday.day}), method: :get %></li>
+    <li><%= link_to t("schedules.day.today"), schedule_day_path(date: {
+        year: Date.today.year, month: Date.today.month, day: Date.today.day}), method: :get %></li>
+    <li><%= link_to t("schedules.day.tomorrow"), schedule_day_path(date: {
+        year: Date.tomorrow.year, month: Date.tomorrow.month, day: Date.tomorrow.day}), method: :get %></li>
+  </ul>
+</div>
+
+<div class="select-date-title">
+  <span id="open-select-day-modal">
+    <%= t("schedules.day.title", year: @select_date.year, month: @select_date.month, day: @select_date.day) %>
+    <i class="fas fa-chevron-down"></i>
+  </span>
+</div>
+
+<% if @date_records.present? %>
+  <% if @date_records.where(cardio_flag: false).present? %>
+    <h3><%= t("dictionary.name.weight") %></h3>
+    <span class="scroll-message"><%= t("schedules.scroll_message") %></span>
+    <div class="schedule-table">
+      <table class="day-table">
+        <thead>
+        <tr>
+          <th colspan="12" rowspan="3" class="day-col__do-flag"><%= t("dictionary.table.do_flag") %></th>
+          <th colspan="164" class="day-col-weight__workout"><%= Record.human_attribute_name(:workout_id) %></th>
+          <th colspan="12" class="day-col__edit"><%= t("schedules.edit") %></th>
+          <th colspan="12" class="day-col__delete"><%= t("schedules.delete") %></th>
+        </tr>
+        <tr>
+          <th colspan="47"><%= Record.human_attribute_name(:weight) %></th>
+          <th colspan="47"><%= Record.human_attribute_name(:rep) %></th>
+          <th colspan="47"><%= Record.human_attribute_name(:set) %></th>
+          <th colspan="47"><%= Record.human_attribute_name(:interval) %></th>
+        </tr>
+        <tr>
+          <th colspan="188"><%= Record.human_attribute_name(:remark) %></th>
+        </tr>
+        </thead>
+        <% @date_records.each do |record| %>
+          <% if record.cardio_flag == false %>
+            <tbody>
+            <tr>
+              <td colspan="12" rowspan="3" class="day-col__do-flag"><%= record.do_flag ? "OK" : "" %></td>
+              <td colspan="164" class="day-col-weight__workout">
+                <%= Workout.reference_data.find_by(id: record.workout_id).name %></td>
+              <td colspan="12" class="day-col__edit">
+                <%= link_to edit_record_path(token: record.token), method: :get do %>
+                  <i class="fas fa-pen-fancy"></i>
+                <% end %>
+              </td>
+              <td colspan="12" class="day-col__delete">
+                <%= link_to record_path(token: record.token), method: :delete,
+                            data: {confirm: t("schedules.delete_message")} do %>
+                  <i class="far fa-trash-alt"></i>
+                <% end %>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="47"><%= record.weight.present? ? t("dictionary.record.value.weight", weight: record.weight) : "- -" %></td>
+              <td colspan="47"><%= record.rep.present? ? t("dictionary.record.value.rep", rep: record.rep) : "- -" %></td>
+              <td colspan="47"><%= record.set.present? ? t("dictionary.record.value.set", set: record.set) : "- -" %></td>
+              <td colspan="47"><%= record.interval.present? ? t("dictionary.record.value.interval", interval: record.interval) : "- -" %></td>
+            </tr>
+            <tr>
+              <td colspan="188" class="day-col__remark"><%= record.remark.present? ? record.remark : "- -" %></td>
+            </tr>
+            </tbody>
+          <% end %>
+        <% end %>
+      </table>
+    </div>
+  <% end %>
+
+  <% if @date_records.where(cardio_flag: true).present? %>
+    <h3><%= t("dictionary.name.cardio") %></h3>
+    <span class="scroll-message"><%= t("schedules.scroll_message") %></span>
+    <div class="schedule-table">
+      <table class="day-table schedule-table">
+        <thead>
+        <tr>
+          <th colspan="3" rowspan="2" class="day-col__do-flag"><%= t("dictionary.table.do_flag") %></th>
+          <th colspan="23" class="day-col-cardio__workout"><%= Record.human_attribute_name(:workout_id) %></th>
+          <th colspan="9" class="day-col-cardio__time"><%= Record.human_attribute_name(:time) %></th>
+          <th colspan="9" class="day-col-cardio__intensity"><%= Record.human_attribute_name(:intensity) %></th>
+          <th colspan="3" class="day-col__edit"><%= t("schedules.edit") %></th>
+          <th colspan="3" class="day-col__delete"><%= t("schedules.delete") %></th>
+        </tr>
+        <tr>
+          <th colspan="47"><%= Record.human_attribute_name(:remark) %></th>
+        </tr>
+        </thead>
+        <% @date_records.each do |record| %>
+          <% if record.cardio_flag == true %>
+            <tbody>
+            <tr>
+              <td colspan="3" rowspan="2" class="day-col__do-flag"><%= record.do_flag ? "OK" : "" %></td>
+              <td colspan="23" class="day-col-cardio__workout">
+                <%= Workout.reference_data.find_by(id: record.workout_id).name %></td>
+              <td colspan="9" class="day-col-cardio__time"><%= record.time.present? ? t("dictionary.record.value.time", time: record.time) : "- -" %></td>
+              <td colspan="9" class="day-col-cardio__intensity">
+                <%= record.intensity_id.present? ? Intensity.reference_data.find_by(id: record.intensity_id).name : "- -" %></td>
+              <td colspan="3" class="day-col__frame-out">
+                <%= link_to edit_record_path(token: record.token), method: :get do %>
+                  <i class="fas fa-pen-fancy"></i>
+                <% end %>
+              </td>
+              <td colspan="3" class="day-col__frame-out">
+                <%= link_to record_path(token: record.token), method: :delete,
+                            data: {confirm: t("schedules.delete_message")} do %>
+                  <i class="far fa-trash-alt"></i>
+                <% end %>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="47" class="day-col__remark"><%= record.remark.present? ? record.remark : "- - " %></td>
+            </tr>
+            </tbody>
+          <% end %>
+        <% end %>
+      </table>
+    </div>
+  <% end %>
+
+<% else %>
+  <h3><%= t("dictionary.table.none") %></h3>
+<% end %>

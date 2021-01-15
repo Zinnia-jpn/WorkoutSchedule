@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     if @user.save
       log_in(@user)
       flash[:success] = t("users.create.success")
-      redirect_to schedule_date_url
+      redirect_to schedule_day_url
     else
       render "new"
     end

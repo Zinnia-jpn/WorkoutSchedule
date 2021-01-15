@@ -13,7 +13,9 @@ class RecordsController < ApplicationController
     @record.user_id = @current_user.id
     if @record.save
       flash[:success] = t("records.create.success")
-      redirect_to schedule_date_url
+      redirect_to schedule_day_url(date: {
+        year: params[:record]["date(1i)"], month: params[:record]["date(2i)"], day: params[:record]["date(3i)"]
+      })
     else
       render "new"
     end
@@ -21,14 +23,16 @@ class RecordsController < ApplicationController
 
   def edit
     @category_id = reverse_lookup_category_id(@record)
-    @workouts = Workout.where(category_id: @category_id)
+    @workouts = Workout.where(category_id: @category_id).reference_data
     @token = params[:token]
   end
 
   def update
     if @record.update(record_params)
       flash[:success] = t("records.update.success")
-      redirect_to schedule_date_url
+      redirect_to schedule_day_url(date: {
+        year: params[:record]["date(1i)"], month: params[:record]["date(2i)"], day: params[:record]["date(3i)"]
+      })
     else
       render "edit"
     end
@@ -37,13 +41,13 @@ class RecordsController < ApplicationController
   def destroy
     @record.destroy
     flash[:success] = t("records.destroy.success")
-    redirect_to schedule_date_url
+    redirect_to request.referrer
   end
 
   # app/javascript/record.jsからAjaxで送信された値を元にフォームを生成
   def dynamic_select_category
     @token = params[:token]
-    @workouts = Workout.where(category_id: params[:category_id])
+    @workouts = Workout.where(category_id: params[:category_id]).reference_data
     params[:category_id].to_i == 1 ? cardio_flag = true : cardio_flag = false
     if params[:record].present?
       @record = Record.new(record_params)
@@ -63,7 +67,7 @@ class RecordsController < ApplicationController
   # 現在のユーザーとrecordを作成したユーザーが一致するか
   def check_created_user(record)
     created_user = User.find_by(id: record.user_id)
-    redirect_to schedule_date_url unless current_user?(created_user)
+    redirect_to schedule_day_url unless current_user?(created_user)
   end
 
   def record_params

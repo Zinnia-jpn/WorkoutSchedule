@@ -9,10 +9,9 @@ module RecordsHelper
     current_or_previous_action_is_edit? ? "patch" : "post"
   end
 
-  # private
+  private
   # 現在か前のactionがeditかどうか
   def current_or_previous_action_is_edit?
-    previous_action = get_previous_url[:action]
-    previous_action == "edit" || action_name == "edit"
+    previous_path[:action] == "edit" || action_name == "edit"
   end
 end

@@ -5,10 +5,9 @@ Rails.application.routes.draw do
   resources :records, param: :token, only: [:new, :create, :edit, :update, :destroy]
 
   # schedules
-  post "dynamic_select_month" => "schedules#dynamic_select_month" # 月ごとのスケジュール表示
-  get "schedule/dynamic_select_date" => "schedules#dynamic_select_date" # Ajax送信先(前後3日間の切り替え)
+  get "schedule/receive_selection" => "schedules#receive_selection"
   get "schedule/month" => "schedules#month"
-  get "schedule/date" => "schedules#date"
+  get "schedule/day" => "schedules#day"
 
   # sessions
   post "logout" => "sessions#logout"

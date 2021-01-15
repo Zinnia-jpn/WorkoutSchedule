@@ -1,3 +1,11 @@
+// 共通
+.scroll-message {
+  font-size: 0.8rem;
+  @include lg {
+    display: none;
+  }
+}
+
 // navbar
 .schedule-navbar {
   @include navbarStyle($title-text-color);
@@ -30,9 +38,8 @@
   }
 }
 
-// date
 .schedule-button-list {
-  @include navbarStyle($whitish-text-color);
+  @include navbarStyle($blackish-text-color);
 
   ul {
     @include flexBox(center, center, 0);
@@ -41,7 +48,7 @@
   li {
     margin: 0 5vw;
 
-    button {
+    a {
       width: 100%;
       @include customButtonStyle;
       @include flexBox(center, center, 0);
@@ -54,7 +61,7 @@
   }
 }
 
-// details共通
+// スケジュール表 共通
 .scroll-message {
   font-size: 0.8rem;
   @include lg {
@@ -88,8 +95,23 @@
   }
 }
 
-// date_details
-.date-table {
+// 選択モーダル関連
+.schedule-select-field {
+  margin-bottom: 2.75rem;
+}
+
+#open-select-month-modal {
+  cursor: pointer;
+}
+
+.select-date-title {
+  font-size: 2.25rem;
+  text-align: center;
+  padding: 1.5rem 0 2rem 0;
+}
+
+// day
+.day-table {
   tbody {
     border-bottom: 2px dashed gray;
 
@@ -111,7 +133,7 @@
   }
 }
 
-.date-col { // weight,cardio共通CSS
+.day-col { // weight,cardio共通CSS
   &__do-flag, &__edit, &__delete {
     width: 6%;
   }
@@ -121,13 +143,13 @@
   }
 }
 
-.date-col-weight { // weightのみ
+.day-col-weight { // 無酸素運動のカラムのみ
   &__workout {
     width: 82%;
   }
 }
 
-.date-col-cardio { // cardioのみ
+.day-col-cardio { // 有酸素運動のカラムのみ
   &__workout {
     width: 46%;
   }
@@ -138,29 +160,6 @@
 }
 
 // month
-#select-month-modal {
-  display: none;
-}
-
-#close-select-month-modal {
-  cursor: pointer;
-}
-
-.schedule-month-select-field {
-  margin-bottom: 2.75rem;
-}
-
-// month_details
-#open-select-month-modal {
-  cursor: pointer;
-}
-
-.select-month {
-  font-size: 2.25rem;
-  text-align: center;
-  padding: 1.5rem 0 2rem 0;
-}
-
 .month-table {
   table-layout: fixed;
 }

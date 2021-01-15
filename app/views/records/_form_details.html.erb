@@ -1,4 +1,5 @@
-<%= form_with model: @record, url: record_form_url(@token), method: record_form_method, local: true, id: "details-table" do |f| %>
+<%= form_with model: @record, url: record_form_url(@token), method: record_form_method,
+              local: true, id: "details-table" do |f| %>
   <%= f.hidden_field :cardio_flag, value: @record.cardio_flag %>
   <table>
     <tr>
@@ -39,7 +40,8 @@
           <%= f.label :intensity, Record.human_attribute_name(:intensity) %>
           <span class="optional-icon"><%= t("dictionary.table.optional") %></span>
         </th>
-        <td><%= f.collection_select :intensity_id, Intensity.all, :id, :name, {prompt: t("helpers.select.prompt"), selected: @record.intensity_id} %></td>
+        <td><%= f.collection_select :intensity_id, Intensity.reference_data,
+                                    :id, :name, {prompt: t("helpers.select.prompt"), selected: @record.intensity_id} %></td>
       </tr>
     <% else # 無酸素 %>
       <tr>
