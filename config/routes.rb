@@ -1,12 +1,8 @@
 Rails.application.routes.draw do
 
   # records
-  post "record/destroy" => "records#destroy"
-  post "record/update" => "records#update"
-  get "record/edit" => "records#edit"
-  get "record/dynamic_select_category" => "records#dynamic_select_category" # Ajax送信先(二重構造のセレクトボックス)
-  post "record/create" => "records#create"
-  get "record/new" => "records#new"
+  get "records/dynamic_select_category" => "records#dynamic_select_category" # Ajax送信先(二重構造のセレクトボックス)
+  resources :records, param: :token, only: [:new, :create, :edit, :update, :destroy]
 
   # schedules
   post "dynamic_select_month" => "schedules#dynamic_select_month" # 月ごとのスケジュール表示
