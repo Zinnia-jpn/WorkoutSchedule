@@ -9,9 +9,9 @@ class User < ApplicationRecord
   validates :name, presence: true, length: { maximum: 30 }
   validates :email, presence: true, uniqueness: { case_sensitive: false },
             format: { with: VALID_EMAIL_REGEX,
-                      message: "の形式が有効ではありません" }
+                      message: I18n.t("errors.messages.wrong_format_to_email") }
   validates :password, format: { with: VALID_PASSWORD_REGEX,
-                                 message: "は半角8~30文字で、英大文字・英小文字・数字をそれぞれ１文字以上含む必要があります" },
+                                 message: I18n.t("errors.messages.wrong_format_to_password") },
             if: :password_was_entered? # 両方未入力の場合Bcryptのバリデーションに引っかかる
 
   # 永続セッションに必要なトークンをハッシュ化してremember_digestカラムに記録
