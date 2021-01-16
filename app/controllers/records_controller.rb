@@ -22,9 +22,6 @@ class RecordsController < ApplicationController
   end
 
   def edit
-    @category_id = reverse_lookup_category_id(@record)
-    @workouts = Workout.where(category_id: @category_id).reference_data
-    @token = params[:token]
   end
 
   def update
@@ -62,6 +59,14 @@ class RecordsController < ApplicationController
   def get_select_record(token)
     @record = Record.find_by(token: token)
     check_created_user(@record)
+    @token = params[:token]
+    required_data(@record)
+  end
+
+  # editに必要なデータを渡す
+  def required_data(record)
+    @category_id = reverse_lookup_category_id(record)
+    @workouts = Workout.where(category_id: @category_id).reference_data
   end
 
   # 現在のユーザーとrecordを作成したユーザーが一致するか

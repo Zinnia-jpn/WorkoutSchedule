@@ -1,1 +1,2 @@
-history.replaceState('', '', '/record/edit')
+let path = location.pathname;
+history.replaceState('', '', `${ path }/edit`)
