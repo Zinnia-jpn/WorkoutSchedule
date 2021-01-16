@@ -7,7 +7,7 @@ RSpec.describe Record, type: :model do
   let(:record) { build(:record) }
   let(:record_2) { build(:record_2) }
 
-  describe "全般" do
+  describe "#全般" do
     describe "#無酸素運動" do
       context "正常な値を送信した場合" do
         example "有効" do
@@ -37,6 +37,7 @@ RSpec.describe Record, type: :model do
     context "存在しないユーザーだった場合" do
       example "無効" do
         record.user_id = 100
+        record.valid?
         expect(record).not_to be_valid
       end
     end
@@ -46,7 +47,8 @@ RSpec.describe Record, type: :model do
     context "空の場合" do
       example "無効" do
         record.date = nil
-        expect(record).not_to be_valid
+        record.valid?
+        expect(record.errors.messages[:date]).to include( I18n.t("errors.messages.blank") )
       end
     end
   end
@@ -66,7 +68,7 @@ RSpec.describe Record, type: :model do
       example "無効" do
         record.workout_id = nil
         record.valid?
-        expect(record).not_to be_valid
+        expect(record.errors.messages[:workout_id]).to include( I18n.t("errors.messages.blank") )
       end
     end
   end
@@ -85,7 +87,6 @@ RSpec.describe Record, type: :model do
     context "最大値(500)の場合" do
       example "有効" do
         record.weight = 500
-        record.valid?
         expect(record).to be_valid
       end
     end
@@ -103,7 +104,6 @@ RSpec.describe Record, type: :model do
     context "最大値(500)の場合" do
       example "有効" do
         record.rep = 500
-        record.valid?
         expect(record).to be_valid
       end
     end
@@ -121,7 +121,6 @@ RSpec.describe Record, type: :model do
     context "最大値(50)の場合" do
       example "有効" do
         record.set = 50
-        record.valid?
         expect(record).to be_valid
       end
     end
@@ -139,7 +138,6 @@ RSpec.describe Record, type: :model do
     context "最大値(600)の場合" do
       example "有効" do
         record.interval = 600
-        record.valid?
         expect(record).to be_valid
       end
     end
@@ -157,7 +155,6 @@ RSpec.describe Record, type: :model do
     context "最大値(600)の場合" do
       example "有効" do
         record.time = 600
-        record.valid?
         expect(record).to be_valid
       end
     end
@@ -174,15 +171,14 @@ RSpec.describe Record, type: :model do
   describe "#remark" do
     context "最大文字数(255)の場合" do
       example "有効" do
-        record.remark = "x" * 255
-        record.valid?
+        record.remark = "a" * 255
         expect(record).to be_valid
       end
     end
 
     context "最大文字数(255)を超えた場合" do
       example "無効" do
-        record.remark = "x" * 256
+        record.remark = "a" * 256
         record.valid?
         expect(record.errors.messages[:remark]).to include( I18n.t("errors.messages.too_long", count: 255) )
       end
