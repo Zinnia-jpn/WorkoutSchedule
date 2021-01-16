@@ -5,7 +5,7 @@ FactoryBot.define do
     user_id { 1 }
     date { "2020-11-09" }
     do_flag { true }
-    workout_id { 2 }
+    workout_id { 50 }
     cardio_flag { false }
     weight { 30 }
     rep { 10 }
@@ -22,7 +22,7 @@ FactoryBot.define do
     user_id { 1 }
     date { "2020-11-09" }
     do_flag { true }
-    workout_id { 3 }
+    workout_id { 1 }
     cardio_flag { true }
     weight { nil }
     rep { nil }

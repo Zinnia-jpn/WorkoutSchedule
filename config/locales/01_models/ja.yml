@@ -15,6 +15,7 @@ ja:
         remember: ログイン状態を保持
         image: プロフィール画像
       record:
+        user: 作成者
         workout_id: 種目名
         date: 日付
         do_flag: 実施の有無

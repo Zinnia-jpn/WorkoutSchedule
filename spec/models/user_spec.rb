@@ -1,11 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+  let(:user) { build(:user) }
+  let(:user_2) { create(:user_2) }
 
   describe "#全般" do
-    context "正常な値を送信した時" do
-      example "保存に成功する" do
-        user = build(:user)
+    context "正常な値を送信した場合" do
+      example "有効" do
         expect(user).to be_valid
       end
     end
@@ -13,44 +14,144 @@ RSpec.describe User, type: :model do
 
   describe "#name" do
     context "空の場合" do
-      example "保存に失敗する" do
-        user = build(:user, name: nil)
-        expect(user).not_to be_valid
+      example "無効" do
+        user.name = nil
+        user.valid?
+        expect(user.errors.messages[:name]).to include( I18n.t("errors.messages.blank") )
+      end
+    end
+
+    context "最大文字数(30)の場合" do
+      example "有効" do
+        user.name = "a" * 30
+        expect(user).to be_valid
+      end
+    end
+
+    context "最大文字数(30)を超えた場合" do
+      example "無効" do
+        user.name = "a" * 31
+        user.valid?
+        expect(user.errors.messages[:name]).to include( I18n.t("errors.messages.too_long", count: 30) )
       end
     end
   end
 
-  describe "#mail_address" do
+  describe "#email" do
     context "空の場合" do
-      example "保存に失敗する" do
-        user = build(:user, email: nil)
-        expect(user).not_to be_valid
+      example "無効" do
+        user.email = nil
+        user.valid?
+        expect(user.errors.messages[:email]).to include( I18n.t("errors.messages.blank") )
       end
     end
 
-    context "同じメールアドレスが入力された場合" do
-      example "保存に失敗する" do
-        create(:user)
-        user = build(:user_2, email: "mail-sample@rails.com")
-        expect(user).not_to be_valid
+    context "登録済みの他ユーザーと同一のアドレスが入力された場合" do
+      example "無効" do
+        user.email = user_2.email
+        user.valid?
+        expect(user.errors.messages[:email]).to include( I18n.t("errors.messages.taken") )
+      end
+    end
+
+    context "メールアドレスの形式が異なっていた場合" do
+      context "@がない場合" do
+        example "無効" do
+          user.email = "mail-sample_rails.com"
+          user.valid?
+          expect(user.errors.messages[:email]).to include( I18n.t("errors.messages.wrong_format_to_email") )
+        end
+      end
+
+      context ".がない場合" do
+        example "無効" do
+          user.email = "mail-sample@railscom"
+          user.valid?
+          expect(user.errors.messages[:email]).to include( I18n.t("errors.messages.wrong_format_to_email") )
+        end
       end
     end
   end
 
   describe "#password" do
     context "空の場合" do
-      example "保存に失敗する" do
-        user = build(:user, password: nil)
-        expect(user).not_to be_valid
+      example "無効" do
+        user.password = nil
+        user.valid?
+        expect(user.errors.messages[:password]).to include( I18n.t("errors.messages.blank") )
+      end
+    end
+
+    context "形式が異なる場合" do
+      context "英大文字が入っていない場合" do
+        example "無効" do
+          user.password = "aaaa1111"
+          user.valid?
+          expect(user.errors.messages[:password]).to include( I18n.t("errors.messages.wrong_format_to_password") )
+        end
+      end
+
+      context "英小文字が入っていない場合" do
+        example "無効" do
+          user.password = "AAAA1111"
+          user.valid?
+          expect(user.errors.messages[:password]).to include( I18n.t("errors.messages.wrong_format_to_password") )
+        end
+      end
+
+      context "数字が入っていない場合" do
+        example "無効" do
+          user.password = "AAAAaaaa"
+          user.valid?
+          expect(user.errors.messages[:password]).to include( I18n.t("errors.messages.wrong_format_to_password") )
+        end
+      end
+
+      context "最小文字数(8)の場合" do
+        example "有効" do
+          user.password = "AAAaaa11"
+          expect(user).to be_valid
+        end
+      end
+
+      context "最小文字数(8)未満の場合" do
+        example "無効" do
+          user.password = "AAAaa11"
+          user.valid?
+          expect(user.errors.messages[:password]).to include( I18n.t("errors.messages.wrong_format_to_password") )
+        end
+      end
+
+      context "最大文字数(30)の場合" do
+        example "有効" do
+          user.password = "A" * 10 + "a" * 10 + "1" * 10
+          expect(user).to be_valid
+        end
+      end
+
+      context "最大文字数(30)を超えた場合" do
+        example "無効" do
+          user.password = "A" * 10 + "a" * 10 + "1" * 11
+          user.valid?
+          expect(user.errors.messages[:password]).to include( I18n.t("errors.messages.wrong_format_to_password") )
+        end
+      end
+
+      context "半角英大文字・小文字・数字以外の値が混ざっていた場合" do
+        example "無効" do
+          user.password = "A" * 5 + "a" * 5 + "1" * 5 + "あ" * 5
+          user.valid?
+          expect(user.errors.messages[:password]).to include( I18n.t("errors.messages.wrong_format_to_password") )
+        end
       end
     end
   end
 
   describe "#image" do
     context "空の場合" do
-      example "保存に失敗する" do
-        user = build(:user, image: nil)
-        expect(user).not_to be_valid
+      example "有効" do
+        user.image = nil
+        expect(user).to be_valid
       end
     end
   end
