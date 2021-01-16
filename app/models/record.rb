@@ -7,11 +7,11 @@ class Record < ApplicationRecord
   validates :do_flag, inclusion: { in: [true, false] }
   validates :workout_id, presence: true
   validates :cardio_flag, inclusion: { in: [true, false] }
-  validates :weight, length: { maximum: 500 }
-  validates :rep, length: { maximum: 500 }
-  validates :set, length: { maximum: 50 }
-  validates :interval, length: { maximum: 600 }
-  validates :time, length: { maximum: 600 }
+  validates :weight, numericality: { less_than_or_equal_to: 500 }, allow_blank: true
+  validates :rep, numericality: { less_than_or_equal_to: 500 }, allow_blank: true
+  validates :set, numericality: { less_than_or_equal_to: 50 }, allow_blank: true
+  validates :interval, numericality: { less_than_or_equal_to: 600 }, allow_blank: true
+  validates :time, numericality: { less_than_or_equal_to: 600 }, allow_blank: true
   validates :remark, length: { maximum: 255 }
 
   # 指定された範囲のRecordを取得

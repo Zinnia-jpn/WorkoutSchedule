@@ -1,1 +1,1 @@
-history.replaceState('', '', '/record/new')
+history.replaceState('', '', '/records/new')
