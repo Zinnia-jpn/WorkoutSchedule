@@ -42,6 +42,8 @@ group :development, :test do
   # RSpec関連Gem
   gem 'rspec-rails'
   gem 'factory_bot_rails'
+  gem 'rails-controller-testing'
+  gem 'capybara'
   gem 'database_cleaner'
 end
 

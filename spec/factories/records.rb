@@ -32,4 +32,20 @@ FactoryBot.define do
     intensity_id { 3 }
     remark { "次は時間を長めに取る" }
   end
+
+  # Requestテスト用データ(userを生成しない)
+  factory :record_3, class: Record do
+    user_id { 1 }
+    date { "2020-11-12" }
+    do_flag { false }
+    workout_id { 3 }
+    cardio_flag { true }
+    weight { 25 }
+    rep { 15 }
+    set { 5 }
+    interval { 4 }
+    time { 20 }
+    intensity_id { 3 }
+    remark { "record書き換え" }
+  end
 end
