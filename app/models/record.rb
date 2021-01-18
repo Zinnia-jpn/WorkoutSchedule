@@ -16,8 +16,7 @@ class Record < ApplicationRecord
 
   # 指定された範囲のRecordを取得
   def self.get_specified_records(user_id, date_range)
-    # 指定されたユーザーのRecordを全て取得・並び替え
-    user_records = self.where(user_id: user_id).records_sort
+    user_records = self.where(user_id: user_id).asc_sort
     user_records.where(date: date_range)
   end
 
@@ -31,7 +30,7 @@ class Record < ApplicationRecord
   end
 
   # 該当のレコードを並び替える
-  def self.records_sort
+  def self.asc_sort
     self.order(date: "ASC", workout_id: "ASC")
   end
 end
