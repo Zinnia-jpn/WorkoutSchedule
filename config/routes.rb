@@ -1,11 +1,9 @@
 Rails.application.routes.draw do
-
   # records
   get "records/dynamic_select_category" => "records#dynamic_select_category" # Ajax送信先(二重構造のセレクトボックス)
   resources :records, param: :token, only: [:new, :create, :edit, :update, :destroy]
 
   # schedules
-  get "schedule/receive_selection" => "schedules#receive_selection"
   get "schedule/month" => "schedules#month"
   get "schedule/day" => "schedules#day"
 

@@ -4,11 +4,17 @@ class ApplicationController < ActionController::Base
 
   # ログイン済みかをチェック
   def logged_in_check
-    redirect_to root_url unless logged_in?
+    unless logged_in?
+      flash[:warning] = t("sessions.login.required")
+      redirect_to login_url
+    end
   end
 
   # ログインしていないかをチェック
   def not_logged_in_check
-    redirect_to schedule_day_url if logged_in?
+    if logged_in?
+      flash[:warning] = t("sessions.login.already")
+      redirect_to schedule_day_url
+    end
   end
 end

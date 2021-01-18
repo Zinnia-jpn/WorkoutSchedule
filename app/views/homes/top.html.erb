@@ -10,7 +10,7 @@
     <div class="top-list-container__content">
       <h4><i class="fas fa-dumbbell"></i>&nbsp;<%= t("dictionary.name.weight") %></h4>
       <ul>
-        <% @weight_items.each do |name| %>
+        <% list_items("weight").each do |name| %>
           <li><%= Record.human_attribute_name(name) %></li>
         <% end %>
       </ul>
@@ -18,7 +18,7 @@
     <div class="top-list-container__content">
       <h4><i class="fas fa-biking"></i>&nbsp;<%= t("dictionary.name.cardio") %></h4>
       <ul>
-        <% @cardio_items.each do |name| %>
+        <% list_items("cardio").each do |name| %>
           <li><%= Record.human_attribute_name(name) %></li>
         <% end %>
       </ul>

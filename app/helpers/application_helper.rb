@@ -5,7 +5,7 @@ module ApplicationHelper
   end
 
   # 遷移元のURLに書き換えるjsのpathを返す
-  def javascript_path
+  def get_javascript_path
     "#{previous_path[:controller]}/#{previous_path[:action]}_url_render.js"
   end
 

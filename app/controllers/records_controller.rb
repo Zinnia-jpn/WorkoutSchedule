@@ -13,9 +13,7 @@ class RecordsController < ApplicationController
     @record.user_id = @current_user.id
     if @record.save
       flash[:success] = t("records.create.success")
-      redirect_to schedule_day_url(date: {
-        year: params[:record]["date(1i)"], month: params[:record]["date(2i)"], day: params[:record]["date(3i)"]
-      })
+      redirect_to schedule_day_url(date: @record.date)
     else
       render "new"
     end
@@ -27,9 +25,7 @@ class RecordsController < ApplicationController
   def update
     if @record.update(record_params)
       flash[:success] = t("records.update.success")
-      redirect_to schedule_day_url(date: {
-        year: params[:record]["date(1i)"], month: params[:record]["date(2i)"], day: params[:record]["date(3i)"]
-      })
+      redirect_to schedule_day_url(date: @record.date)
     else
       render "edit"
     end
@@ -59,11 +55,11 @@ class RecordsController < ApplicationController
   def get_select_record(token)
     @record = Record.find_by(token: token)
     check_created_user(@record)
-    @token = params[:token]
+    @token = token
     required_data(@record)
   end
 
-  # editに必要なデータを渡す
+  # editに必要なデータを渡す(update失敗時のrenderにも必要)
   def required_data(record)
     @category_id = reverse_lookup_category_id(record)
     @workouts = Workout.where(category_id: @category_id).reference_data

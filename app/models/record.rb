@@ -15,8 +15,9 @@ class Record < ApplicationRecord
   validates :remark, length: { maximum: 255 }
 
   # 指定された範囲のRecordを取得
-  def get_specified_records(user_id, date_range)
-    get_user_records(user_id).where(date: date_range)
+  def self.get_specified_records(user_id, date_range)
+    user_records = self.where(user_id: user_id).asc_sort
+    user_records.where(date: date_range)
   end
 
   private
@@ -28,8 +29,8 @@ class Record < ApplicationRecord
     end
   end
 
-  # 現在のユーザーのRecordを全て取得
-  def get_user_records(user_id)
-    Record.where(user_id: user_id).order(date: "ASC", workout_id: "ASC")
+  # 該当のレコードを並び替える
+  def self.asc_sort
+    self.order(date: "ASC", workout_id: "ASC")
   end
 end
