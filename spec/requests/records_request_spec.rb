@@ -5,12 +5,6 @@ RSpec.describe "Records", type: :request do
   let!(:record) { create(:record, token: "7EcAdn8kIqZkgYC8gyBHmw") }
   let(:record_3) { build(:record_3) }
 
-
-  before do
-    # assosiationを設定しているため、userも一緒に生成される
-    # create(:record, token: "7EcAdn8kIqZkgYC8gyBHmw")
-  end
-
   describe "GET #new" do
     it_behaves_like "ログイン状態の時" do
       example "リクエストが成功する" do
@@ -47,7 +41,6 @@ RSpec.describe "Records", type: :request do
   xdescribe "GET #edit" do
     it_behaves_like "ログイン状態の時" do
       example "リクエストが成功する" do
-        Workout.all
         get edit_record_path(token: record.token)
         expect(response).to have_http_status(:success)
       end
