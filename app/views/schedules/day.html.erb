@@ -1,8 +1,8 @@
 <div id="select-day-modal" class="custom-modal">
-  <%= form_with url: schedule_receive_selection_path, method: :get, class: "schedule-select-field", local: true do |f| %>
+  <%= form_with url: schedule_day_path, method: :get, class: "schedule-select-field", local: true do |f| %>
     <%= raw sprintf(
-                f.date_select(:date, order: [:year, :month, :day],
-                              use_month_numbers: true, start_year: 2020, end_year: 2040, default: @select_date,
+                f.date_select(:date, order: [:year, :month, :day], use_month_numbers: true,
+                              start_year: 2020, end_year: 2030, default: @select_date,
                               date_separator: '%s'), '年 ', '月 ') + '日' %>&nbsp;
     <%= f.submit t("helpers.submit.submit"), class: "custom-button" %>
   <% end %>
@@ -13,12 +13,9 @@
 
 <div class="schedule-button-list">
   <ul>
-    <li><%= link_to t("schedules.day.yesterday"), schedule_day_path(date: {
-        year: Date.yesterday.year, month: Date.yesterday.month, day: Date.yesterday.day}), method: :get %></li>
-    <li><%= link_to t("schedules.day.today"), schedule_day_path(date: {
-        year: Date.today.year, month: Date.today.month, day: Date.today.day}), method: :get %></li>
-    <li><%= link_to t("schedules.day.tomorrow"), schedule_day_path(date: {
-        year: Date.tomorrow.year, month: Date.tomorrow.month, day: Date.tomorrow.day}), method: :get %></li>
+    <li><%= link_to t("schedules.day.yesterday"), schedule_day_path(date: Date.yesterday), method: :get %></li>
+    <li><%= link_to t("schedules.day.today"), schedule_day_path(date: Date.today), method: :get %></li>
+    <li><%= link_to t("schedules.day.tomorrow"), schedule_day_path(date: Date.tomorrow), method: :get %></li>
   </ul>
 </div>
 

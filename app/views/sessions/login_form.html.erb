@@ -13,7 +13,7 @@
         <i class="far fa-envelope"></i>&nbsp;<%= f.label :email, User.human_attribute_name(:email) %>
         <span class="required-icon"><%= t("dictionary.table.required") %></span>
       </div>
-      <%= f.email_field :email, value: params[:email], class: "input-field" %>
+      <%= f.email_field :email, value: @user.email, class: "input-field" %>
     </div>
     <div class="mb-4">
       <div class="py-2">

@@ -3,6 +3,8 @@ ja:
     login:
       success: "ログインしました"
       failure: "メールアドレスかパスワードが間違っています"
+      required: "ログインが必要です"
+      already: "すでにログインしています"
     logout:
       success: "ログアウトしました"
   users:

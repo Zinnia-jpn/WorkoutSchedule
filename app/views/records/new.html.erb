@@ -1,8 +1,11 @@
 <h1><%= t("records.new.title") %></h1>
+
 <%= render partial: "error_messages" %>
+
 <div class="mb-3">
   <div class="mb-2"><%= t("records.category") %></div>
-  <%= collection_select(:category, :id, Category.all, :id, :name,
+  <%= collection_select(:category, :id, Category.reference_data, :id, :name,
                             {prompt: t("helpers.select.prompt")}, {id: "category-select"}) %>
 </div>
+
 <div id="record-details" class="record-details-layout"></div>

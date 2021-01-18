@@ -1,11 +1,14 @@
 <h1><%= t("records.edit.title") %></h1>
+
 <%= render partial: "error_messages" %>
+
 <div class="mb-3">
   <%= hidden_field_tag :token, @token %>
   <div class="mb-2"><%= t("records.category") %></div>
-  <%= collection_select(:category, :id, Category.all, :id, :name,
+  <%= collection_select(:category, :id, Category.reference_data, :id, :name,
                               {prompt: t("helpers.select.prompt"), selected: @category_id}, {id: "category-select"}) %>
 </div>
+
 <div id="record-details" class="record-details-layout">
   <%= render partial: "form_details" %>
 </div>
