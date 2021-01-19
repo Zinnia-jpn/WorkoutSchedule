@@ -33,8 +33,8 @@
 ## 使用技術
 ### フロントエンド
 
-* HTML5 / CSS3 / Sass / Bootstrap
-* Javascript / jQuery 3.4.1
+* HTML5 / CSS3 / Sass / Bootstrap 4.3.1
+* Javascript / jQuery 3.5.1
   
 ### バックエンド
 
