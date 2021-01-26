@@ -1,0 +1,60 @@
+# ファイルフォーマットのバージョンを指定
+version: '3'
+services:
+#  # MySql
+#  db:
+#    # MySqlのイメージを指定
+#    image: mysql:8.0.20
+#    # 環境変数を指定
+#    environment:
+#      MYSQL_ROOT_PASSWORD: password
+#      MYSQL_DATABASE: root
+#    command: --default-authentication-plugin=mysql_native_password
+#    # コンテナのデータをローカルに保存する
+#    volumes:
+#      - db-data:/var/lib/mysql
+#    ports:
+#      - '3306:3306'
+
+  # Rails
+  app:
+    image: rails:6.0.3.3
+    # コンテナに入って操作できるかを指定
+    tty: true
+    stdin_open: true
+    # Dockerfileの場所(「.」はカレントディレクトリを指す)
+    build: .
+    command: puma -C config/puma.rb
+#    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    # コンテナのデータをローカルに保存する
+    volumes:
+      - .:/WorkoutSchedule
+      - public-data:/WorkoutSchedule/public
+      - tmp-data:/WorkoutSchedule/tmp
+      - log-data:/WorkoutSchedule/log
+    # localhost:3000にアクセスしたらコンテナの3000が応答する
+    # リクエストはnginxが受け取るためコメントアウト
+#    ports:
+#      - '3000:3000'
+    # dbコンテナと結びつける
+#    depends_on:
+#      - db
+
+  # Nginx
+  web:
+    image: nginx:1.19.6
+    build:
+      context: containers/nginx
+    volumes:
+      - public-data:/WorkoutSchedule/public
+      - tmp-data:/WorkoutSchedule/tmp
+    ports:
+      - '80:80'
+    depends_on:
+      - app
+
+volumes:
+  public-data:
+  tmp-data:
+  log-data:
+  db-data:
