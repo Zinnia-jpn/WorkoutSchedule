@@ -1,20 +1,20 @@
 # ファイルフォーマットのバージョンを指定
 version: '3'
 services:
-#  # MySql
-#  db:
-#    # MySqlのイメージを指定
-#    image: mysql:8.0.20
-#    # 環境変数を指定
-#    environment:
-#      MYSQL_ROOT_PASSWORD: password
-#      MYSQL_DATABASE: root
-#    command: --default-authentication-plugin=mysql_native_password
-#    # コンテナのデータをローカルに保存する
-#    volumes:
-#      - db-data:/var/lib/mysql
-#    ports:
-#      - '3306:3306'
+  # MySql
+  db:
+    # MySqlのイメージを指定
+    image: mysql:8.0.20
+    # 環境変数を指定
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: root
+    command: --default-authentication-plugin=mysql_native_password
+    # コンテナのデータをローカルに保存する
+    volumes:
+      - db-data:/var/lib/mysql
+    ports:
+      - '3306:3306'
 
   # Rails
   app:

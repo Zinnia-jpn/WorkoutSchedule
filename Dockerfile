@@ -1,37 +1,30 @@
 # ベースとなるイメージ
-FROM ruby:2.7.1
-
-# リポジトリを更新し依存モジュールをインストール
-RUN apt-get update -qq && \
-    apt-get install -y build-essential \
-                       nodejs
-
-# yarnパッケージ管理ツールインストール
-RUN apt-get update && apt-get install -y curl apt-transport-https wget && \
-    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
-    echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
-    apt-get update && apt-get install -y yarn
-
-# Node.jsをインストール
-RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - && \
-    apt-get install -y nodejs
+FROM ruby:2.7.1-alpine
 
 # 作業ディレクトリを作成・指定
 RUN mkdir /WorkoutSchedule
 WORKDIR /WorkoutSchedule
 
-# Gemfileを追加
-ADD Gemfile /WorkoutSchedule/Gemfile
-ADD Gemfile.lock /WorkoutSchedule/Gemfile.lock
-
-# Gemライブラリのインストール
-RUN bundle install
+# 環境設定
+ENV TZ=Asia/Tokyo
 
 # ローカルにあるアプリを追加
 ADD . /WorkoutSchedule
 
-# puma.sockを配置するディレクトリを作成
-RUN mkdir -p tmp/sockets
+# puma.sockを配置するディレクトリとログファイルを作成
+RUN mkdir -p tmp/sockets log && \
+    touch log/puma.stderr.log log/puma.stdout.log
 
 VOLUME /WorkoutSchedule/public
 VOLUME /WorkoutSchedule/tmp
+
+# リポジトリを更新し依存モジュールをインストール
+RUN apk update -qq && \
+    apk add --no-cache yarn tzdata libxml2-dev curl-dev make gcc libc-dev nodejs g++ mariadb-dev imagemagick6-dev && \
+    # Gemライブラリのインストール
+    bundle install && \
+    # アセットパイプラインのプリコンパイル
+    rails assets:precompile RAILS_ENV=production && \
+    # 不要なデータを削除
+    rm -rf /usr/local/bundle/cache/* /usr/local/share/.cache/* /var/cache/* /tmp/* && \
+    apk del libxml2-dev curl-dev make gcc libc-dev g++
