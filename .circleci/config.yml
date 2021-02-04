@@ -76,7 +76,7 @@ workflows:
   deploy-nginx:
     jobs:
       - aws-ecr/build-and-push-image: # Orbを実行する
-          dockerfile: containers/nginx/Dockerfile
+          path: 'containers/nginx/'
           account-url: AWS_ECR_ACCOUNT_URL
           aws-access-key-id: AWS_ACCESS_KEY_ID
           aws-secret-access-key: AWS_SECRET_ACCESS_KEY
@@ -114,6 +114,7 @@ workflows:
             branches:
               only: master
           create-repo: true
+          extra-build-args: '--build-arg RAILS_MASTER_KEY=${RAILS_MASTER_KEY}' # マスターキーの設定
       - aws-ecs/deploy-service-update:
           requires:
             - aws-ecr/build-and-push-image
