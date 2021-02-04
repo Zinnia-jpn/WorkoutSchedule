@@ -1,4 +1,5 @@
 // Bootstrap
+import "bootstrap"
 import '../stylesheets/application'
 
 // Awesome
