@@ -78,6 +78,8 @@ workflows:
       - aws-ecr/build-and-push-image: # Orbを実行する
           dockerfile: containers/nginx/Dockerfile
           account-url: AWS_ECR_ACCOUNT_URL
+          aws-access-key-id: AWS_ACCESS_KEY_ID
+          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
           repo: NGINX_ECR_NAME
           region: AWS_REGION
           tag: '${CIRCLE_SHA1}' # タグとしてコミットのハッシュ値を設定
@@ -103,6 +105,8 @@ workflows:
       - aws-ecr/build-and-push-image:
           dockerfile: Dockerfile
           account-url: AWS_ECR_ACCOUNT_URL
+          aws-access-key-id: AWS_ACCESS_KEY_ID
+          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
           repo: RAILS_ECR_NAME
           region: AWS_REGION
           tag: '${CIRCLE_SHA1}'
