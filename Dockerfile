@@ -8,6 +8,11 @@ WORKDIR /WorkoutSchedule
 # 環境設定
 ENV TZ=Asia/Tokyo
 
+# マスターキーの設定(CircleCIからECRへプッシュする際に必要)
+# ローカル環境下でコンテナ化する際はコメントアウト
+ARG RAILS_MASTER_KEY
+ENV RAILS_MASTER_KEY ${RAILS_MASTER_KEY}
+
 # ローカルにあるアプリを追加
 ADD . /WorkoutSchedule
 
