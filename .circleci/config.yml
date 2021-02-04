@@ -1,0 +1,119 @@
+# circleciのバージョン指定
+version: 2.1
+
+# CircleCIによって提供されているパッケージ(Orb)をインポート
+orbs:
+  # ECRへイメージをプッシュするOrb
+  aws-ecr: circleci/aws-ecr@6.15.3
+  # ECSの設定を更新するOrb
+  aws-ecs: circleci/aws-ecs@1.4.0
+
+jobs:
+  test:
+    docker:
+      # app(rails)の設定
+      - image: circleci/ruby:2.7.1-node-browsers
+        environment:
+          RAILS_ENV: test
+          DATABASE_USER: 'root'
+          DATABASE_PASSWORD: ''
+          DATABASE_HOST: 127.0.0.1
+          DATABASE_PORT: 3306
+      # db(MySql)の設定
+      - image: circleci/mysql:8.0.2
+        command: mysqld --default-authentication-plugin=mysql_native_password
+        environment:
+          MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
+          MYSQL_ROOT_HOST: '%'
+    working_directory: ~/repo
+    # GitHubのリポジトリからコードを取得(ローカルの場合は現在のリポジトリ)
+    steps:
+      - checkout
+      # キャッシュの復元
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "Gemfile.lock" }}
+            - v1-dependencies-
+      # 依存パッケージのインストール
+      - run:
+          name: install dependencies
+          command: |
+            bundle install --jobs=4 --retry=3
+      # キャッシュを保存
+      - save_cache:
+          paths:
+            - ./vendor/bundle
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+      # DBのセットアップ
+      - run:
+          command: |
+            mv config/database.yml.ci config/database.yml
+            bundle exec rails db:create db:schema:load
+      # yarnのインストール
+      - run:
+          command: |
+            yarn install
+            bundle exec bin/webpack
+      # Rspecの実行
+      - run:
+          name: RSpec
+          command: |
+            mkdir /tmp/test-results
+            rspec
+      # テスト結果の記録
+      - store_test_results:
+          path: /tmp/test-results
+      - store_artifacts:
+          path: /tmp/test-results
+          destination: test-results
+
+workflows:
+  test:
+    jobs:
+      - test
+
+  #Nginx(web)のデプロイ
+  deploy-nginx:
+    jobs:
+      - aws-ecr/build-and-push-image: # Orbを実行する
+          dockerfile: containers/nginx/Dockerfile
+          account-url: AWS_ECR_ACCOUNT_URL
+          repo: NGINX_ECR_NAME
+          region: AWS_REGION
+          tag: '${CIRCLE_SHA1}' # タグとしてコミットのハッシュ値を設定
+          # masterにpushされたら実行
+          filters:
+            branches:
+              only: master
+          create-repo: true # リポジトリが存在しない場合は作成
+      # タスク定義内のnginxコンテナ設定を更新
+      - aws-ecs/deploy-service-update:
+          # ECRへのpush処理を呼び出す
+          requires:
+            - aws-ecr/build-and-push-image
+          family: 'my-app-tasks' # タスク定義名
+          cluster-name:  'my-app-ecs-cluster'
+          service-name: 'my-app-service'
+          # タスク定義のコンテナ名とイメージタグを変更・更新
+          container-image-name-updates: 'container=nginx,image-and-tag=${AWS_ECR_ACCOUNT_URL}/${NGINX_ECR_NAME}:${CIRCLE_SHA1}'
+
+  # rails(app)のデプロイ
+  deploy-rails:
+    jobs:
+      - aws-ecr/build-and-push-image:
+          dockerfile: Dockerfile
+          account-url: AWS_ECR_ACCOUNT_URL
+          repo: RAILS_ECR_NAME
+          region: AWS_REGION
+          tag: '${CIRCLE_SHA1}'
+          filters:
+            branches:
+              only: master
+          create-repo: true
+      - aws-ecs/deploy-service-update:
+          requires:
+            - aws-ecr/build-and-push-image
+          family: 'my-app-tasks'
+          cluster-name:  'my-app-ecs-cluster'
+          service-name: 'my-app-service'
+          container-image-name-updates: 'container=rails,image-and-tag=${AWS_ECR_ACCOUNT_URL}/${RAILS_ECR_NAME}:${CIRCLE_SHA1}'
