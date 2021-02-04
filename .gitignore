@@ -38,3 +38,4 @@ yarn-debug.log*
 /public/uploads
 .env.production
 /config/initializers/carrierwave.rb
+.idea
