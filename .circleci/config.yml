@@ -38,27 +38,28 @@ jobs:
       - run:
           name: install dependencies
           command: |
-            bundle install --jobs=4 --retry=3 --path vendor/bundle
+            bundle install --jobs=4 --retry=3
       # キャッシュを保存
       - save_cache:
           paths:
             - ./vendor/bundle
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
       # DBのセットアップ
-      - run: mv config/database.yml.ci config/database.yml
-      - run: rails db:create db:schema:load
+      - run:
+          command: |
+            mv config/database.yml.ci config/database.yml
+            bundle exec rails db:create db:schema:load
+      # yarnのインストール
+      - run:
+          command: |
+            yarn install
+            bundle exec bin/webpack
       # Rspecの実行
       - run:
           name: RSpec
           command: |
             mkdir /tmp/test-results
-            TEST_FILES="$(circleci tests glob "spec/models/users_spec.rb" | \
-              circleci tests split --split-by=timings)"
-            rspec \
-              --format progress \
-              --out /tmp/test-results/rspec.xml \
-              --format progress \
-              $TEST_FILES
+            rspec
       # テスト結果の記録
       - store_test_results:
           path: /tmp/test-results
