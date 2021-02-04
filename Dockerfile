@@ -8,10 +8,13 @@ WORKDIR /WorkoutSchedule
 # 環境設定
 ENV TZ=Asia/Tokyo
 
-# マスターキーの設定(CircleCIからECRへプッシュする際に必要)
 # ローカル環境下でコンテナ化する際はコメントアウト
+# マスターキーの設定(CircleCIからECRへプッシュする際に必要)
 ARG RAILS_MASTER_KEY
 ENV RAILS_MASTER_KEY ${RAILS_MASTER_KEY}
+ # 実行環境の設定
+ARG RAILS_ENV
+ENV RAILS_ENV ${RAILS_ENV}
 
 # ローカルにあるアプリを追加
 ADD . /WorkoutSchedule
@@ -29,6 +32,7 @@ RUN apk update -qq && \
     # Gemライブラリのインストール
     bundle install && \
     # アセットパイプラインのプリコンパイル
+    rails assets:precompile RAILS_ENV=test && \
     rails assets:precompile RAILS_ENV=production && \
     # 不要なデータを削除
     rm -rf /usr/local/bundle/cache/* /usr/local/share/.cache/* /var/cache/* /tmp/* && \
