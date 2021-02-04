@@ -30,10 +30,7 @@ development:
 test:
   <<: *default
   database: WorkoutSchedule_test
-<<<<<<< HEAD
   socket: db
-=======
->>>>>>> 4169787 (Fixed circleci config file)
 
 production:
   <<: *default
