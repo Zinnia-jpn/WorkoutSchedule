@@ -119,6 +119,6 @@ workflows:
           requires:
             - aws-ecr/build-and-push-image
           family: 'my-app-tasks'
-          cluster-name:  'my-app-ecs-cluster'
+          cluster-name: 'my-app-ecs-cluster'
           service-name: 'my-app-service'
           container-image-name-updates: 'container=rails,image-and-tag=${AWS_ECR_ACCOUNT_URL}/${RAILS_ECR_NAME}:${CIRCLE_SHA1}'
