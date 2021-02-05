@@ -9,42 +9,48 @@
 ### 機能
 #### 全般
 
-（画像）
-
 * レスポンシブデザイン(スマホ, タブレット, PC)
   - スマホサイズになるとヘッダーメニューがアイコンに収納される
+  
+<img src="https://user-images.githubusercontent.com/66233629/106972406-2942da80-6794-11eb-8812-8de60a3d948f.png" width="200px">
 
 #### セッション関連
-
-（画像）
 
 * ログイン・ログアウト
 * Cookieを利用したログイン情報の保存
 
-#### ユーザー関連
+<img src="https://user-images.githubusercontent.com/66233629/106972764-de759280-6794-11eb-8477-e023e982dd70.png" width="250px">
 
-（画像）
+#### ユーザー関連
 
 * ユーザー作成・閲覧・編集・削除
 * プロフィール画像のアップロード・初期化
 
-#### 記録関連
+##### > ユーザー閲覧画面 / ユーザー編集画面
 
-（画像）
+<img src="https://user-images.githubusercontent.com/66233629/106971501-6ad28600-6792-11eb-9455-4708742fe4d0.png" width="250px"> <img src="https://user-images.githubusercontent.com/66233629/106971512-6dcd7680-6792-11eb-8090-373ea167e7bb.png" width="250px">
+
+#### 記録関連
 
 * ワークアウトの記録・編集・削除
 * 無酸素運動・有酸素運動によって記録項目が変動
   - カテゴリを選択すると有酸素・無酸素を判断し、ロードなしでフォームを切り替える (Ajax通信)
 * 記録を作成・編集した後は、記録した予定・実施日の日ごとスケジュールへ遷移する
 
-#### スケジュール関連
+##### > 無酸素運動の記録画面 / 有酸素運動の記録画面
 
-（画像）
+<img src="https://user-images.githubusercontent.com/66233629/106970310-f0086b80-678f-11eb-9313-957a0713d9e8.png" width="250px"> <img src="https://user-images.githubusercontent.com/66233629/106970336-fe568780-678f-11eb-9b08-dcd406027251.png" width="250px">
+
+#### スケジュール関連
 
 * 日ごと・月ごとの切り替え
   - 日ごとは詳細まで確認可能
   - 月ごとは情報を一部簡略化して表示しており、記録を俯瞰して見られる
 * 記録の編集・削除へのリンク
+
+##### > 日ごとのスケジュール画面 / 月ごとのスケジュール画面
+
+<img src="https://user-images.githubusercontent.com/66233629/106973060-6f4c6e00-6795-11eb-8532-811e813f019b.png" width="250px"> <img src="https://user-images.githubusercontent.com/66233629/106972981-43c98380-6795-11eb-9679-1097ffc952b2.png" width="250px">
 
 ## 使用技術
 
@@ -72,7 +78,7 @@
 
 #### インフラ構成図
 
-(未作成)
+<img src="https://user-images.githubusercontent.com/66233629/106969769-d87cb300-678e-11eb-801c-cc32db299559.png" width="850px">
 
 #### Rails内で使用したGem
 
